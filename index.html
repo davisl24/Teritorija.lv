@@ -16,8 +16,9 @@
   <meta property="og:url" content="https://www.teritorija.lv/">
   <!-- og:image and favicon will be added after the actual assets are verified. -->
   <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/home-hero.css">
 </head>
-<body>
+<body class="home-page">
   <a class="skip-link" href="#saturs">Pāriet uz saturu</a>
 
   <header class="site-header">
@@ -41,8 +42,12 @@
   </header>
 
   <main id="saturs" tabindex="-1">
-    <section class="hero container-wide" aria-labelledby="hero-title">
-      <div class="hero-content">
+    <section class="hero home-hero" aria-labelledby="hero-title">
+      <figure class="hero-media" aria-hidden="true">
+        <img src="https://images.unsplash.com/photo-1754197530623-18452ed34114?auto=format&amp;fit=crop&amp;fm=jpg&amp;q=82&amp;w=2400"
+             alt="" width="2400" height="1600" fetchpriority="high" decoding="async">
+      </figure>
+      <div class="hero-content container">
         <p class="eyebrow">Teritorija · Ārtelpas labiekārtojums</p>
         <h1 id="hero-title">Āra mēbeles un labiekārtojuma risinājumi</h1>
         <p class="lead">Produkti publiskām ārtelpām, dzīvojamiem projektiem un atpūtas vietām.</p>
@@ -51,11 +56,6 @@
           <a class="button button-secondary" href="./pieprasijums/index.html">Pieteikt projektu</a>
         </div>
       </div>
-      <figure class="hero-media">
-        <img src="./assets/images/hero/zano-hero.jpg"
-             alt="ZANO āra mēbeļu risinājums" width="927" height="594" fetchpriority="high" decoding="async">
-        <figcaption>ZANO āra mēbeles</figcaption>
-      </figure>
     </section>
 
     <nav class="category-index container" aria-label="Produktu kategorijas">
