@@ -194,7 +194,7 @@ button { cursor: pointer; }
   .brand img { width: 128px; height: 64px; }
   .site-nav { order: 0; flex-basis: auto; margin-left: auto; border-top: 0; }
   .request-link { margin-left: var(--space-lg); }
-  .hero { padding-block: var(--space-4xl); gap: var(--space-3xl); }
+  .hero { padding-block: var(--space-3xl); gap: var(--space-2xl); }
   .hero-media img { aspect-ratio: 1.65; }
   .category-index { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .category-index a { padding-inline: var(--space-lg); border-right: 1px solid var(--color-border); }
@@ -222,7 +222,7 @@ button { cursor: pointer; }
   .header-inner { min-height: 84px; gap: var(--space-xl); }
   .brand img { width: 138px; height: 69px; }
   .site-nav ul { gap: 0 var(--space-xl); }
-  .hero { grid-template-columns: minmax(0, 42%) minmax(0, 58%); gap: clamp(48px, 5vw, 88px); min-height: 720px; padding-block: var(--space-4xl); }
+  .hero { grid-template-columns: minmax(0, 42%) minmax(0, 58%); gap: clamp(48px, 5vw, 88px); min-height: 720px; padding-block: var(--space-3xl); }
   .hero-content { padding-block: var(--space-xl); }
   .hero-media { align-self: stretch; display: flex; flex-direction: column; justify-content: center; }
   .hero-media img { aspect-ratio: 1.1; }
@@ -244,12 +244,14 @@ button { cursor: pointer; }
   .manufacturer-grid li:nth-child(3n) a { border-right: 0; }
   .manufacturer-grid li:nth-child(odd) a { padding-right: var(--space-xl); }
   .manufacturer-grid li:nth-child(even) a { padding-left: var(--space-xl); }
-  .page-intro { padding-top: var(--space-4xl); padding-bottom: var(--space-4xl); }
+  .page-intro { padding-top: var(--space-3xl); padding-bottom: var(--space-3xl); }
   .product-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 
 @media (max-width: 767px) {
   h1 { max-width: 12ch; }
+  .site-footer { padding-top: var(--space-2xl); }
+  .footer-grid { gap: var(--space-xl); padding-bottom: var(--space-2xl); }
   .hero-actions .button, .catalog-filters .button { width: 100%; }
   .menu-toggle { margin-left: auto; }
   .request-link { padding-inline: 10px; font-size: .8rem; }
