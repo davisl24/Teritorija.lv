@@ -75,7 +75,7 @@ button { cursor: pointer; }
 .button:disabled, button[aria-disabled="true"] { cursor: not-allowed; opacity: .55; border-style: dashed; transform: none; }
 .button[aria-busy="true"] { cursor: progress; }
 .hero-media { min-width: 0; align-self: center; }
-.hero-media img { width: 100%; aspect-ratio: 1.4; object-fit: cover; border-radius: 8px; background: var(--color-surface); }
+.hero-media img { width: 100%; aspect-ratio: 1.4; object-fit: contain; border-radius: 8px; background: var(--color-surface); }
 .hero-media figcaption { margin-top: var(--space-sm); color: var(--color-muted); font-size: .75rem; }
 .section-heading { margin-bottom: var(--space-xl); }
 .section-heading h2 { max-width: 24ch; }
@@ -163,7 +163,8 @@ button { cursor: pointer; }
   .hero-content { padding-block: var(--space-xl); }
   .hero-media { align-self: stretch; display: flex; flex-direction: column; justify-content: center; }
   .hero-media img { aspect-ratio: 1.1; }
-  .category-grid, .product-grid, .manufacturer-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .category-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .product-grid, .manufacturer-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .process-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-2xl); }
   .project-cta-inner { flex-direction: row; align-items: center; justify-content: space-between; }
   .project-cta-inner > .button { flex-shrink: 0; }
