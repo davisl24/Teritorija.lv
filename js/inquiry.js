@@ -194,19 +194,70 @@
     };
   }
 
-  function handleFormSubmit(event) {
+  async function handleFormSubmit(event) {
     const form = event.currentTarget;
     event.preventDefault();
     const status = document.querySelector('[data-inquiry-form-status]');
+    const submitButton = form.querySelector('button[type="submit"]');
+
     if (!form.checkValidity()) {
       form.reportValidity();
       if (status) status.textContent = 'Pārbaudiet obligātos laukus un e-pasta adresi.';
       return;
     }
+
     const payload = prepareFormPayload(form);
-    form.dataset.preparedPayload = JSON.stringify(payload);
-    if (status) {
-      status.textContent = 'Forma ir sagatavota. Nosūtīšana tiks aktivizēta pēc e-pasta integrācijas.';
+    const formSubmitPayload = {
+      'Vārds / uzņēmums': payload.contact,
+      'E-pasts': payload.email,
+      'Tālrunis': payload.phone,
+      'Projekta vieta': payload.location,
+      'Projekta apraksts': payload.description,
+      _subject: 'Jauns Teritorija projekta pieprasījums',
+      _template: 'table'
+    };
+
+    if (payload.products.length > 0) {
+      formSubmitPayload['Izvēlētie produkti'] = payload.products
+        .map((item) => `${item.manufacturer} — ${item.name} (${item.id})`)
+        .join('\n');
+    }
+
+    if (submitButton) submitButton.disabled = true;
+    if (status) status.textContent = 'Nosūta pieprasījumu…';
+
+    try {
+      const response = await fetch('https://formsubmit.co/ajax/davislocs135@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
+        },
+        body: JSON.stringify(formSubmitPayload)
+      });
+
+      let result = null;
+      try {
+        result = await response.json();
+      } catch (error) {
+        result = null;
+      }
+
+      if (!response.ok || !result || result.success !== 'true' && result.success !== true) {
+        throw new Error(result && result.message ? result.message : 'FormSubmit request failed');
+      }
+
+      writeItems([]);
+      updateHeaderCount([]);
+      syncAddButtons([]);
+      syncInquiryPage([]);
+      form.reset();
+      syncHiddenProducts([]);
+      if (status) status.textContent = 'Pieprasījums veiksmīgi nosūtīts. Paldies!';
+    } catch (error) {
+      if (status) status.textContent = 'Neizdevās nosūtīt pieprasījumu. Lūdzu, mēģiniet vēlreiz.';
+    } finally {
+      if (submitButton) submitButton.disabled = false;
     }
   }
 
