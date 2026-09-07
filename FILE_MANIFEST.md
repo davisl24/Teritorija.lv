@@ -69,13 +69,14 @@ Produkcijas pāradresāciju sarakstu sagatavo pēc esošo URL audita.
 ## Izstrādes secība un pārbaude
 1. Šis manifests.
 2. index.html — sākumlapas HTML; pirms tam pārbaudīt izmantojamās fotogrāfijas un logo.
-3. Pārējās HTML lapas — pa vienai; produktu lapām vispirms pārbaudīt modeļu datus.
-4. css/style.css.
-5. js/content.js un js/main.js — katrs atsevišķā ziņojumā.
-6. js/products-data.js.
-7. Formas servera pieslēgums, hostinga instrukcijas un noslēdzošā pārbaude pēc servera izvēles.
+3. produkti/index.html — kataloga HTML (izveidots).
+4. css/style.css — TAGAD, pirms atlikušajām HTML lapām; pieslēgt abām esošajām lapām un atjaunināt šo manifestu vienā commitā pēc lietotāja norādes.
+5. Atlikušās HTML lapas — pa vienai, izmantojot kopīgo CSS; produktu lapām vispirms pārbaudīt modeļu datus.
+6. js/content.js un js/main.js — katrs atsevišķā ziņojumā.
+7. js/products-data.js.
+8. Formas servera pieslēgums, hostinga instrukcijas un noslēdzošā pārbaude pēc servera izvēles.
 
 Ievēro lietotāja sākotnējā pielikuma prasību: viens koda fails vienā ziņojumā, pēc tā gaidīt “OK”.
-Kamēr CSS un JS vēl nav pievienoti, starpposma HTML nav gatavs vizuālais priekšskatījums.
+CSS posms nodrošina abu esošo lapu vizuālo noformējumu. JS darbības vēl nav pieslēgtas. Šajā posmā lietotājs skaidri atļāva CSS, divu HTML saišu un manifesta izmaiņas vienā commitā.
 HTML pievienošana viena pati negarantē konkrētā Vercel deployment 404 novēršanu; pēc izvietošanas pārbaudīt īsto URL.
 Noslēgumā pārbaudīt navigāciju, filtru rezultātus, saraksta daudzumus/dzēšanu, kļūdu stāvokļus un mobile/tablet/desktop.
