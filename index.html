@@ -48,12 +48,18 @@
   <main id="saturs" tabindex="-1">
     <section class="hero home-hero" aria-labelledby="hero-title">
       <figure class="hero-media" aria-hidden="true">
-        <img src="./assets/images/hero/hero-plaza-1672.jpg"
-             srcset="./assets/images/hero/hero-plaza-800.jpg 800w,
-                     ./assets/images/hero/hero-plaza-1200.jpg 1200w,
-                     ./assets/images/hero/hero-plaza-1672.jpg 1672w"
-             sizes="100vw"
-             alt="" width="1672" height="941" loading="eager" fetchpriority="high" decoding="async">
+        <picture>
+          <source media="(max-width: 767px)"
+                  srcset="./assets/images/hero/hero-mobile-640.jpg 640w, ./assets/images/hero/hero-mobile-941.jpg 941w"
+                  sizes="100vw">
+          <source media="(max-width: 1024px)"
+                  srcset="./assets/images/hero/hero-tablet-800.jpg 800w, ./assets/images/hero/hero-tablet-1086.jpg 1086w"
+                  sizes="100vw">
+          <img src="./assets/images/hero/hero-desktop-1671.jpg"
+               srcset="./assets/images/hero/hero-desktop-800.jpg 800w, ./assets/images/hero/hero-desktop-1200.jpg 1200w, ./assets/images/hero/hero-desktop-1671.jpg 1671w"
+               sizes="100vw"
+               alt="" width="1671" height="941" loading="eager" fetchpriority="high" decoding="async">
+        </picture>
       </figure>
       <div class="hero-content container">
         <p class="eyebrow">Teritorija · Ārtelpas labiekārtojums</p>
