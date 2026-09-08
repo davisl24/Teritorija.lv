@@ -1,81 +1,50 @@
 # Failu manifests
-2026-09-07. 4. posms, pirmais ziņojums.
-Lietotājs ar “a aiziet” apstiprināja SITEMAP_SEO.md variantu A:
-5 pamatlapas, līdz 12 pārbaudītu produktu detalizācijas lapām, bez atsevišķa portfolio un bloga.
-Vizuālais virziens: apstiprinātā UI_UX_SPEC.md gaišā/zaļā sistēma.
-Šis ir plānoto failu manifests, nevis apliecinājums, ka faili jau izveidoti.
 
-## Lapas
-| Ceļš | Loma |
-|---|---|
-| index.html | Sākumlapa: hero, produktu kategorijas, sadarbība un ražotāji; kontakti kājenē |
-| produkti/index.html | Statisks produktu katalogs ar JS filtru uzlabojumiem |
-| produkti/{produkta-slug}/index.html | Atsevišķa lapa katram pārbaudītam modelim; līdz 12 lapām |
-| pieprasijums/index.html | Izvēlēto produktu saraksts un projekta pieteikums |
-| par-mums/index.html | Pārbaudīts uzņēmuma un sadarbības apraksts |
-| privatums/index.html | Faktiskajai datu apstrādei atbilstošs privātuma teksts |
+Aktuālais Teritorija.lv statiskās vietnes manifests.
 
-{produkta-slug} ir dokumentācijas apzīmējums; šāda burtiska mape netiks izveidota.
-Konkrētie produktu failu nosaukumi jānosaka pēc modeļu pārbaudes.
-Neizveidot izdomātus modeļus, lai aizpildītu 12 vietas.
+## HTML lapas
+- `index.html` — sākumlapa.
+- `produkti/index.html` — produktu katalogs.
+- `katalogi/index.html` — ražotāju katalogu lapa ar 19 tekstuālām kartītēm; PDF repo netiek glabāti.
+- `par-mums/index.html` — uzņēmuma apraksts un rekvizīti.
+- `pieprasijums/index.html` — projekta pieprasījums un izvēlētie produkti.
+- `privatums/index.html` — privātuma politika.
+- `produkti/zano-flash-02-725-1/index.html`
+- `produkti/zano-scandik-02-046/index.html`
+- `produkti/zano-soft-05-012/index.html`
+- `produkti/zano-stilo-18-048/index.html`
 
-## Dizains, skripti un dati
-| Ceļš | Loma |
-|---|---|
-| css/style.css | Visi kopīgie stili, tokeni, mobilā/tablet/desktop adaptācija, pogu un formu stāvokļi |
-| js/content.js | LV UI teksti, filtru nosaukumi, validācijas kļūdas un paziņojumi; CONTENT un LANG |
-| js/products-data.js | Pārbaudīti produktu ID, nosaukumi, saites un filtru atribūti |
-| js/main.js | Navigācija, katalogu filtri, pieprasījuma saraksts, daudzumi, glabāšana un formas validācija |
+## CSS
+- `css/style.css` — kopējā dizaina sistēma, responsivitāte, kartītes, režģi, header/footer, funkcionālās animācijas.
+- `css/home-hero.css` — sākumlapas hero.
+- `css/phase2.css` — produkta detaļu un pieprasījuma lapu papildstili.
+- `css/about.css` — Par mums lapas papildstili.
+- `css/privacy.css` — privātuma lapas papildstili.
 
-Skriptu ielādes secība: content.js → products-data.js → main.js.
-Visi parastā script režīmā ar defer, bez type=module.
-HTML satur SEO tekstus un produktu pamatinformāciju; products-data.js tos neaizstāj.
-Nav portfolio-data.js vai blog-data.js.
-Saraksts glabā tikai produktu ID un daudzumu; personas dati netiek saglabāti localStorage.
-Bez gatava servera nav aktīvas nosūtīšanas vai viltus panākumu paziņojuma.
+Katalogu lapa izmanto esošās `style.css` klases (`section`, `section-heading`, `product-grid`, `product-card`, `product-card-content`, `eyebrow`, `text-link`, `project-cta`), tāpēc šajā posmā jauna kataloga CSS klase nav vajadzīga.
 
-## Attēlu un dokumentu mapes
-| Ceļš | Saturs |
-|---|---|
-| assets/images/brand/ | Oriģinālais uzņēmuma logo un no tā sagatavots favicon |
-| assets/images/hero/ | Atlasīta īsta hero fotogrāfija un nepieciešamie izmēri |
-| assets/images/categories/ | Īsti kategoriju attēli |
-| assets/images/products/ | Pārbaudīto produktu attēli |
-| assets/images/manufacturers/ | Oficiālie pārstāvēto ražotāju logo |
-| assets/images/og-teritorija.jpg | Kopīgais sociālo saišu attēls pēc īsto materiālu atlases |
-| assets/documents/ | Atļauti ražotāju katalogi un tehniskie dokumenti, ja tos glabājam lokāli |
+## JavaScript
+- `js/inquiry.js` — produktu pieprasījuma saraksts un FormSubmit plūsma. Katalogu darbā nav mainīts.
+- `js/catalog.js` — produktu filtri.
+- `js/header.js` — iekšlapu header scroll stāvoklis.
 
-Failu formāts un precīzie nosaukumi tiek fiksēti, iegūstot īstos materiālus.
-Nepievienot tukšus attēlus, bojātas saites vai izdomātus realizētus projektus.
-Ārējos ražotāja dokumentus drīkst arī sasaistīt ar pārbaudītu oficiālo URL.
+## Attēli
+- `assets/images/hero/` — hero attēlu varianti.
+- `assets/images/products/` — pārbaudīto produktu attēli.
+- `assets/logo/` — logo un favicon faili.
+- `assets/images/katalogi/` — paredzētā katalogu vāku sīkbilžu mape nākamam posmam. Šajā commitā sīkbildes netiek pievienotas.
 
-## Dokumentācija un izvietošana
-| Ceļš | Loma |
-|---|---|
-| UI_UX_SPEC.md | Apstiprinātā dizaina un funkciju specifikācija |
-| SITEMAP_SEO.md | Apstiprinātā A lapu karte un statiskie meta dati |
-| FILE_MANIFEST.md | Šis manifests un izstrādes secība |
-| CONTENT_SOURCES.md | Izmantoto materiālu avoti un pārbaudes statuss; papildina materiālu atlases laikā |
-| DEPLOYMENT.md | Priekšskatījuma/gala publicēšanas soļi un formas servera pieslēgums |
-| robots.txt | Gala indeksācijas noteikumi; atšķir preview un publisko vidi |
-| sitemap.xml | Tikai reāli publicēto indeksējamo lapu saraksts |
+Plānotais katalogu vāku formāts vēlāk: `assets/images/katalogi/<slug>.jpg`, JPEG 400×400, `loading="lazy"`.
 
-Hostinga konfigurācijas un nosūtīšanas endpoint failus konkretizē pēc gala hostinga izvēles.
-Hostinger PHP endpoint nav daļa no Vercel statisko failu izpildes.
-Nekādi SMTP noslēpumi repozitorijā vai pārlūkā.
-Produkcijas pāradresāciju sarakstu sagatavo pēc esošo URL audita.
+## Dokumentācija
+- `SITEMAP_SEO.md` — aktuālā lapu karte un SEO statuss.
+- `FILE_MANIFEST.md` — šis fails.
+- `PUBLISH_CHECKLIST.md` — publicēšanas dienas PDF pārslēgšanas saraksts ar visiem 18 vecais URL → `/faili/` pāriem.
+- `UI_UX_SPEC.md` — apstiprinātā dizaina un UX specifikācija.
 
-## Izstrādes secība un pārbaude
-1. Šis manifests.
-2. index.html — sākumlapas HTML; pirms tam pārbaudīt izmantojamās fotogrāfijas un logo.
-3. produkti/index.html — kataloga HTML (izveidots).
-4. css/style.css — TAGAD, pirms atlikušajām HTML lapām; pieslēgt abām esošajām lapām un atjaunināt šo manifestu vienā commitā pēc lietotāja norādes.
-5. Atlikušās HTML lapas — pa vienai, izmantojot kopīgo CSS; produktu lapām vispirms pārbaudīt modeļu datus.
-6. js/content.js un js/main.js — katrs atsevišķā ziņojumā.
-7. js/products-data.js.
-8. Formas servera pieslēgums, hostinga instrukcijas un noslēdzošā pārbaude pēc servera izvēles.
+## Katalogu PDF princips
+`katalogi/index.html` satur 19 katalogu kartītes: ZANO 3, URBASTYLE 6, GOVAPLAST 6, SAWO 3, GREENMAX 1.
 
-Ievēro lietotāja sākotnējā pielikuma prasību: viens koda fails vienā ziņojumā, pēc tā gaidīt “OK”.
-CSS posms nodrošina abu esošo lapu vizuālo noformējumu. JS darbības vēl nav pieslēgtas. Šajā posmā lietotājs skaidri atļāva CSS, divu HTML saišu un manifesta izmaiņas vienā commitā.
-HTML pievienošana viena pati negarantē konkrētā Vercel deployment 404 novēršanu; pēc izvietošanas pārbaudīt īsto URL.
-Noslēgumā pārbaudīt navigāciju, filtru rezultātus, saraksta daudzumus/dzēšanu, kļūdu stāvokļus un mobile/tablet/desktop.
+18 PDF kartītēm `href` priekšskatījumā paliek esošais `teritorija.lv/_files/ugd/...pdf`, bet `data-pdf-target` glabā nākotnes `/faili/<slug>.pdf` ceļu. ZANO on-line katalogs ir vienīgais izņēmums: tas paliek ārējā `zano.pl` saite un tam nav `data-pdf-target`.
+
+Repo nedrīkst būt PDF faili.

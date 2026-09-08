@@ -1,80 +1,31 @@
-# Lapu karte, SEO un satura apjoms
-2026-09-07. 3. posms — saskaņošanai.
-Lietotājs apstiprināja 2. posma piedāvāto gaišo/zaļo vizuālo virzienu un B kataloga funkcionalitāti ar “aiziet talak ja un aiziet”.
-UI_UX_SPEC.md v0.1 vizuālās un funkcionālās prasības pieņemtas. Šeit piedāvātais lapu un dinamiskā satura apjoms vēl jāsaskaņo.
+# Lapu karte un SEO
 
-## Lapu karte
-URL norādīti gala domēnam https://www.teritorija.lv.
-| URL | title (<=60) | meta description (<=155) | H1 | CTA / funkcija |
-|---|---|---|---|---|
-| / | Āra mēbeles un labiekārtojums | Teritorija | Āra mēbeles, velo novietnes un rotaļu laukumu aprīkojums. Apskati risinājumus un piesaki sava projekta vajadzības. | Āra mēbeles un labiekārtojuma risinājumi | Apskatīt produktus; abu plūsmu sākums |
-| /produkti/ | Produktu katalogs | Teritorija | Atrodi āra mēbeles, velo infrastruktūras un rotaļu laukumu risinājumus. Izvēlies produktus un pievieno tos piedāvājuma pieprasījumam. | Produktu katalogs | Pievienot pieprasījumam; samazina produktu precizēšanu |
-| /pieprasijums/ | Piedāvājuma pieprasījums | Teritorija | Nosūti izvēlēto produktu sarakstu vai apraksti projekta vajadzības, norādot atrašanās vietu un vēlamo termiņu. | Pieteikt projektu | Nosūtīt pieprasījumu; vienkopus apkopo sākotnējos datus |
-| /par-mums/ | Par mums | Teritorija | Iepazīsti Teritorija pārstāvētos labiekārtojuma risinājumus un sadarbības pieeju arhitektiem, būvniekiem un attīstītājiem. | Partneris ārtelpas labiekārtošanai | Pieteikt projektu; paskaidro sadarbību |
-| /privatums/ | Privātuma politika | Teritorija | Informācija par personas datu apstrādi, piesakot projektu vai pieprasot piedāvājumu Teritorija mājaslapā. | Privātuma politika | Izskaidro datu apstrādi |
+Aktuālais priekšskatījuma stāvoklis. Gala domēns: `https://www.teritorija.lv` līdz publicēšanas brīdī tiek apstiprināts citādi.
 
-Katras tabulā norādītās lapas og:image: TRŪKST. Plānotais kopīgais ceļš /assets/images/og-teritorija.jpg; nepieļaut tagu uz neesošu failu.
-Produktu detalizācijas lapas: /produkti/{parbaudits-slug}/, tikai pēc īsto produktu atlases.
-Katras produkta lapas title: {nosaukums} | Teritorija, pārbaudīt <=60 rakstzīmes; H1: īstais produkta nosaukums.
-Meta aprakstu un og:image fiksē katram reālajam produktam pēc avota pārbaudes; pašlaik TRŪKST. Izdomātas produktu lapas neveidot.
-Projekta pieprasījumu un privātuma lapu neiekļaut SEO piesaistes mērķos; pieprasījuma lapai noindex,follow.
-Laika ietaupījums ir sagaidāmais ieguvums, nevis izmērīts fakts. Neapsolīt ietaupījuma procentus.
-Nav atsevišķu B2C/B2B lapu: auditorijas apkalpo pēc vajadzības — produktu izvēle vai projekta apraksts.
+| URL | Lapa | H1 | Indeksācija priekšskatījumā |
+|---|---|---|---|
+| `/` | Sākumlapa | Āra mēbeles un labiekārtojums | noindex, nofollow |
+| `/produkti/` | Produktu katalogs | Produktu katalogs | noindex, nofollow |
+| `/katalogi/` | Ražotāju katalogi | Produktu katalogi | noindex, nofollow |
+| `/par-mums/` | Par mums | Pilsētplānošana un urbānisms | noindex, nofollow |
+| `/pieprasijums/` | Projekta pieprasījums | Projekta pieprasījums | noindex, follow |
+| `/privatums/` | Privātuma politika | Privātuma politika | noindex, nofollow |
+| `/produkti/zano-flash-02-725-1/` | ZANO Flash 02.725.1 | Flash 02.725.1 | noindex, nofollow |
+| `/produkti/zano-scandik-02-046/` | ZANO Scandik 02.046 | Scandik 02.046 | noindex, nofollow |
+| `/produkti/zano-soft-05-012/` | ZANO Soft 05.012 | Soft 05.012 | noindex, nofollow |
+| `/produkti/zano-stilo-18-048/` | ZANO Stilo 18.048 | Stilo 18.048 | noindex, nofollow |
 
-## Navigācija un kategorijas
-Galvene: Produkti, Par mums, Pieprasījums (skaits). Kontakti paliek kājenē: e-pasts un tālrunis.
-Projekti pievienojas tikai tad, ja tiek apstiprināta atsevišķa sadaļa un ir pārbaudīti uzņēmuma realizāciju materiāli.
-Kategorijas V1 ir filtri katalogā, nevis četras plānas SEO lapas.
-Sākuma grupas: āra mēbeles, velo infrastruktūra, rotaļu laukumi, pārstrādātas plastmasas risinājumi.
-Grupām atļauta pārklāšanās; materiāla grupa nav ekskluzīva produkta lietojuma kategorija.
-Piedāvāts starta apjoms: līdz 12 produktiem ar pārbaudītiem datiem, nevis izdomāti produkti skaita sasniegšanai.
-Konkrētus modeļus atlasa nākamajā satura pārbaudē no esošās vietnes un oficiālajiem ražotāju avotiem.
+## Katalogi
+`/katalogi/` satur 19 kartītes šādā secībā: ZANO 3, URBASTYLE 6, GOVAPLAST 6, SAWO 3, GREENMAX 1.
 
-## HTML un JavaScript
-Katrai lapai sava mape ar index.html. Lokālajās saitēs lietot skaidru relatīvu ceļu uz index.html, lai failu apskate darbotos arī file://.
-Publiskie canonical izmanto tabulas URL. Pēc izvietošanas pārbaudīt dublētos /index.html URL.
-HTML: title, description, canonical, OG, H1, produktu apraksti, pamatnavigācija un kontakti.
-js/content.js: const CONTENT = { lv: { ... } }; let LANG = 'lv'; tikai LV UI, filtru un formas ziņas.
-js/main.js: navigācija, filtri, saraksts, validācija.
-Piedāvāts js/products-data.js: pārbaudīti ID, nosaukumi, ceļi un filtru pazīmes saraksta darbībai; SEO saturu ar to neaizstāt.
-Visi skripti parastā script režīmā ar defer; bez moduļiem, ietvariem un build.
-Failu manifestu sagatavo pēc šī posma apstiprinājuma.
+18 PDF saites priekšskatījumā ved uz esošajiem `https://www.teritorija.lv/_files/ugd/...pdf` URL un satur `data-pdf-target="/faili/...pdf"` gala hostinga ceļam. ZANO on-line katalogs paliek ārējā `zano.pl` saite bez `data-pdf-target`.
 
-## Dinamiskās sadaļas — lēmums
-Ieteikums: products-data.js JĀ; portfolio-data.js NĒ V1; blog-data.js NĒ V1.
-Īstu projektu fotogrāfijas var izmantot sākumlapā tikai ar pārbaudītu kontekstu un izmantošanas tiesībām.
-Ražotāja piemēra attēlu nedrīkst nosaukt par uzņēmuma realizētu projektu.
-Portfolio var apstiprināt kā atsevišķu paplašinājumu, ja ir reāli materiāli.
-Blogu neiekļaut bez satura uzturēšanas plāna.
+PDF faili repo netiek glabāti. Publicēšanas pārslēgšanas darbības ir `PUBLISH_CHECKLIST.md`.
 
-## Nepieciešamie materiāli
-| Materiāls | Pašreizējais statuss | Darbība |
-|---|---|---|
-| Oriģinālais logo | Nav repozitorijā | Iegūt no esošās lapas vai oriģinālfaila; neizdomāt citu logo |
-| Hero fotogrāfija | Nav atlasīta | Izvēlēties īstu atbilstošu attēlu, pārbaudīt izmantošanas tiesības |
-| Produktu modeļi, attēli, parametri | Nav atlasīti | Pārbaudīt līdz 12 modeļiem; saglabāt avotu saites |
-| Projektu fotogrāfijas | Nav pārbaudīta piederība | Publicēt tikai ar precīzu kontekstu |
-| Ražotāju logo / katalogi | Jāpārbauda saites un tiesības | Izmantot oficiālos materiālus |
-| Kontakti un rekvizīti | Nolasīti esošajā lapā iepriekšējā auditā | Pārbaudīt pirms publiskas palaišanas |
-| Privātuma teksts | Nav sagatavots | Saskaņot ar reālo datu apstrādi un glabāšanu |
-| Gala hostings un nosūtīšanas saņēmējs | Nav apstiprināts | Izlemt pirms servera pieslēgšanas |
+Katalogu vāku sīkbildes šajā posmā nav pievienotas. Ja tās pievieno vēlāk, paredzētais ceļš ir `assets/images/katalogi/<slug>.jpg`, 400×400 JPEG, `loading="lazy"`.
 
-## SEO pāreja
-Pirms aizstāt esošo domēna lapu, inventarizēt pašreizējos URL, katalogu PDF un attēlu saites.
-Esošajiem aizstātajiem URL izveidot konkrētu 301 atbilstību; visu automātiski nenovirzīt uz sākumlapu.
-Esošo /par-mums saglabāt vai paredzēt precīzu pāradresāciju.
-Produktu shēmā neizdomāt Offer, cenu, availability vai atsauksmes.
-Sitemap.xml satur tikai publicētas indeksējamas lapas. Preview nedrīkst tikt indeksēts.
-OG attēlus un canonical pārbaudīt pret gala domēnu pirms palaišanas.
+## Navigācija
+Galvene un kājene esošajās publiskajās HTML lapās satur saites uz `Produkti`, `Katalogi` un `Par mums`; `Pieprasījums` paliek atsevišķa galvenes CTA. Kontakti paliek kājenē.
 
-## Pašreizējā 404
-2026-09-07 pārbaudē repozitorijā bija tikai UI_UX_SPEC.md; nebija index.html.
-Šī dokumenta pievienošana vēl nerada strādājošu mājaslapu.
-Attēlā redzams NOT_FOUND; konkrētā deployment konfigurācija un atvērtā URL nav pārbaudīta.
-Pēc koda pievienošanas pārbaudīt Vercel jaunāko deployment un īsto preview URL.
-
-## Trīs saskaņošanas opcijas
-A — Apstiprināt 5 pamatlapas + līdz 12 pārbaudītu produktu detalizācijas lapām; bez atsevišķa portfolio un bloga. Ieteikums.
-B — Tas pats + projektu portfolio, ja ir pārbaudīti materiāli; papildus projektu lapa un portfolio-data.js.
-C — Sākumā 5 pamatlapas ar produktu detalizāciju kataloga HTML iekšienē; mazāk lapu, ierobežotāka produktu SEO individualizācija.
-Pēc izvēles sākt 4. posmu ar failu manifestu. Pēc tam kodu veidot pa failam saskaņā ar lietotāja sākotnēji noteikto apstiprināšanas secību.
+## Publicēšana
+Robots, canonical, sitemap.xml un gala domēna pārslēgšana notiek tikai pēc lapas apstiprināšanas un domēna gatavības. Neizņemt `noindex` priekšskatījuma laikā.
