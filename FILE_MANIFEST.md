@@ -1,19 +1,18 @@
 # Failu manifests
 2026-09-07. 4. posms, pirmais ziņojums.
 Lietotājs ar “a aiziet” apstiprināja SITEMAP_SEO.md variantu A:
-6 pamatlapas, līdz 12 pārbaudītu produktu detalizācijas lapām, bez atsevišķa portfolio un bloga.
+5 pamatlapas, līdz 12 pārbaudītu produktu detalizācijas lapām, bez atsevišķa portfolio un bloga.
 Vizuālais virziens: apstiprinātā UI_UX_SPEC.md gaišā/zaļā sistēma.
 Šis ir plānoto failu manifests, nevis apliecinājums, ka faili jau izveidoti.
 
 ## Lapas
 | Ceļš | Loma |
 |---|---|
-| index.html | Sākumlapa: hero, produktu kategorijas, sadarbība, ražotāji un kontakti |
+| index.html | Sākumlapa: hero, produktu kategorijas, sadarbība un ražotāji; kontakti kājenē |
 | produkti/index.html | Statisks produktu katalogs ar JS filtru uzlabojumiem |
 | produkti/{produkta-slug}/index.html | Atsevišķa lapa katram pārbaudītam modelim; līdz 12 lapām |
 | pieprasijums/index.html | Izvēlēto produktu saraksts un projekta pieteikums |
 | par-mums/index.html | Pārbaudīts uzņēmuma un sadarbības apraksts |
-| kontakti/index.html | Kontaktinformācija un rekvizīti |
 | privatums/index.html | Faktiskajai datu apstrādei atbilstošs privātuma teksts |
 
 {produkta-slug} ir dokumentācijas apzīmējums; šāda burtiska mape netiks izveidota.

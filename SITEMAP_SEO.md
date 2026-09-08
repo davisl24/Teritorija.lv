@@ -11,7 +11,6 @@ URL norādīti gala domēnam https://www.teritorija.lv.
 | /produkti/ | Produktu katalogs | Teritorija | Atrodi āra mēbeles, velo infrastruktūras un rotaļu laukumu risinājumus. Izvēlies produktus un pievieno tos piedāvājuma pieprasījumam. | Produktu katalogs | Pievienot pieprasījumam; samazina produktu precizēšanu |
 | /pieprasijums/ | Piedāvājuma pieprasījums | Teritorija | Nosūti izvēlēto produktu sarakstu vai apraksti projekta vajadzības, norādot atrašanās vietu un vēlamo termiņu. | Pieteikt projektu | Nosūtīt pieprasījumu; vienkopus apkopo sākotnējos datus |
 | /par-mums/ | Par mums | Teritorija | Iepazīsti Teritorija pārstāvētos labiekārtojuma risinājumus un sadarbības pieeju arhitektiem, būvniekiem un attīstītājiem. | Partneris ārtelpas labiekārtošanai | Pieteikt projektu; paskaidro sadarbību |
-| /kontakti/ | Kontakti | Teritorija | Sazinies ar Teritorija par āra mēbelēm un labiekārtojuma risinājumiem. Kontaktinformācija, uzņēmuma rekvizīti un projekta pieteikums. | Kontakti | Pieteikt projektu / zvanīt |
 | /privatums/ | Privātuma politika | Teritorija | Informācija par personas datu apstrādi, piesakot projektu vai pieprasot piedāvājumu Teritorija mājaslapā. | Privātuma politika | Izskaidro datu apstrādi |
 
 Katras tabulā norādītās lapas og:image: TRŪKST. Plānotais kopīgais ceļš /assets/images/og-teritorija.jpg; nepieļaut tagu uz neesošu failu.
@@ -23,7 +22,7 @@ Laika ietaupījums ir sagaidāmais ieguvums, nevis izmērīts fakts. Neapsolīt 
 Nav atsevišķu B2C/B2B lapu: auditorijas apkalpo pēc vajadzības — produktu izvēle vai projekta apraksts.
 
 ## Navigācija un kategorijas
-Galvene: Produkti, Par mums, Kontakti, Pieprasījums (skaits).
+Galvene: Produkti, Par mums, Pieprasījums (skaits). Kontakti paliek kājenē: e-pasts un tālrunis.
 Projekti pievienojas tikai tad, ja tiek apstiprināta atsevišķa sadaļa un ir pārbaudīti uzņēmuma realizāciju materiāli.
 Kategorijas V1 ir filtri katalogā, nevis četras plānas SEO lapas.
 Sākuma grupas: āra mēbeles, velo infrastruktūra, rotaļu laukumi, pārstrādātas plastmasas risinājumi.
@@ -75,7 +74,7 @@ Attēlā redzams NOT_FOUND; konkrētā deployment konfigurācija un atvērtā UR
 Pēc koda pievienošanas pārbaudīt Vercel jaunāko deployment un īsto preview URL.
 
 ## Trīs saskaņošanas opcijas
-A — Apstiprināt 6 pamatlapas + līdz 12 pārbaudītu produktu detalizācijas lapām; bez atsevišķa portfolio un bloga. Ieteikums.
+A — Apstiprināt 5 pamatlapas + līdz 12 pārbaudītu produktu detalizācijas lapām; bez atsevišķa portfolio un bloga. Ieteikums.
 B — Tas pats + projektu portfolio, ja ir pārbaudīti materiāli; papildus projektu lapa un portfolio-data.js.
-C — Sākumā 6 pamatlapas ar produktu detalizāciju kataloga HTML iekšienē; mazāk lapu, ierobežotāka produktu SEO individualizācija.
+C — Sākumā 5 pamatlapas ar produktu detalizāciju kataloga HTML iekšienē; mazāk lapu, ierobežotāka produktu SEO individualizācija.
 Pēc izvēles sākt 4. posmu ar failu manifestu. Pēc tam kodu veidot pa failam saskaņā ar lietotāja sākotnēji noteikto apstiprināšanas secību.

@@ -9,122 +9,14 @@
   <link rel="canonical" href="https://www.teritorija.lv/pieprasijums/">
   <link rel="icon" type="image/png" sizes="64x64" href="../assets/logo/teritorija-favicon-dark-64w.png">
   <link rel="apple-touch-icon" sizes="180x180" href="../assets/logo/teritorija-favicon-dark-180w.png">
-  <meta property="og:type" content="website">
-  <meta property="og:locale" content="lv_LV">
-  <meta property="og:site_name" content="Teritorija">
-  <meta property="og:title" content="Projekta pieprasījums | Teritorija">
-  <meta property="og:description" content="Pievienojiet izvēlētos produktus vai aprakstiet savu projektu. Sazināsimies, lai precizētu piemērotāko risinājumu.">
-  <meta property="og:url" content="https://www.teritorija.lv/pieprasijums/">
-  <link rel="stylesheet" href="../css/style.css">
-  <link rel="stylesheet" href="../css/phase2.css">
+  <meta property="og:type" content="website"><meta property="og:locale" content="lv_LV"><meta property="og:site_name" content="Teritorija"><meta property="og:title" content="Projekta pieprasījums | Teritorija"><meta property="og:description" content="Pievienojiet izvēlētos produktus vai aprakstiet savu projektu. Sazināsimies, lai precizētu piemērotāko risinājumu."><meta property="og:url" content="https://www.teritorija.lv/pieprasijums/">
+  <link rel="stylesheet" href="../css/style.css"><link rel="stylesheet" href="../css/phase2.css">
 </head>
 <body>
-  <a class="skip-link" href="#saturs">Pāriet uz saturu</a>
-
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="../index.html" aria-label="Teritorija — sākumlapa">
-        <img src="../assets/logo/teritorija-logo-dark-268w.png"
-             srcset="../assets/logo/teritorija-logo-dark-268w.png 268w, ../assets/logo/teritorija-logo-dark-536w.png 536w, ../assets/logo/teritorija-logo-dark-1072w.png 1072w"
-             sizes="(min-width: 768px) 158px, 126px"
-             alt="Teritorija" width="158" height="79" decoding="async">
-      </a>
-      <button class="menu-toggle" type="button" aria-controls="site-nav" aria-expanded="false" hidden>Izvēlne</button>
-      <nav class="site-nav" id="site-nav" aria-label="Galvenā navigācija">
-        <ul>
-          <li><a href="../produkti/index.html">Produkti</a></li>
-          <li><a href="../par-mums/index.html">Par mums</a></li>
-          <li><a href="../kontakti/index.html">Kontakti</a></li>
-        </ul>
-      </nav>
-      <a class="request-link" href="./index.html" aria-current="page">Pieprasījums <span class="request-count" data-request-count hidden>0</span></a>
-    </div>
-  </header>
-
-  <main id="saturs" tabindex="-1">
-    <section class="request-intro container" aria-labelledby="request-title">
-      <nav class="breadcrumbs" aria-label="Atrašanās vieta">
-        <ol><li><a href="../index.html">Sākums</a></li><li aria-current="page">Pieprasījums</li></ol>
-      </nav>
-      <p class="eyebrow">Projekta informācija</p>
-      <h1 id="request-title">Projekta pieprasījums</h1>
-      <p class="lead">Pievienojiet izvēlētos produktus vai aprakstiet savu projektu. Sazināsimies, lai precizētu piemērotāko risinājumu.</p>
-    </section>
-
-    <section class="request-workspace container" data-inquiry-page>
-      <div class="request-products" aria-labelledby="selected-products-title">
-        <div class="request-section-heading">
-          <p class="eyebrow">Izvēle</p>
-          <h2 id="selected-products-title">Izvēlētie produkti</h2>
-        </div>
-        <div class="request-product-list" data-inquiry-list></div>
-        <div class="request-empty" data-inquiry-empty>
-          <h3>Produkti vēl nav pievienoti</h3>
-          <p>Varat izvēlēties produktus katalogā vai uzreiz aprakstīt savu projektu.</p>
-          <a class="button button-secondary" href="../produkti/index.html">Apskatīt produktus</a>
-        </div>
-        <p class="inquiry-feedback" data-inquiry-status role="status" aria-live="polite" aria-atomic="true"></p>
-      </div>
-
-      <div class="request-form-wrap" aria-labelledby="request-form-title">
-        <div class="request-section-heading">
-          <p class="eyebrow">Projekts</p>
-          <h2 id="request-form-title">Pastāstiet par projektu</h2>
-        </div>
-        <form class="request-form" data-inquiry-form>
-          <input type="hidden" name="products" value="" data-inquiry-products>
-          <div class="field">
-            <label for="contact-name">Vārds / uzņēmums <span aria-hidden="true">*</span></label>
-            <input id="contact-name" name="contact" type="text" autocomplete="name" required>
-          </div>
-          <div class="field">
-            <label for="contact-email">E-pasts <span aria-hidden="true">*</span></label>
-            <input id="contact-email" name="email" type="email" autocomplete="email" required>
-          </div>
-          <div class="field">
-            <label for="contact-phone">Tālrunis</label>
-            <input id="contact-phone" name="phone" type="tel" autocomplete="tel">
-          </div>
-          <div class="field">
-            <label for="project-location">Projekta vieta</label>
-            <input id="project-location" name="location" type="text" autocomplete="street-address" placeholder="Rīga, Latvija">
-          </div>
-          <div class="field request-description-field">
-            <label for="project-description">Projekta apraksts <span aria-hidden="true">*</span></label>
-            <textarea id="project-description" name="description" required placeholder="Īsi aprakstiet projektu, vietu un ko vēlaties labiekārtot."></textarea>
-          </div>
-          <p class="request-consent">Nosūtot pieprasījumu, jūs piekrītat, ka Teritorija izmanto norādīto informāciju, lai sazinātos par jūsu projektu.</p>
-          <button class="button button-primary request-submit" type="submit">Sagatavot pieprasījumu</button>
-          <p class="form-status" data-inquiry-form-status role="status" aria-live="polite" aria-atomic="true"></p>
-          <noscript><p class="form-note">Šajā priekšskatījumā pieprasījuma sagatavošanai nepieciešams JavaScript. Varat sazināties pa tālruni <a href="tel:+37129136973">+371 29136973</a> vai e-pastu <a href="mailto:einars@teritorija.lv">einars@teritorija.lv</a>.</p></noscript>
-        </form>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container footer-grid">
-      <div class="footer-brand">
-        <a class="brand-text" href="../index.html">Teritorija</a>
-        <p>Āra mēbeles un labiekārtojuma risinājumi.</p>
-      </div>
-      <nav aria-label="Kājenes navigācija">
-        <ul>
-          <li><a href="../produkti/index.html">Produkti</a></li>
-          <li><a href="../par-mums/index.html">Par mums</a></li>
-          <li><a href="../kontakti/index.html">Kontakti</a></li>
-        </ul>
-      </nav>
-      <address>
-        <a href="mailto:einars@teritorija.lv">einars@teritorija.lv</a>
-        <a href="tel:+37129136973">+371 29136973</a>
-      </address>
-    </div>
-    <div class="container footer-bottom">
-      <small>© 2026 SIA “Mārupes noma” · Teritorija</small>
-      <a href="../privatums/index.html">Privātuma politika</a>
-    </div>
-  </footer>
-  <script src="../js/inquiry.js?v=12ed86c" defer></script>
-</body>
-</html>
+<a class="skip-link" href="#saturs">Pāriet uz saturu</a>
+<header class="site-header"><div class="container header-inner"><a class="brand" href="../index.html" aria-label="Teritorija — sākumlapa"><img src="../assets/logo/teritorija-logo-dark-268w.png" srcset="../assets/logo/teritorija-logo-dark-268w.png 268w, ../assets/logo/teritorija-logo-dark-536w.png 536w, ../assets/logo/teritorija-logo-dark-1072w.png 1072w" sizes="(min-width: 768px) 158px, 126px" alt="Teritorija" width="158" height="79" decoding="async"></a><button class="menu-toggle" type="button" aria-controls="site-nav" aria-expanded="false" hidden>Izvēlne</button><nav class="site-nav" id="site-nav" aria-label="Galvenā navigācija"><ul><li><a href="../produkti/index.html">Produkti</a></li><li><a href="../par-mums/index.html">Par mums</a></li></ul></nav><a class="request-link" href="./index.html" aria-current="page">Pieprasījums <span class="request-count" data-request-count hidden>0</span></a></div></header>
+<main id="saturs" tabindex="-1"><section class="request-intro container" aria-labelledby="request-title"><nav class="breadcrumbs" aria-label="Atrašanās vieta"><ol><li><a href="../index.html">Sākums</a></li><li aria-current="page">Pieprasījums</li></ol></nav><p class="eyebrow">Projekta informācija</p><h1 id="request-title">Projekta pieprasījums</h1><p class="lead">Pievienojiet izvēlētos produktus vai aprakstiet savu projektu. Sazināsimies, lai precizētu piemērotāko risinājumu.</p></section>
+<section class="request-workspace container" data-inquiry-page><div class="request-products" aria-labelledby="selected-products-title"><div class="request-section-heading"><p class="eyebrow">Izvēle</p><h2 id="selected-products-title">Izvēlētie produkti</h2></div><div class="request-product-list" data-inquiry-list></div><div class="request-empty" data-inquiry-empty><h3>Produkti vēl nav pievienoti</h3><p>Varat izvēlēties produktus katalogā vai uzreiz aprakstīt savu projektu.</p><a class="button button-secondary" href="../produkti/index.html">Apskatīt produktus</a></div><p class="inquiry-feedback" data-inquiry-status role="status" aria-live="polite" aria-atomic="true"></p></div>
+<div class="request-form-wrap" aria-labelledby="request-form-title"><div class="request-section-heading"><p class="eyebrow">Projekts</p><h2 id="request-form-title">Pastāstiet par projektu</h2></div><form class="request-form" data-inquiry-form><input type="hidden" name="products" value="" data-inquiry-products><div class="field"><label for="contact-name">Vārds / uzņēmums <span aria-hidden="true">*</span></label><input id="contact-name" name="contact" type="text" autocomplete="name" required></div><div class="field"><label for="contact-email">E-pasts <span aria-hidden="true">*</span></label><input id="contact-email" name="email" type="email" autocomplete="email" required></div><div class="field"><label for="contact-phone">Tālrunis</label><input id="contact-phone" name="phone" type="tel" autocomplete="tel"></div><div class="field"><label for="project-location">Projekta vieta</label><input id="project-location" name="location" type="text" autocomplete="street-address" placeholder="Rīga, Latvija"></div><div class="field request-description-field"><label for="project-description">Projekta apraksts <span aria-hidden="true">*</span></label><textarea id="project-description" name="description" required placeholder="Īsi aprakstiet projektu, vietu un ko vēlaties labiekārtot."></textarea></div><p class="request-consent">Nosūtot pieprasījumu, jūs piekrītat, ka Teritorija izmanto norādīto informāciju, lai sazinātos par jūsu projektu.</p><button class="button button-primary request-submit" type="submit">Sagatavot pieprasījumu</button><p class="form-status" data-inquiry-form-status role="status" aria-live="polite" aria-atomic="true"></p><noscript><p class="form-note">Šajā priekšskatījumā pieprasījuma sagatavošanai nepieciešams JavaScript. Varat sazināties pa tālruni <a href="tel:+37129136973">+371 29136973</a> vai e-pastu <a href="mailto:einars@teritorija.lv">einars@teritorija.lv</a>.</p></noscript></form></div></section></main>
+<footer class="site-footer"><div class="container footer-grid"><div class="footer-brand"><a class="brand-text" href="../index.html">Teritorija</a><p>Āra mēbeles un labiekārtojuma risinājumi.</p></div><nav aria-label="Kājenes navigācija"><ul><li><a href="../produkti/index.html">Produkti</a></li><li><a href="../par-mums/index.html">Par mums</a></li><li><a href="https://www.facebook.com/teritorija.lv" target="_blank" rel="noopener">Facebook</a></li><li><a href="https://www.instagram.com/teritorija.lv/" target="_blank" rel="noopener">Instagram</a></li></ul></nav><address><a href="mailto:einars@teritorija.lv">einars@teritorija.lv</a><a href="tel:+37129136973">+371 29136973</a></address></div><div class="container footer-bottom"><small>© 2026 SIA “Mārupes noma” · Teritorija</small><a href="../privatums/index.html">Privātuma politika</a></div></footer>
+<script src="../js/inquiry.js?v=12ed86c" defer></script></body></html>
