@@ -9,7 +9,7 @@
 }
 .home-page .site-header .header-inner { position: relative; z-index: 2; }
 .home-page .site-header .brand { width: 118px; height: 66px; }
-.home-page .site-header .brand img { width: 100%; height: 100%; object-fit: contain; filter: invert(1) grayscale(1) brightness(2); mix-blend-mode: screen; }
+.home-page .site-header .brand img { width: 100%; height: 100%; object-fit: contain; }
 .home-page .site-header .site-nav { border-color: rgba(255, 255, 255, .22); }
 .home-page .site-header .site-nav a,
 .home-page .site-header .request-link { color: #fff; }
