@@ -15,7 +15,7 @@ Nav interneta veikala apmaksas, klientu kontu, automātiskas tāmes vai CRM V1 a
 
 ## 2. Pozicionējums un valoda
 Virziens: precīzs un atturīgs arhitektūras produktu katalogs.
-Piedāvātais H1: “Āra mēbeles un labiekārtojuma risinājumi”.
+Piedāvātais H1: “Āra mēbeles un labiekārtojums”.
 Piedāvātais ievads: “Produkti publiskām ārtelpām, dzīvojamiem projektiem un atpūtas vietām.”
 Primārais CTA: “Apskatīt produktus”. Sekundārais: “Pieteikt projektu”.
 Rakstīt latviski, konkrēti, bez nepamatotiem kvalitātes superlatīviem.
@@ -92,6 +92,7 @@ Teksta un interaktīvo stāvokļu kontrastu pārbaudīt implementācijā.
 Tipogrāfija: --font-heading un --font-body: Arial, Helvetica, sans-serif.
 V1 neparedz ārējas fontu ielādes; mierīgs, viegli salasāms sans-serif.
 Phase 1 heading mērogs: H1 clamp(2.65rem, 6vw, 5rem); H2 clamp(2rem, 3.6vw, 3.5rem); pamata teksts 1rem, line-height 1.6.
+H1 nekad nav garāks par 4 vārdiem.
 Atstarpes: --space-xs 4px; --space-sm 8px; --space-md 16px; --space-lg 24px; --space-xl 32px; --space-2xl 48px; --space-3xl 64px; --space-4xl 96px; --space-5xl 128px.
 Konteiners: 1280px; image-led/hero līdz 1440px. Ārējās malas mobile 20px, tablet 32px, desktop 48px.
 Sadaļu vertikālās atstarpes: mobile 64px, tablet 96px, desktop līdz 128px atkarībā no sekcijas.
