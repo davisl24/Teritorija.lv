@@ -198,13 +198,6 @@ button { cursor: pointer; }
 .catalog-empty .button { margin: 0 var(--space-sm) var(--space-sm) 0; }
 .catalog noscript p { margin-top: var(--space-xl); color: var(--color-muted); font-size: .875rem; }
 
-.motion-ready .reveal {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity var(--dur-slow) var(--ease), transform var(--dur-slow) var(--ease);
-}
-.motion-ready .reveal.is-visible { opacity: 1; transform: translateY(0); }
-
 @media (min-width: 768px) {
   :root { --page-gutter: 32px; --section-space: var(--space-4xl); }
   .brand { width: 128px; height: 86px; }
@@ -278,5 +271,4 @@ button { cursor: pointer; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
-  .motion-ready .reveal { opacity: 1 !important; transform: none !important; }
 }

@@ -169,8 +169,10 @@ Hero attēls vienmēr iet līdz malām bez apaļiem stūriem.
 ## 14. Kustības skala
 --dur-fast: 200ms — hover, fokuss, krāsu pārejas.
 --dur-base: 300ms — kartīšu pacelšanās.
---dur-slow: 400ms — sadaļu ienākšana skrollējot.
+--dur-slow: 400ms — hero ielādes animācija.
 --ease: cubic-bezier(.22,.61,.36,1).
 Noteikums: animē tikai transform un opacity.
 Nekad neanimē width, height, top, left vai margin.
+Lapā ir tikai viena ielādes animācija — hero blokā.
+Sadaļu ienākšana skrollējot netiek izmantota.
 Viss zem prefers-reduced-motion tiek izslēgts.
