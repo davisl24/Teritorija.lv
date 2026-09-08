@@ -156,3 +156,20 @@ Dzīvās nosūtīšanas pārbaude tikai ar skaidri marķētu testa pieprasījumu
 ## 12. Saskaņošana un nākamais posms
 Phase 1 vizuālais virziens ir implementēts sākumlapā un produktu katalogā: premium/editorial produkta-first sistēma, 2×2 desktop kategorijas, izceltie produkti, process, ražotāju index, CTA un katalogam saskaņota vizuālā valoda.
 Nākamais posms sākas tikai pēc vizuālā review: produktu detalizācijas lapas un/vai JS katalogfiltri/pieprasījuma saraksts atbilstoši apstiprinātajai prioritātei.
+
+## 13. Radius skala
+--radius-sm: 8px — pogas, ievadlauki, tagi.
+--radius-md: 14px — kartītes, formu bloki.
+--radius-lg: 18px — attēli kartītēs, mediju bloki.
+--radius-none: 0 — hero attēls, pilnekrāna sadaļas.
+Noteikums: citas radius vērtības lapā nedrīkst parādīties.
+Hero attēls vienmēr iet līdz malām bez apaļiem stūriem.
+
+## 14. Kustības skala
+--dur-fast: 200ms — hover, fokuss, krāsu pārejas.
+--dur-base: 300ms — kartīšu pacelšanās.
+--dur-slow: 400ms — sadaļu ienākšana skrollējot.
+--ease: cubic-bezier(.22,.61,.36,1).
+Noteikums: animē tikai transform un opacity.
+Nekad neanimē width, height, top, left vai margin.
+Viss zem prefers-reduced-motion tiek izslēgts.
