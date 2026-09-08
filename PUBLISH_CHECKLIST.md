@@ -21,3 +21,7 @@ Pārslēgšanas dienā katrā `katalogi/index.html` kataloga saitē `href` aizvi
 16. https://www.teritorija.lv/_files/ugd/e827f3_d0c3685e3ab244faa2ff7cb355b74ddc.pdf -> /faili/sawo-velosipedu-nojumes.pdf
 17. https://www.teritorija.lv/_files/ugd/e827f3_59565e0360944363bda825805a8ca593.pdf -> /faili/sawo-remonta-stacijas.pdf
 18. https://www.teritorija.lv/_files/ugd/e827f3_3266976b044f4b2c9a9dde1b29502906.pdf -> /faili/greenmax-produktu-katalogs.pdf
+
+## Formas saņēmējs
+Pirms nodošanas `js/inquiry.js` nomainīt FormSubmit saņēmēju no `davislocs135@gmail.com` uz `einars@teritorija.lv` un veikt jaunu FormSubmit aktivizāciju no live lapas.
+Bez tā klienta pieprasījumi ies uz izstrādātāja pastu.

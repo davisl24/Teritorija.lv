@@ -219,6 +219,12 @@
       return;
     }
 
+    const honeyField = form.elements.namedItem('_honey');
+    if (honeyField && String(honeyField.value || '').trim()) {
+      if (status) status.textContent = 'Pieprasījums veiksmīgi nosūtīts. Paldies!';
+      return;
+    }
+
     const payload = prepareFormPayload(form);
     const formSubmitPayload = {
       'Vārds / uzņēmums': payload.contact,
@@ -227,7 +233,8 @@
       'Projekta vieta': payload.location,
       'Projekta apraksts': payload.description,
       _subject: 'Jauns Teritorija projekta pieprasījums',
-      _template: 'table'
+      _template: 'table',
+      _honey: ''
     };
 
     if (payload.products.length > 0) {
