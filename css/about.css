@@ -1,0 +1,30 @@
+.about-page .breadcrumbs { margin-bottom: 64px; }
+.about-hero { padding: 32px 0 96px; border-bottom: 1px solid var(--color-border); }
+.about-hero h1 { max-width: 12ch; }
+.about-hero-copy { display: grid; gap: 24px; margin-top: 48px; max-width: 760px; }
+.about-hero-copy p, .about-editorial-copy p { color: var(--color-muted); }
+.about-editorial { padding-block: 96px; border-bottom: 1px solid var(--color-border); }
+.about-editorial-grid { display: grid; gap: 48px; }
+.about-editorial h2 { max-width: 13ch; }
+.about-editorial-copy { max-width: 650px; }
+.about-details { padding-block: 96px; border-bottom: 1px solid var(--color-border); }
+.about-details-heading { margin-bottom: 48px; }
+.about-data { margin: 0; border-top: 1px solid var(--color-border); }
+.about-data > div { display: grid; gap: 8px; padding: 16px 0; border-bottom: 1px solid var(--color-border); }
+.about-data dt { color: var(--color-muted); font-size: .78rem; letter-spacing: .04em; }
+.about-data dd { margin: 0; max-width: 58ch; font-size: 1rem; }
+.about-data-name dd { font-size: clamp(1.35rem, 2.4vw, 2rem); line-height: 1.2; letter-spacing: -.025em; }
+.about-partner { background: var(--color-surface); }
+@media (min-width: 768px) {
+  .about-hero { padding-top: 48px; padding-bottom: 128px; }
+  .about-hero-copy { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px; max-width: 1000px; }
+  .about-editorial-grid { grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 96px; align-items: start; }
+  .about-data > div { grid-template-columns: minmax(160px, .35fr) minmax(0, 1fr); gap: 32px; align-items: baseline; padding: 18px 0; }
+  .about-data-name { padding-block: 24px !important; }
+}
+@media (min-width: 1025px) {
+  .about-hero-copy { margin-top: 64px; margin-left: 25%; }
+  .about-editorial-grid { grid-template-columns: minmax(0, 1fr) minmax(420px, .85fr); gap: 128px; }
+  .about-details-heading { display: grid; grid-template-columns: 25% 1fr; align-items: end; }
+  .about-details-heading .eyebrow { margin-bottom: 8px; }
+}
