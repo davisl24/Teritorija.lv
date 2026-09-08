@@ -2,8 +2,12 @@
   'use strict';
 
   const STORAGE_KEY = 'teritorijaInquiry';
+  const DRAFT_STORAGE_KEY = 'teritorijaInquiryDraft';
+  const DRAFT_MAX_AGE = 24 * 60 * 60 * 1000;
+  const DRAFT_FIELDS = ['contact', 'email', 'phone', 'location', 'description'];
   const memoryState = { items: [] };
   let storageAvailable = true;
+  let draftSaveTimer = null;
 
   function normalizeItem(value) {
     if (!value || typeof value !== 'object') return null;
@@ -48,6 +52,64 @@
       window.localStorage.setItem(STORAGE_KEY, JSON.stringify(clean));
     } catch (error) {
       storageAvailable = false;
+    }
+  }
+
+  function saveInquiryDraft(form) {
+    try {
+      const draft = { savedAt: Date.now() };
+      DRAFT_FIELDS.forEach((name) => {
+        const field = form.elements.namedItem(name);
+        draft[name] = field ? String(field.value || '') : '';
+      });
+      window.localStorage.setItem(DRAFT_STORAGE_KEY, JSON.stringify(draft));
+    } catch (error) {
+      return;
+    }
+  }
+
+  function scheduleInquiryDraftSave(form) {
+    if (draftSaveTimer) window.clearTimeout(draftSaveTimer);
+    draftSaveTimer = window.setTimeout(() => {
+      draftSaveTimer = null;
+      saveInquiryDraft(form);
+    }, 400);
+  }
+
+  function restoreInquiryDraft(form) {
+    try {
+      const raw = window.localStorage.getItem(DRAFT_STORAGE_KEY);
+      if (!raw) return;
+      const draft = JSON.parse(raw);
+      const savedAt = Number(draft && draft.savedAt);
+      if (!savedAt || Date.now() - savedAt >= DRAFT_MAX_AGE) {
+        window.localStorage.removeItem(DRAFT_STORAGE_KEY);
+        return;
+      }
+      DRAFT_FIELDS.forEach((name) => {
+        const field = form.elements.namedItem(name);
+        if (field && !String(field.value || '').trim() && typeof draft[name] === 'string') {
+          field.value = draft[name];
+        }
+      });
+    } catch (error) {
+      try {
+        window.localStorage.removeItem(DRAFT_STORAGE_KEY);
+      } catch (removeError) {
+        return;
+      }
+    }
+  }
+
+  function clearInquiryDraft() {
+    if (draftSaveTimer) {
+      window.clearTimeout(draftSaveTimer);
+      draftSaveTimer = null;
+    }
+    try {
+      window.localStorage.removeItem(DRAFT_STORAGE_KEY);
+    } catch (error) {
+      return;
     }
   }
 
@@ -268,6 +330,7 @@
       }
 
       writeItems([]);
+      clearInquiryDraft();
       updateHeaderCount([]);
       syncAddButtons([]);
       syncInquiryPage([]);
@@ -298,6 +361,9 @@
     syncInquiryPage(items);
     document.addEventListener('click', handleClick);
     document.querySelectorAll('[data-inquiry-form]').forEach((form) => {
+      restoreInquiryDraft(form);
+      form.addEventListener('input', () => scheduleInquiryDraftSave(form));
+      form.addEventListener('change', () => scheduleInquiryDraftSave(form));
       form.addEventListener('submit', handleFormSubmit);
     });
   }
