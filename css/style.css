@@ -272,3 +272,32 @@ button { cursor: pointer; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
+
+@keyframes request-count-bump {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.25); }
+}
+
+@keyframes catalog-filter-fade {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .4; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .site-header,
+  .site-header .header-inner {
+    transition: min-height var(--dur-fast) var(--ease), background-color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
+  }
+  .site-header.is-scrolled { background: rgb(247, 247, 242); border-bottom-color: rgba(89, 98, 85, .36); }
+  .site-header.is-scrolled .header-inner { min-height: 64px; }
+
+  .product-card .product-image { overflow: hidden; }
+  .product-card .product-image img { transition: transform var(--dur-base) var(--ease); }
+  .product-card:hover .product-image img,
+  .product-card:focus-within .product-image img { transform: scale(1.04); }
+
+  .request-count.is-bumped { animation: request-count-bump 300ms var(--ease); }
+
+  .product-grid.is-filtering,
+  .catalog-empty.is-filtering { animation: catalog-filter-fade var(--dur-fast) var(--ease); }
+}

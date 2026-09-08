@@ -63,6 +63,18 @@
     });
   }
 
+  function bumpHeaderCount() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    document.querySelectorAll('[data-request-count]:not([hidden])').forEach((counter) => {
+      counter.classList.remove('is-bumped');
+      void counter.offsetWidth;
+      counter.classList.add('is-bumped');
+      counter.addEventListener('animationend', () => {
+        counter.classList.remove('is-bumped');
+      }, { once: true });
+    });
+  }
+
   function setPageStatus(message) {
     document.querySelectorAll('[data-inquiry-status]').forEach((status) => {
       status.textContent = message;
@@ -103,6 +115,7 @@
     items.push(product);
     writeItems(items);
     updateHeaderCount(items);
+    bumpHeaderCount();
     syncAddButtons(items);
     syncInquiryPage(items);
     setPageStatus(`${product.name} pievienots pieprasījumam.`);
@@ -287,4 +300,20 @@
   } else {
     init();
   }
+})();
+
+(() => {
+  const currentScript = document.currentScript;
+  if (!currentScript) return;
+  const base = new URL('.', currentScript.src);
+
+  const loadScript = (name) => {
+    const script = document.createElement('script');
+    script.src = new URL(name, base).href;
+    script.defer = true;
+    document.head.append(script);
+  };
+
+  loadScript('header.js');
+  if (document.querySelector('[data-catalog]')) loadScript('catalog.js');
 })();
