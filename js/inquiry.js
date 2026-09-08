@@ -296,6 +296,7 @@
       'Projekta apraksts': payload.description,
       _subject: 'Jauns Teritorija projekta pieprasījums',
       _template: 'table',
+      _url: window.location.href,
       _honey: ''
     };
 
