@@ -138,6 +138,13 @@ button { cursor: pointer; }
 .process-grid h3 { max-width: 17ch; margin-bottom: var(--space-md); }
 .process-grid p { max-width: 40ch; color: var(--color-muted); }
 
+.advantages-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-2xl); }
+.advantage-item { min-width: 0; }
+.advantage-icon { display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; margin-bottom: var(--space-lg); border-radius: var(--radius-sm); background: var(--color-surface); color: var(--color-primary); }
+.advantage-icon svg { width: 24px; height: 24px; }
+.advantage-item h3 { margin-bottom: var(--space-sm); font-size: clamp(1.25rem, 2vw, 1.55rem); }
+.advantage-item p { max-width: 32ch; color: var(--color-muted); font-size: .9rem; }
+
 .manufacturers { background: var(--color-surface); border-top: 1px solid var(--color-border); }
 .manufacturer-grid { display: grid; grid-template-columns: minmax(0, 1fr); list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--color-border); }
 .manufacturer-grid li { min-width: 0; border-radius: var(--radius-md); transition: transform var(--dur-base) var(--ease); }
@@ -155,6 +162,7 @@ button { cursor: pointer; }
 .project-cta-inner p:not(.eyebrow) { margin-top: var(--space-lg); max-width: 48ch; color: rgba(255, 255, 255, .72); }
 
 .site-footer { padding-top: var(--space-3xl); background: #ECEDE7; }
+.site-footer .container { padding-right: calc(48px + var(--space-lg)); }
 .footer-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-2xl); padding-bottom: var(--space-3xl); }
 .footer-grid > * { min-width: 0; }
 .brand-text { display: inline-block; font-size: clamp(1.8rem, 3vw, 2.4rem); letter-spacing: -.045em; text-decoration: none; }
@@ -221,6 +229,7 @@ button { cursor: pointer; }
   .category-card:nth-child(2n) { border-right: 0; }
   .featured-products-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .process-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .advantages-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .manufacturer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .manufacturer-grid li:nth-child(odd) a { padding-right: var(--space-xl); border-right: 1px solid var(--color-border); }
   .manufacturer-grid li:nth-child(even) a { padding-left: var(--space-xl); }
@@ -255,6 +264,7 @@ button { cursor: pointer; }
   .featured-product:not(.featured-product-main) .featured-product-copy { padding-top: 0; align-self: center; }
   .featured-product:not(.featured-product-main) .featured-product-copy > p:not(.eyebrow) { display: none; }
   .process-grid { gap: var(--space-3xl); }
+  .advantages-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .manufacturer-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .manufacturer-grid li a { padding: var(--space-xl); border-right: 1px solid var(--color-border); }
   .manufacturer-grid li:nth-child(3n) a { border-right: 0; }
