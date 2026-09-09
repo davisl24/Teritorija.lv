@@ -5,16 +5,7 @@
     const style = document.createElement('style');
     style.textContent = `
       .home-page .home-hero{align-items:center!important;}
-      .home-page .home-hero .hero-content{
-        grid-template-columns:1fr!important;
-        grid-template-rows:auto auto auto!important;
-        justify-items:center!important;
-        align-items:center!important;
-        text-align:center!important;
-        width:min(calc(100% - 48px),920px)!important;
-        margin:76px auto 0!important;
-        gap:18px!important;
-      }
+      .home-page .home-hero .hero-content{grid-template-columns:1fr!important;grid-template-rows:auto auto auto!important;justify-items:center!important;align-items:center!important;text-align:center!important;width:min(calc(100% - 48px),920px)!important;margin:76px auto 0!important;gap:18px!important;}
       .home-page .home-hero h1{grid-column:1!important;grid-row:1!important;max-width:11ch!important;margin:0 auto!important;}
       .home-page .home-hero .lead{grid-column:1!important;grid-row:2!important;align-self:auto!important;max-width:42ch!important;margin:0 auto!important;}
       .home-page .home-hero .hero-actions{grid-column:1!important;grid-row:3!important;justify-content:center!important;margin-top:6px!important;}
@@ -31,28 +22,51 @@
 
     document.querySelectorAll('a[href]').forEach((link) => {
       const rawHref = link.getAttribute('href');
-      const target = externalProductTargets[rawHref];
-      if (!target) return;
-      link.href = target;
-      link.target = '_blank';
-      link.rel = 'noopener noreferrer';
+      const externalTarget = externalProductTargets[rawHref];
+      if (externalTarget) {
+        link.href = externalTarget;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        return;
+      }
+
+      const href = link.href;
+      if (href.includes('teritorija.lv/sawo/velosipedu-stativi')) {
+        link.href = './produkti/velo-stativi/index.html';
+        link.removeAttribute('target');
+        link.removeAttribute('rel');
+      } else if (href.includes('teritorija.lv/velo-nojume')) {
+        link.href = './produkti/velo-nojumes/index.html';
+        link.removeAttribute('target');
+        link.removeAttribute('rel');
+      } else if (href.includes('teritorija.lv/sawo/skrejritenu-stativi')) {
+        link.href = './produkti/skrejritenu-stativi/index.html';
+        link.removeAttribute('target');
+        link.removeAttribute('rel');
+      } else if (href.includes('teritorija.lv/betona-ara-mebeles')) {
+        link.href = './produkti/betona-mebeles/index.html';
+        link.removeAttribute('target');
+        link.removeAttribute('rel');
+      }
     });
 
     const range = document.querySelector('.product-range-grid');
     if (range) {
       const additions = [
-        ['Betona mēbeles', 'https://www.urbastyle.com/'],
-        ['Skrejriteņu statīvi', 'https://www.teritorija.lv/sawo/skrejritenu-stativi'],
-        ['Viedā pilsēta', 'https://www.zano-streetfurniture.com/smart-city'],
-        ['HPL un dizaina mēbeles', 'https://outsiderfurniture.com/']
+        ['Betona mēbeles', './produkti/betona-mebeles/index.html', false],
+        ['Skrejriteņu statīvi', './produkti/skrejritenu-stativi/index.html', false],
+        ['Viedā pilsēta', 'https://www.zano-streetfurniture.com/smart-city', true],
+        ['HPL un dizaina mēbeles', 'https://outsiderfurniture.com/', true]
       ];
       const existingLabels = new Set(Array.from(range.querySelectorAll('a span:first-child')).map((el) => el.textContent.trim()));
-      additions.forEach(([label, href]) => {
+      additions.forEach(([label, href, external]) => {
         if (existingLabels.has(label)) return;
         const link = document.createElement('a');
         link.href = href;
-        link.target = '_blank';
-        link.rel = 'noopener noreferrer';
+        if (external) {
+          link.target = '_blank';
+          link.rel = 'noopener noreferrer';
+        }
         link.innerHTML = `<span>${label}</span><span aria-hidden="true">↗</span>`;
         range.appendChild(link);
       });
@@ -66,7 +80,6 @@
   sentinel.className = 'top-scroll-sentinel';
   sentinel.setAttribute('aria-hidden', 'true');
   document.body.prepend(sentinel);
-
   button.hidden = false;
 
   const observer = new IntersectionObserver((entries) => {
