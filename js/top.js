@@ -12,41 +12,97 @@
       .replace(/^-+|-+$/g, '');
   }
 
-  function saveCardToInquiry(card) {
-    if (!card) return;
-    const name = card.querySelector('h3')?.textContent?.trim();
-    if (!name) return;
-    const manufacturer = card.querySelector('.eyebrow')?.textContent?.trim() || 'TERITORIJA';
-    const image = card.querySelector('img')?.getAttribute('src') || '';
-    const id = card.dataset.productId || slugify(`${manufacturer}-${name}`);
-    if (!id) return;
-
-    let items = [];
+  function readInquiryItems() {
     try {
       const raw = window.localStorage.getItem(INQUIRY_STORAGE_KEY);
       const parsed = raw ? JSON.parse(raw) : [];
-      if (Array.isArray(parsed)) items = parsed;
+      return Array.isArray(parsed) ? parsed.filter(Boolean) : [];
     } catch (error) {
-      items = [];
+      return [];
+    }
+  }
+
+  function updateRequestCount(items = readInquiryItems()) {
+    document.querySelectorAll('[data-request-count]').forEach((counter) => {
+      if (items.length > 0) {
+        counter.textContent = String(items.length);
+        counter.hidden = false;
+      } else {
+        counter.textContent = '0';
+        counter.hidden = true;
+      }
+    });
+  }
+
+  function absoluteImageUrl(card) {
+    const src = card?.querySelector('img')?.getAttribute('src') || '';
+    if (!src) return '';
+    try {
+      return new URL(src, window.location.href).href;
+    } catch (error) {
+      return src;
+    }
+  }
+
+  function productFromCard(card) {
+    if (!card) return null;
+    const name = card.querySelector('h3')?.textContent?.trim();
+    if (!name) return null;
+    const manufacturer = card.querySelector('.eyebrow')?.textContent?.trim() || 'TERITORIJA';
+    const id = card.dataset.productId || slugify(`${manufacturer}-${name}`);
+    if (!id) return null;
+    return {
+      id,
+      name,
+      manufacturer,
+      image: absoluteImageUrl(card)
+    };
+  }
+
+  function saveCardToInquiry(card) {
+    const product = productFromCard(card);
+    if (!product) return null;
+
+    const items = readInquiryItems();
+    const existingIndex = items.findIndex((item) => item && item.id === product.id);
+    if (existingIndex === -1) {
+      items.push(product);
+    } else {
+      items[existingIndex] = { ...items[existingIndex], ...product };
     }
 
-    if (!items.some((item) => item && item.id === id)) {
-      items.push({ id, name, manufacturer, image });
-      try {
-        window.localStorage.setItem(INQUIRY_STORAGE_KEY, JSON.stringify(items));
-      } catch (error) {
-        return;
-      }
+    try {
+      window.localStorage.setItem(INQUIRY_STORAGE_KEY, JSON.stringify(items));
+    } catch (error) {
+      return null;
     }
+
+    updateRequestCount(items);
+    return product;
+  }
+
+  function isExplicitProductAdd(link, card) {
+    if (link.matches('[data-inquiry-add]')) return true;
+    const actionText = [
+      link.textContent,
+      card?.querySelector('.bench-request')?.textContent,
+      card?.querySelector('.card-link')?.textContent
+    ].filter(Boolean).join(' ').toLowerCase();
+    return actionText.includes('pievienot pieprasījumam');
   }
 
   document.addEventListener('click', (event) => {
     const link = event.target.closest('a[href*="pieprasijums"]');
     if (!link) return;
     const card = link.closest('.bench-card, .category-product-card, .featured-product');
-    if (!card) return;
+    if (!card || !isExplicitProductAdd(link, card)) return;
     saveCardToInquiry(card);
   }, true);
+
+  updateRequestCount();
+  window.addEventListener('storage', (event) => {
+    if (event.key === INQUIRY_STORAGE_KEY) updateRequestCount();
+  });
 
   if (document.body.classList.contains('home-page')) {
     const style = document.createElement('style');
