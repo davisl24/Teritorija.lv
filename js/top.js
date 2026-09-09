@@ -1,44 +1,62 @@
 (() => {
   'use strict';
 
-  const localCategoryTargets = [
-    {
-      selector: '.category-card a[href*="category=ara-mebeles"], .product-range-grid a[href*="zano-streetfurniture.com/street-furniture/catalogue/benches"]',
-      href: './produkti/ara-mebeles/index.html'
-    },
-    {
-      selector: '.product-range-grid a[href*="zano-streetfurniture.com/street-furniture/catalogue/litter-bins"]',
-      href: './produkti/ara-mebeles/index.html#atkritumu-urnas'
-    },
-    {
-      selector: '.product-range-grid a[href*="zano-streetfurniture.com/street-furniture/catalogue/planters"]',
-      href: './produkti/ara-mebeles/index.html#puku-kastes'
-    },
-    {
-      selector: '.product-range-grid a[href*="zano-streetfurniture.com/street-furniture/catalogue/tables"]',
-      href: './produkti/ara-mebeles/index.html#ara-galdi'
-    },
-    {
-      selector: '.product-range-grid a[href*="zano-streetfurniture.com/street-furniture/catalogue/picnic-tables"]',
-      href: './produkti/ara-mebeles/index.html#piknika-galdi'
-    },
-    {
-      selector: '.product-range-grid a[href*="teritorija.lv/velo-nojume"]',
-      href: './produkti/velo-nojumes/index.html'
-    },
-    {
-      selector: '.product-range-grid a[href*="teritorija.lv/zano-ara-mebeles"]',
-      href: './produkti/ara-mebeles/index.html#koku-sargi'
-    }
-  ];
+  if (document.body.classList.contains('home-page')) {
+    const style = document.createElement('style');
+    style.textContent = `
+      .home-page .home-hero{align-items:center!important;}
+      .home-page .home-hero .hero-content{
+        grid-template-columns:1fr!important;
+        grid-template-rows:auto auto auto!important;
+        justify-items:center!important;
+        align-items:center!important;
+        text-align:center!important;
+        width:min(calc(100% - 48px),920px)!important;
+        margin:76px auto 0!important;
+        gap:18px!important;
+      }
+      .home-page .home-hero h1{
+        grid-column:1!important;
+        grid-row:1!important;
+        max-width:11ch!important;
+        margin:0 auto!important;
+      }
+      .home-page .home-hero .lead{
+        grid-column:1!important;
+        grid-row:2!important;
+        align-self:auto!important;
+        max-width:42ch!important;
+        margin:0 auto!important;
+      }
+      .home-page .home-hero .hero-actions{
+        grid-column:1!important;
+        grid-row:3!important;
+        justify-content:center!important;
+        margin-top:6px!important;
+      }
+      @media(max-width:767px){
+        .home-page .home-hero .hero-content{width:min(calc(100% - 32px),680px)!important;margin-top:64px!important;}
+        .home-page .home-hero h1{max-width:9ch!important;}
+      }
+    `;
+    document.head.appendChild(style);
 
-  localCategoryTargets.forEach(({ selector, href }) => {
-    document.querySelectorAll(selector).forEach((link) => {
-      link.href = href;
-      link.removeAttribute('target');
-      link.removeAttribute('rel');
+    const externalProductTargets = {
+      './produkti/zano-flash-02-725-1/index.html': 'https://www.zano-streetfurniture.com/street-furniture/catalogue/benches/flash-bench-02-725-1',
+      './produkti/zano-scandik-02-046/index.html': 'https://www.zano-streetfurniture.com/street-furniture/catalogue/benches/scandik-bench-02-046',
+      './produkti/zano-soft-05-012/index.html': 'https://www.zano-streetfurniture.com/street-furniture/catalogue/bicycle-racks/soft-bicycle-rack-05-012',
+      './produkti/zano-stilo-18-048/index.html': 'https://www.zano-streetfurniture.com/street-furniture/catalogue/bicycle-zone/stilo-bicycle-repair-station-18-048'
+    };
+
+    document.querySelectorAll('a[href]').forEach((link) => {
+      const rawHref = link.getAttribute('href');
+      const target = externalProductTargets[rawHref];
+      if (!target) return;
+      link.href = target;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
     });
-  });
+  }
 
   const button = document.querySelector('[data-back-to-top]');
   if (!button) return;
