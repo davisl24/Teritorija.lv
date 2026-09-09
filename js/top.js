@@ -1,6 +1,45 @@
 (() => {
   'use strict';
 
+  const localCategoryTargets = [
+    {
+      selector: '.category-card a[href*="category=ara-mebeles"], .product-range-grid a[href*="zano-streetfurniture.com/street-furniture/catalogue/benches"]',
+      href: './produkti/ara-mebeles/index.html'
+    },
+    {
+      selector: '.product-range-grid a[href*="zano-streetfurniture.com/street-furniture/catalogue/litter-bins"]',
+      href: './produkti/ara-mebeles/index.html#atkritumu-urnas'
+    },
+    {
+      selector: '.product-range-grid a[href*="zano-streetfurniture.com/street-furniture/catalogue/planters"]',
+      href: './produkti/ara-mebeles/index.html#puku-kastes'
+    },
+    {
+      selector: '.product-range-grid a[href*="zano-streetfurniture.com/street-furniture/catalogue/tables"]',
+      href: './produkti/ara-mebeles/index.html#ara-galdi'
+    },
+    {
+      selector: '.product-range-grid a[href*="zano-streetfurniture.com/street-furniture/catalogue/picnic-tables"]',
+      href: './produkti/ara-mebeles/index.html#piknika-galdi'
+    },
+    {
+      selector: '.product-range-grid a[href*="teritorija.lv/velo-nojume"]',
+      href: './produkti/velo-nojumes/index.html'
+    },
+    {
+      selector: '.product-range-grid a[href*="teritorija.lv/zano-ara-mebeles"]',
+      href: './produkti/ara-mebeles/index.html#koku-sargi'
+    }
+  ];
+
+  localCategoryTargets.forEach(({ selector, href }) => {
+    document.querySelectorAll(selector).forEach((link) => {
+      link.href = href;
+      link.removeAttribute('target');
+      link.removeAttribute('rel');
+    });
+  });
+
   const button = document.querySelector('[data-back-to-top]');
   if (!button) return;
 
