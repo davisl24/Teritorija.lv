@@ -93,11 +93,7 @@
         }
       });
     } catch (error) {
-      try {
-        window.localStorage.removeItem(DRAFT_STORAGE_KEY);
-      } catch (removeError) {
-        return;
-      }
+      try { window.localStorage.removeItem(DRAFT_STORAGE_KEY); } catch (removeError) { return; }
     }
   }
 
@@ -106,11 +102,7 @@
       window.clearTimeout(draftSaveTimer);
       draftSaveTimer = null;
     }
-    try {
-      window.localStorage.removeItem(DRAFT_STORAGE_KEY);
-    } catch (error) {
-      return;
-    }
+    try { window.localStorage.removeItem(DRAFT_STORAGE_KEY); } catch (error) { return; }
   }
 
   function updateHeaderCount(items = readItems()) {
@@ -131,16 +123,12 @@
       counter.classList.remove('is-bumped');
       void counter.offsetWidth;
       counter.classList.add('is-bumped');
-      counter.addEventListener('animationend', () => {
-        counter.classList.remove('is-bumped');
-      }, { once: true });
+      counter.addEventListener('animationend', () => counter.classList.remove('is-bumped'), { once: true });
     });
   }
 
   function setPageStatus(message) {
-    document.querySelectorAll('[data-inquiry-status]').forEach((status) => {
-      status.textContent = message;
-    });
+    document.querySelectorAll('[data-inquiry-status]').forEach((status) => { status.textContent = message; });
   }
 
   function setAddButtonState(button, isAdded) {
@@ -185,10 +173,11 @@
 
   function resolveRequestImage(item) {
     if (!item.image) return '';
-    if (/^https?:\/\//i.test(item.image)) return item.image;
-    if (!document.querySelector('[data-inquiry-page]')) return item.image;
-    const filename = item.image.split('/').pop();
-    return filename ? `../assets/images/products/${filename}` : '';
+    try {
+      return new URL(item.image, window.location.origin + '/').href;
+    } catch (error) {
+      return '';
+    }
   }
 
   function renderInquiryItem(item) {
@@ -204,6 +193,8 @@
       image.height = 96;
       image.loading = 'lazy';
       image.decoding = 'async';
+      image.referrerPolicy = 'no-referrer';
+      image.addEventListener('error', () => image.remove(), { once: true });
       article.append(image);
     }
 
@@ -230,11 +221,7 @@
   function syncHiddenProducts(items) {
     const field = document.querySelector('[data-inquiry-products]');
     if (!field) return;
-    field.value = JSON.stringify(items.map((item) => ({
-      id: item.id,
-      name: item.name,
-      manufacturer: item.manufacturer
-    })));
+    field.value = JSON.stringify(items.map((item) => ({ id: item.id, name: item.name, manufacturer: item.manufacturer })));
   }
 
   function syncInquiryPage(items = readItems()) {
@@ -318,20 +305,12 @@
     try {
       const response = await fetch('https://formsubmit.co/ajax/davislocs135@gmail.com', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json'
-        },
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify(formSubmitPayload)
       });
 
       let result = null;
-      try {
-        result = await response.json();
-      } catch (error) {
-        result = null;
-      }
-
+      try { result = await response.json(); } catch (error) { result = null; }
       if (!response.ok || !result || result.success !== 'true' && result.success !== true) {
         throw new Error(result && result.message ? result.message : 'FormSubmit request failed');
       }
@@ -375,25 +354,20 @@
     });
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init, { once: true });
-  } else {
-    init();
-  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, { once: true });
+  else init();
 })();
 
 (() => {
   const currentScript = document.currentScript;
   if (!currentScript) return;
   const base = new URL('.', currentScript.src);
-
   const loadScript = (name) => {
     const script = document.createElement('script');
     script.src = new URL(name, base).href;
     script.defer = true;
     document.head.append(script);
   };
-
   loadScript('header.js');
   if (document.querySelector('[data-catalog]')) loadScript('catalog.js');
 })();
