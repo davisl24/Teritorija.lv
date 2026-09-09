@@ -326,7 +326,7 @@
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
-  .home-page .site-header { inset-top: 18px; }
+  .home-page .site-header { top: 18px; }
   .home-page .site-header .header-inner {
     width: min(calc(100% - 40px), 960px);
     min-height: 58px;
