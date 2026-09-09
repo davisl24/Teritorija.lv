@@ -102,15 +102,14 @@
   }, true);
 
   function rootPrefix() {
-    const path = window.location.pathname.replace(/\\/g, '/');
-    const marker = '/produkti/';
-    if (path.includes(marker)) {
-      const rest = path.split(marker)[1] || '';
-      const depth = rest.split('/').filter(Boolean).length;
-      return '../'.repeat(Math.max(1, depth + 1));
-    }
-    if (/\/[^/]+\/index\.html$/i.test(path)) return '../';
-    return './';
+    const segments = window.location.pathname
+      .replace(/\\/g, '/')
+      .split('/')
+      .filter(Boolean);
+    if (segments.length === 0) return './';
+    const last = segments[segments.length - 1];
+    const directoryDepth = /\.[a-z0-9]+$/i.test(last) ? segments.length - 1 : segments.length;
+    return directoryDepth > 0 ? '../'.repeat(directoryDepth) : './';
   }
 
   function enforceInternalLogoLinks() {
