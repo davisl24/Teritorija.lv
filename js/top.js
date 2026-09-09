@@ -37,18 +37,25 @@
   function absoluteImageUrl(card) {
     const src = card?.querySelector('img')?.getAttribute('src') || '';
     if (!src) return '';
-    try {
-      return new URL(src, window.location.href).href;
-    } catch (error) {
-      return src;
-    }
+    try { return new URL(src, window.location.href).href; } catch (error) { return src; }
+  }
+
+  function inferManufacturer(card) {
+    const explicit = card?.querySelector('.eyebrow')?.textContent?.trim();
+    if (explicit) return explicit;
+    const path = window.location.pathname.toLowerCase();
+    if (path.includes('velo-') || path.includes('divu-limenu') || path.includes('skrejritenu')) return 'SAWO';
+    if (path.includes('betona-mebeles')) return 'URBASTYLE';
+    if (path.includes('parstradata-plastmasa')) return 'GOVAPLAST';
+    if (path.includes('rotalu-laukumi')) return 'FREEKIDS';
+    return 'TERITORIJA';
   }
 
   function productFromCard(card) {
     if (!card) return null;
     const name = card.querySelector('h3')?.textContent?.trim();
     if (!name) return null;
-    const manufacturer = card.querySelector('.eyebrow')?.textContent?.trim() || 'TERITORIJA';
+    const manufacturer = inferManufacturer(card);
     const id = card.dataset.productId || slugify(`${manufacturer}-${name}`);
     if (!id) return null;
     return { id, name, manufacturer, image: absoluteImageUrl(card) };
@@ -61,20 +68,22 @@
     const existingIndex = items.findIndex((item) => item && item.id === product.id);
     if (existingIndex === -1) items.push(product);
     else items[existingIndex] = { ...items[existingIndex], ...product };
-    try {
-      window.localStorage.setItem(INQUIRY_STORAGE_KEY, JSON.stringify(items));
-    } catch (error) {
-      return null;
-    }
+    try { window.localStorage.setItem(INQUIRY_STORAGE_KEY, JSON.stringify(items)); }
+    catch (error) { return null; }
     updateRequestCount(items);
     return product;
   }
 
   function isExplicitProductAdd(link, card) {
     if (link.matches('[data-inquiry-add]')) return true;
-    const actionText = [link.textContent, card?.querySelector('.bench-request')?.textContent, card?.querySelector('.card-link')?.textContent]
-      .filter(Boolean).join(' ').toLowerCase();
-    return actionText.includes('pievienot pieprasījumam');
+    const actionText = [
+      link.textContent,
+      card?.querySelector('.bench-request')?.textContent,
+      card?.querySelector('.card-link')?.textContent
+    ].filter(Boolean).join(' ').toLowerCase();
+    return actionText.includes('pievienot pieprasījumam') ||
+      actionText.includes('pieteikt risinājumu') ||
+      actionText.includes('pieteikt modeli');
   }
 
   function markAdded(link, card) {
@@ -207,6 +216,54 @@
     });
   }
 
+  function setCardImage(card, src, alt) {
+    if (!card || !src) return;
+    const media = card.querySelector('.category-product-media, .bench-media');
+    if (!media) return;
+    media.classList.remove('is-image-placeholder');
+    const img = document.createElement('img');
+    img.src = src;
+    img.alt = alt || card.querySelector('h3')?.textContent?.trim() || '';
+    img.loading = 'lazy';
+    img.decoding = 'async';
+    img.referrerPolicy = 'no-referrer';
+    media.replaceChildren(img);
+  }
+
+  function findCardByTitle(title) {
+    return Array.from(document.querySelectorAll('.category-product-card, .bench-card'))
+      .find((card) => card.querySelector('h3')?.textContent?.trim().toLowerCase() === title.toLowerCase());
+  }
+
+  function enrichSawoBikeRacks() {
+    const path = window.location.pathname.toLowerCase();
+    if (!path.includes('/produkti/velo-stativi/')) return;
+
+    const images = {
+      'U-tipa statīvi': 'https://static.wixstatic.com/media/e827f3_ad3b72d482fc42319e29dda8444b07ef~mv2.jpg/v1/fill/w_891,h_414,q_90/e827f3_ad3b72d482fc42319e29dda8444b07ef~mv2.jpg',
+      'Trapecveida statīvi': 'https://static.wixstatic.com/media/e827f3_b51554a34caf44e3bba698d8f270d795~mv2.jpg/v1/fill/w_891,h_417,q_90/e827f3_b51554a34caf44e3bba698d8f270d795~mv2.jpg',
+      'Privātām teritorijām': 'https://static.wixstatic.com/media/e827f3_b04f4c4114db4cb2b148572457338784~mv2.jpg/v1/fill/w_891,h_417,q_90/e827f3_b04f4c4114db4cb2b148572457338784~mv2.jpg',
+      'Moduļu statīvi': 'https://static.wixstatic.com/media/e827f3_d2cd7cd27a5441ebafd526dc0363d70e~mv2.png/v1/fill/w_980,h_653,al_c,q_90/e827f3_d2cd7cd27a5441ebafd526dc0363d70e~mv2.png'
+    };
+    Object.entries(images).forEach(([title, src]) => setCardImage(findCardByTitle(title), src, `SAWO ${title}`));
+
+    const heroLead = document.querySelector('.listing-hero .lead, .category-hero .lead');
+    if (heroLead) {
+      heroLead.textContent = 'SAWO piedāvā plašu velostatīvu klāstu publiskām pilsētu ielām, parkiem, uzņēmumu stāvvietām un privātām teritorijām. Statīvi apvieno izturību, mūsdienīgu dizainu un pielāgojamību dažādām vidēm.';
+    }
+
+    const container = document.querySelector('.listing-catalog .container, .category-catalog .container');
+    if (container && !container.querySelector('[data-sawo-source-copy]')) {
+      const note = document.createElement('div');
+      note.className = 'category-source-note';
+      note.dataset.sawoSourceCopy = 'true';
+      note.innerHTML = '<strong>Materiāli un apdare:</strong> SAWO statīvi tiek cinkoti un tos iespējams nokrāsot jebkurā RAL tonī. Statīvi tiek izgatavoti no 33, 42 vai 48 mm diametra caurulēm. Moduļu statīvi tiek montēti uz izturīgas sliedes; vienā modulī iespējami 4 vai 5 statīvi.';
+      const toolbar = container.querySelector('.listing-toolbar');
+      if (toolbar) toolbar.insertAdjacentElement('afterend', note);
+      else container.prepend(note);
+    }
+  }
+
   updateRequestCount();
   window.addEventListener('storage', (event) => {
     if (event.key === INQUIRY_STORAGE_KEY) updateRequestCount();
@@ -216,6 +273,7 @@
   remapOldTeritorijaLinks();
   remapHomepageCategoryQueries();
   remapManufacturerCards();
+  enrichSawoBikeRacks();
   normalizeCatalogImages();
 
   if (document.body.classList.contains('home-page')) {
@@ -258,10 +316,7 @@
         if (existingLabels.has(label)) return;
         const link = document.createElement('a');
         link.href = href;
-        if (external) {
-          link.target = '_blank';
-          link.rel = 'noopener noreferrer';
-        }
+        if (external) { link.target = '_blank'; link.rel = 'noopener noreferrer'; }
         link.innerHTML = `<span>${label}</span><span aria-hidden="true">↗</span>`;
         range.appendChild(link);
       });
