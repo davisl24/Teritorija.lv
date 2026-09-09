@@ -51,32 +51,21 @@
     const manufacturer = card.querySelector('.eyebrow')?.textContent?.trim() || 'TERITORIJA';
     const id = card.dataset.productId || slugify(`${manufacturer}-${name}`);
     if (!id) return null;
-    return {
-      id,
-      name,
-      manufacturer,
-      image: absoluteImageUrl(card)
-    };
+    return { id, name, manufacturer, image: absoluteImageUrl(card) };
   }
 
   function saveCardToInquiry(card) {
     const product = productFromCard(card);
     if (!product) return null;
-
     const items = readInquiryItems();
     const existingIndex = items.findIndex((item) => item && item.id === product.id);
-    if (existingIndex === -1) {
-      items.push(product);
-    } else {
-      items[existingIndex] = { ...items[existingIndex], ...product };
-    }
-
+    if (existingIndex === -1) items.push(product);
+    else items[existingIndex] = { ...items[existingIndex], ...product };
     try {
       window.localStorage.setItem(INQUIRY_STORAGE_KEY, JSON.stringify(items));
     } catch (error) {
       return null;
     }
-
     updateRequestCount(items);
     return product;
   }
@@ -91,18 +80,136 @@
     return actionText.includes('pievienot pieprasījumam');
   }
 
+  function markAdded(link, card) {
+    card?.classList.add('is-added-to-inquiry');
+    const action = link.querySelector('.bench-request, .card-link') || card?.querySelector('.bench-request, .card-link') || link;
+    if (action) {
+      action.textContent = 'Pievienots pieprasījumam ✓';
+      action.setAttribute('aria-live', 'polite');
+    }
+  }
+
   document.addEventListener('click', (event) => {
     const link = event.target.closest('a[href*="pieprasijums"]');
     if (!link) return;
     const card = link.closest('.bench-card, .category-product-card, .featured-product');
     if (!card || !isExplicitProductAdd(link, card)) return;
-    saveCardToInquiry(card);
+
+    event.preventDefault();
+    event.stopPropagation();
+    const product = saveCardToInquiry(card);
+    if (product) markAdded(link, card);
   }, true);
+
+  function rootPrefix() {
+    const path = window.location.pathname.replace(/\\/g, '/');
+    const marker = '/produkti/';
+    if (path.includes(marker)) {
+      const rest = path.split(marker)[1] || '';
+      const depth = rest.split('/').filter(Boolean).length;
+      return '../'.repeat(Math.max(1, depth + 1));
+    }
+    if (/\/[^/]+\/index\.html$/i.test(path)) return '../';
+    return './';
+  }
+
+  function enforceInternalLogoLinks() {
+    const home = `${rootPrefix()}index.html`;
+    document.querySelectorAll('a.brand').forEach((link) => {
+      link.href = home;
+      link.removeAttribute('target');
+      link.removeAttribute('rel');
+    });
+  }
+
+  function remapOldTeritorijaLinks() {
+    const prefix = document.body.classList.contains('home-page') ? './' : rootPrefix();
+    const routes = [
+      [/teritorija\.lv\/sawo\/velosipedu-stativi/i, `${prefix}produkti/velo-stativi/index.html`],
+      [/teritorija\.lv\/velo-nojume/i, `${prefix}produkti/velo-nojumes/index.html`],
+      [/teritorija\.lv\/sawo\/skrejritenu-stativi/i, `${prefix}produkti/skrejritenu-stativi/index.html`],
+      [/teritorija\.lv\/sawo\/velosipedu-noliktavas/i, `${prefix}produkti/velo-glabatuves/index.html`],
+      [/teritorija\.lv\/sawo\/?$/i, `${prefix}produkti/velo-infrastruktura/index.html`],
+      [/teritorija\.lv\/betona-ara-mebeles/i, `${prefix}produkti/betona-mebeles/index.html`],
+      [/teritorija\.lv\/govaplast/i, `${prefix}produkti/parstradata-plastmasa/index.html`],
+      [/teritorija\.lv\/zano-ara-mebeles/i, `${prefix}produkti/ara-mebeles/index.html`]
+    ];
+
+    document.querySelectorAll('a[href]').forEach((link) => {
+      const href = link.href;
+      for (const [pattern, target] of routes) {
+        if (!pattern.test(href)) continue;
+        link.href = target;
+        link.removeAttribute('target');
+        link.removeAttribute('rel');
+        break;
+      }
+    });
+  }
+
+  function remapManufacturerCards() {
+    if (!document.body.classList.contains('home-page')) return;
+    const targets = {
+      'ZANO': './produkti/ara-mebeles/index.html',
+      'URBASTYLE': './produkti/betona-mebeles/index.html',
+      'SAWO': './produkti/velo-infrastruktura/index.html',
+      'GOVA PLAST': './produkti/parstradata-plastmasa/index.html',
+      'GOVAPLAST': './produkti/parstradata-plastmasa/index.html',
+      'FREEKIDS': './produkti/rotalu-laukumi/index.html',
+      'OUT-SIDER': './produkti/ara-mebeles/index.html'
+    };
+
+    document.querySelectorAll('a[href]').forEach((link) => {
+      const text = link.textContent.replace(/↗/g, '').trim().toUpperCase();
+      const key = Object.keys(targets).find((name) => text === name || text.startsWith(`${name} `));
+      if (!key) return;
+      link.href = targets[key];
+      link.removeAttribute('target');
+      link.removeAttribute('rel');
+    });
+  }
+
+  function replaceMediaWithPlaceholder(media, label = 'Attēls tiks pievienots') {
+    if (!media || media.classList.contains('is-image-placeholder')) return;
+    media.classList.add('is-image-placeholder');
+    media.replaceChildren();
+    const placeholder = document.createElement('span');
+    placeholder.className = 'catalog-image-placeholder';
+    placeholder.textContent = label;
+    media.appendChild(placeholder);
+  }
+
+  function normalizeCatalogImages() {
+    document.querySelectorAll('.category-product-grid, .catalog-hub-grid').forEach((grid) => {
+      const seen = new Set();
+      grid.querySelectorAll('.category-product-media, .catalog-hub-card').forEach((media) => {
+        const img = media.querySelector('img');
+        if (!img) return;
+        let src = img.getAttribute('src') || '';
+        try { src = new URL(src, window.location.href).href; } catch (error) {}
+
+        if (src && seen.has(src)) {
+          replaceMediaWithPlaceholder(media, 'Attēls tiks pievienots');
+          return;
+        }
+        if (src) seen.add(src);
+
+        img.addEventListener('error', () => {
+          replaceMediaWithPlaceholder(media, 'Attēls nav pieejams');
+        }, { once: true });
+      });
+    });
+  }
 
   updateRequestCount();
   window.addEventListener('storage', (event) => {
     if (event.key === INQUIRY_STORAGE_KEY) updateRequestCount();
   });
+
+  enforceInternalLogoLinks();
+  remapOldTeritorijaLinks();
+  remapManufacturerCards();
+  normalizeCatalogImages();
 
   if (document.body.classList.contains('home-page')) {
     const style = document.createElement('style');
@@ -126,31 +233,10 @@
     document.querySelectorAll('a[href]').forEach((link) => {
       const rawHref = link.getAttribute('href');
       const externalTarget = externalProductTargets[rawHref];
-      if (externalTarget) {
-        link.href = externalTarget;
-        link.target = '_blank';
-        link.rel = 'noopener noreferrer';
-        return;
-      }
-
-      const href = link.href;
-      if (href.includes('teritorija.lv/sawo/velosipedu-stativi')) {
-        link.href = './produkti/velo-stativi/index.html';
-        link.removeAttribute('target');
-        link.removeAttribute('rel');
-      } else if (href.includes('teritorija.lv/velo-nojume')) {
-        link.href = './produkti/velo-nojumes/index.html';
-        link.removeAttribute('target');
-        link.removeAttribute('rel');
-      } else if (href.includes('teritorija.lv/sawo/skrejritenu-stativi')) {
-        link.href = './produkti/skrejritenu-stativi/index.html';
-        link.removeAttribute('target');
-        link.removeAttribute('rel');
-      } else if (href.includes('teritorija.lv/betona-ara-mebeles')) {
-        link.href = './produkti/betona-mebeles/index.html';
-        link.removeAttribute('target');
-        link.removeAttribute('rel');
-      }
+      if (!externalTarget) return;
+      link.href = externalTarget;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
     });
 
     const range = document.querySelector('.product-range-grid');
@@ -159,7 +245,7 @@
         ['Betona mēbeles', './produkti/betona-mebeles/index.html', false],
         ['Skrejriteņu statīvi', './produkti/skrejritenu-stativi/index.html', false],
         ['Viedā pilsēta', 'https://www.zano-streetfurniture.com/smart-city', true],
-        ['HPL un dizaina mēbeles', 'https://outsiderfurniture.com/', true]
+        ['HPL un dizaina mēbeles', './produkti/ara-mebeles/index.html', false]
       ];
       const existingLabels = new Set(Array.from(range.querySelectorAll('a span:first-child')).map((el) => el.textContent.trim()));
       additions.forEach(([label, href, external]) => {
