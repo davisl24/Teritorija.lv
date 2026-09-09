@@ -176,3 +176,158 @@
     animation: none;
   }
 }
+
+/* Homepage visual audit fixes */
+.home-page .category-index a {
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--space-md);
+  min-width: 0;
+}
+.home-page .category-index a > span:first-child {
+  min-width: 0;
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
+}
+
+.home-page .section {
+  padding-block: clamp(64px, 7vw, 96px);
+}
+.home-page .categories .section-heading,
+.home-page .selected-products .section-heading,
+.home-page .manufacturers .section-heading {
+  margin-bottom: clamp(28px, 4vw, 48px);
+}
+
+/* Override the legacy inline category-card block still present in index.html. */
+.home-page .categories .category-card {
+  position: relative !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto !important;
+  grid-template-rows: auto auto !important;
+  aspect-ratio: auto !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  overflow: visible !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  color: var(--color-text) !important;
+  isolation: auto !important;
+}
+.home-page .categories .category-card::after { display: none !important; }
+.home-page .categories .category-card > img {
+  position: static !important;
+  inset: auto !important;
+  grid-column: 1 / -1 !important;
+  width: 100% !important;
+  height: auto !important;
+  aspect-ratio: 4 / 3 !important;
+  object-fit: cover !important;
+  border-radius: var(--radius-md) !important;
+  z-index: auto !important;
+}
+.home-page .categories .category-card-content {
+  align-self: center !important;
+  padding: var(--space-md) 0 0 !important;
+  padding-right: 0 !important;
+}
+.home-page .categories .category-card h3,
+.home-page .categories .category-card h3 a,
+.home-page .categories .category-arrow {
+  color: var(--color-text) !important;
+}
+.home-page .categories .category-card p { display: none !important; }
+.home-page .categories .category-arrow {
+  position: static !important;
+  right: auto !important;
+  bottom: auto !important;
+  align-self: center !important;
+  justify-self: end !important;
+  margin-top: var(--space-md) !important;
+}
+.home-page .categories .category-card:hover > img,
+.home-page .categories .category-card:focus-within > img {
+  transform: scale(1.018) !important;
+}
+
+.home-page .selected-products {
+  padding-block: clamp(64px, 7vw, 92px);
+}
+.home-page .featured-products-grid {
+  gap: var(--space-xl);
+}
+.home-page .featured-product,
+.home-page .featured-product-main,
+.home-page .featured-product:not(.featured-product-main) {
+  grid-row: auto;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+}
+.home-page .featured-product-image,
+.home-page .featured-product-main .featured-product-image,
+.home-page .featured-product:not(.featured-product-main) .featured-product-image {
+  aspect-ratio: 4 / 3;
+  min-height: 0;
+  padding: clamp(18px, 2.4vw, 30px);
+}
+.home-page .featured-product-copy,
+.home-page .featured-product:not(.featured-product-main) .featured-product-copy {
+  padding-top: var(--space-md);
+  align-self: auto;
+}
+.home-page .featured-product:not(.featured-product-main) .featured-product-copy > p:not(.eyebrow) {
+  display: block;
+}
+.home-page .section-footer-link {
+  margin-top: var(--space-xl);
+}
+
+@media (min-width: 1025px) {
+  .home-page .featured-products-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-rows: none;
+    gap: var(--space-lg);
+  }
+  .home-page .categories .category-grid {
+    gap: var(--space-lg);
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .home-page .featured-products-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .home-page main > .category-index,
+    .home-page main > .section:not(.project-cta) .section-heading,
+    .home-page .category-card,
+    .home-page .featured-product,
+    .home-page .process-grid > li,
+    .home-page .advantage-item,
+    .home-page .manufacturer-grid > li,
+    .home-page .project-cta-panel {
+      animation-name: section-reveal;
+      animation-duration: 1ms;
+      animation-fill-mode: both;
+      animation-timing-function: linear;
+      animation-timeline: view();
+      animation-range: entry 8% cover 28%;
+    }
+    .home-page .category-card:nth-child(2),
+    .home-page .featured-product:nth-child(2),
+    .home-page .manufacturer-grid > li:nth-child(2) { animation-range: entry 12% cover 32%; }
+    .home-page .category-card:nth-child(3),
+    .home-page .featured-product:nth-child(3),
+    .home-page .manufacturer-grid > li:nth-child(3) { animation-range: entry 16% cover 36%; }
+    .home-page .category-card:nth-child(4),
+    .home-page .featured-product:nth-child(4) { animation-range: entry 20% cover 40%; }
+  }
+}
+
+@keyframes section-reveal {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: translateY(0); }
+}
