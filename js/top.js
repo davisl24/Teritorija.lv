@@ -18,33 +18,9 @@
       .home-page .home-hero h1{grid-column:1!important;grid-row:1!important;max-width:11ch!important;margin:0 auto!important;}
       .home-page .home-hero .lead{grid-column:1!important;grid-row:2!important;align-self:auto!important;max-width:42ch!important;margin:0 auto!important;}
       .home-page .home-hero .hero-actions{grid-column:1!important;grid-row:3!important;justify-content:center!important;margin-top:6px!important;}
-      @media(max-width:767px){
-        .home-page .home-hero .hero-content{width:min(calc(100% - 32px),680px)!important;margin-top:64px!important;}
-        .home-page .home-hero h1{max-width:9ch!important;}
-      }
+      @media(max-width:767px){.home-page .home-hero .hero-content{width:min(calc(100% - 32px),680px)!important;margin-top:64px!important;}.home-page .home-hero h1{max-width:9ch!important;}}
     `;
     document.head.appendChild(style);
-
-    const directTargets = [
-      { match: 'category=ara-mebeles', href: './produkti/ara-mebeles/index.html', external: false },
-      { match: 'category=velo-infrastruktura', href: './produkti/velo-infrastruktura/index.html', external: false },
-      { match: 'category=rotalu-laukumi', href: 'https://freekids.pl/en/kategoria-produktu/playgrounds/', external: true },
-      { match: 'category=parstradata-plastmasa', href: 'https://www.govaplast.com/street/', external: true }
-    ];
-
-    document.querySelectorAll('.category-card a[href], .category-index a[href]').forEach((link) => {
-      const rawHref = link.getAttribute('href') || '';
-      const target = directTargets.find((item) => rawHref.includes(item.match));
-      if (!target) return;
-      link.href = target.href;
-      if (target.external) {
-        link.target = '_blank';
-        link.rel = 'noopener noreferrer';
-      } else {
-        link.removeAttribute('target');
-        link.removeAttribute('rel');
-      }
-    });
 
     const externalProductTargets = {
       './produkti/zano-flash-02-725-1/index.html': 'https://www.zano-streetfurniture.com/street-furniture/catalogue/benches/flash-bench-02-725-1',
@@ -62,24 +38,25 @@
       link.rel = 'noopener noreferrer';
     });
 
-    document.querySelectorAll('.product-range-grid a[href]').forEach((link) => {
-      const text = (link.textContent || '').trim().toLowerCase();
-      if (text.includes('velo nojumes')) {
-        link.href = './produkti/velo-nojumes/index.html';
-        link.removeAttribute('target');
-        link.removeAttribute('rel');
-      }
-      if (text.includes('rotaļu laukumi')) {
-        link.href = 'https://freekids.pl/en/kategoria-produktu/playgrounds/';
+    const range = document.querySelector('.product-range-grid');
+    if (range) {
+      const additions = [
+        ['Betona mēbeles', 'https://www.urbastyle.com/'],
+        ['Skrejriteņu statīvi', 'https://www.teritorija.lv/sawo/skrejritenu-stativi'],
+        ['Viedā pilsēta', 'https://www.zano-streetfurniture.com/smart-city'],
+        ['HPL un dizaina mēbeles', 'https://outsiderfurniture.com/']
+      ];
+      const existingLabels = new Set(Array.from(range.querySelectorAll('a span:first-child')).map((el) => el.textContent.trim()));
+      additions.forEach(([label, href]) => {
+        if (existingLabels.has(label)) return;
+        const link = document.createElement('a');
+        link.href = href;
         link.target = '_blank';
         link.rel = 'noopener noreferrer';
-      }
-      if (text.includes('pārstrādātas plastmasas')) {
-        link.href = 'https://www.govaplast.com/street/';
-        link.target = '_blank';
-        link.rel = 'noopener noreferrer';
-      }
-    });
+        link.innerHTML = `<span>${label}</span><span aria-hidden="true">↗</span>`;
+        range.appendChild(link);
+      });
+    }
   }
 
   const button = document.querySelector('[data-back-to-top]');
