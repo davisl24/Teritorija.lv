@@ -11,13 +11,13 @@
 
   function normalizeItem(value) {
     if (!value || typeof value !== 'object') return null;
-    const fields = ['id', 'name', 'manufacturer', 'image'];
-    if (!fields.every((field) => typeof value[field] === 'string' && value[field].trim())) return null;
+    const required = ['id', 'name', 'manufacturer'];
+    if (!required.every((field) => typeof value[field] === 'string' && value[field].trim())) return null;
     return {
       id: value.id.trim(),
       name: value.name.trim(),
       manufacturer: value.manufacturer.trim(),
-      image: value.image.trim()
+      image: typeof value.image === 'string' ? value.image.trim() : ''
     };
   }
 
@@ -161,7 +161,7 @@
       id: button.dataset.productId,
       name: button.dataset.productName,
       manufacturer: button.dataset.productManufacturer,
-      image: button.dataset.productImage
+      image: button.dataset.productImage || ''
     });
   }
 
@@ -184,22 +184,28 @@
   }
 
   function resolveRequestImage(item) {
+    if (!item.image) return '';
+    if (/^https?:\/\//i.test(item.image)) return item.image;
     if (!document.querySelector('[data-inquiry-page]')) return item.image;
     const filename = item.image.split('/').pop();
-    return `../assets/images/products/${filename}`;
+    return filename ? `../assets/images/products/${filename}` : '';
   }
 
   function renderInquiryItem(item) {
     const article = document.createElement('article');
     article.className = 'request-product-item';
 
-    const image = document.createElement('img');
-    image.src = resolveRequestImage(item);
-    image.alt = '';
-    image.width = 128;
-    image.height = 96;
-    image.loading = 'lazy';
-    image.decoding = 'async';
+    const imageSrc = resolveRequestImage(item);
+    if (imageSrc) {
+      const image = document.createElement('img');
+      image.src = imageSrc;
+      image.alt = '';
+      image.width = 128;
+      image.height = 96;
+      image.loading = 'lazy';
+      image.decoding = 'async';
+      article.append(image);
+    }
 
     const copy = document.createElement('div');
     copy.className = 'request-product-copy';
@@ -217,7 +223,7 @@
     remove.setAttribute('aria-label', `Noņemt ${item.name} no pieprasījuma`);
     remove.textContent = 'Noņemt';
 
-    article.append(image, copy, remove);
+    article.append(copy, remove);
     return article;
   }
 
