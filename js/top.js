@@ -1,6 +1,53 @@
 (() => {
   'use strict';
 
+  const INQUIRY_STORAGE_KEY = 'teritorijaInquiry';
+
+  function slugify(value) {
+    return String(value || '')
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '');
+  }
+
+  function saveCardToInquiry(card) {
+    if (!card) return;
+    const name = card.querySelector('h3')?.textContent?.trim();
+    if (!name) return;
+    const manufacturer = card.querySelector('.eyebrow')?.textContent?.trim() || 'TERITORIJA';
+    const image = card.querySelector('img')?.getAttribute('src') || '';
+    const id = card.dataset.productId || slugify(`${manufacturer}-${name}`);
+    if (!id) return;
+
+    let items = [];
+    try {
+      const raw = window.localStorage.getItem(INQUIRY_STORAGE_KEY);
+      const parsed = raw ? JSON.parse(raw) : [];
+      if (Array.isArray(parsed)) items = parsed;
+    } catch (error) {
+      items = [];
+    }
+
+    if (!items.some((item) => item && item.id === id)) {
+      items.push({ id, name, manufacturer, image });
+      try {
+        window.localStorage.setItem(INQUIRY_STORAGE_KEY, JSON.stringify(items));
+      } catch (error) {
+        return;
+      }
+    }
+  }
+
+  document.addEventListener('click', (event) => {
+    const link = event.target.closest('a[href*="pieprasijums"]');
+    if (!link) return;
+    const card = link.closest('.bench-card, .category-product-card, .featured-product');
+    if (!card) return;
+    saveCardToInquiry(card);
+  }, true);
+
   if (document.body.classList.contains('home-page')) {
     const style = document.createElement('style');
     style.textContent = `
