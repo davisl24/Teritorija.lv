@@ -72,11 +72,8 @@
 
   function isExplicitProductAdd(link, card) {
     if (link.matches('[data-inquiry-add]')) return true;
-    const actionText = [
-      link.textContent,
-      card?.querySelector('.bench-request')?.textContent,
-      card?.querySelector('.card-link')?.textContent
-    ].filter(Boolean).join(' ').toLowerCase();
+    const actionText = [link.textContent, card?.querySelector('.bench-request')?.textContent, card?.querySelector('.card-link')?.textContent]
+      .filter(Boolean).join(' ').toLowerCase();
     return actionText.includes('pievienot pieprasījumam');
   }
 
@@ -94,7 +91,6 @@
     if (!link) return;
     const card = link.closest('.bench-card, .category-product-card, .featured-product');
     if (!card || !isExplicitProductAdd(link, card)) return;
-
     event.preventDefault();
     event.stopPropagation();
     const product = saveCardToInquiry(card);
@@ -102,10 +98,7 @@
   }, true);
 
   function rootPrefix() {
-    const segments = window.location.pathname
-      .replace(/\\/g, '/')
-      .split('/')
-      .filter(Boolean);
+    const segments = window.location.pathname.replace(/\\/g, '/').split('/').filter(Boolean);
     if (segments.length === 0) return './';
     const last = segments[segments.length - 1];
     const directoryDepth = /\.[a-z0-9]+$/i.test(last) ? segments.length - 1 : segments.length;
@@ -133,7 +126,6 @@
       [/teritorija\.lv\/govaplast/i, `${prefix}produkti/parstradata-plastmasa/index.html`],
       [/teritorija\.lv\/zano-ara-mebeles/i, `${prefix}produkti/ara-mebeles/index.html`]
     ];
-
     document.querySelectorAll('a[href]').forEach((link) => {
       const href = link.href;
       for (const [pattern, target] of routes) {
@@ -143,6 +135,26 @@
         link.removeAttribute('rel');
         break;
       }
+    });
+  }
+
+  function remapHomepageCategoryQueries() {
+    if (!document.body.classList.contains('home-page')) return;
+    const routes = {
+      'ara-mebeles': './produkti/ara-mebeles/index.html',
+      'velo-infrastruktura': './produkti/velo-infrastruktura/index.html',
+      'rotalu-laukumi': './produkti/rotalu-laukumi/index.html',
+      'parstradata-plastmasa': './produkti/parstradata-plastmasa/index.html'
+    };
+    document.querySelectorAll('a[href*="produkti/index.html?category="]').forEach((link) => {
+      try {
+        const url = new URL(link.href, window.location.href);
+        const category = url.searchParams.get('category');
+        if (!routes[category]) return;
+        link.href = routes[category];
+        link.removeAttribute('target');
+        link.removeAttribute('rel');
+      } catch (error) {}
     });
   }
 
@@ -157,7 +169,6 @@
       'FREEKIDS': './produkti/rotalu-laukumi/index.html',
       'OUT-SIDER': './produkti/ara-mebeles/index.html'
     };
-
     document.querySelectorAll('a[href]').forEach((link) => {
       const text = link.textContent.replace(/↗/g, '').trim().toUpperCase();
       const key = Object.keys(targets).find((name) => text === name || text.startsWith(`${name} `));
@@ -186,16 +197,12 @@
         if (!img) return;
         let src = img.getAttribute('src') || '';
         try { src = new URL(src, window.location.href).href; } catch (error) {}
-
         if (src && seen.has(src)) {
           replaceMediaWithPlaceholder(media, 'Attēls tiks pievienots');
           return;
         }
         if (src) seen.add(src);
-
-        img.addEventListener('error', () => {
-          replaceMediaWithPlaceholder(media, 'Attēls nav pieejams');
-        }, { once: true });
+        img.addEventListener('error', () => replaceMediaWithPlaceholder(media, 'Attēls nav pieejams'), { once: true });
       });
     });
   }
@@ -207,6 +214,7 @@
 
   enforceInternalLogoLinks();
   remapOldTeritorijaLinks();
+  remapHomepageCategoryQueries();
   remapManufacturerCards();
   normalizeCatalogImages();
 
@@ -228,7 +236,6 @@
       './produkti/zano-soft-05-012/index.html': 'https://www.zano-streetfurniture.com/street-furniture/catalogue/bicycle-racks/soft-bicycle-rack-05-012',
       './produkti/zano-stilo-18-048/index.html': 'https://www.zano-streetfurniture.com/street-furniture/catalogue/bicycle-zone/stilo-bicycle-repair-station-18-048'
     };
-
     document.querySelectorAll('a[href]').forEach((link) => {
       const rawHref = link.getAttribute('href');
       const externalTarget = externalProductTargets[rawHref];
@@ -263,21 +270,17 @@
 
   const button = document.querySelector('[data-back-to-top]');
   if (!button) return;
-
   const sentinel = document.createElement('span');
   sentinel.className = 'top-scroll-sentinel';
   sentinel.setAttribute('aria-hidden', 'true');
   document.body.prepend(sentinel);
   button.hidden = false;
-
   const observer = new IntersectionObserver((entries) => {
     const entry = entries[0];
     const passedThreshold = !entry.isIntersecting && entry.boundingClientRect.top < 0;
     button.classList.toggle('is-visible', passedThreshold);
   });
-
   observer.observe(sentinel);
-
   button.addEventListener('click', () => {
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     window.scrollTo({ top: 0, behavior: reducedMotion ? 'auto' : 'smooth' });
