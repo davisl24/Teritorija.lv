@@ -73,7 +73,8 @@ Govaplast Play:
 
 ## FreeKids
 
-- `https://freekids.pl/en/products/` — VERIFIED.
+- `https://freekids.pl/en/kategoria-produktu/playgrounds/` — VERIFIED; aktuālajā lapā ir pilnais Playgrounds katalogs.
+- produktu hub `Rotaļu laukumi` vairs neizlaiž TERITORIJA lokālo kategorijas lapu; tas ved uz `produkti/rotalu-laukumi/index.html`, un no turienes lietotājs var atvērt FreeKids pilno kategoriju.
 
 ## OUT-SIDER
 
@@ -94,6 +95,40 @@ Lokālie galamērķi repo:
 - skrejritenu-stativi — local
 
 `Remonta stacijas` ir salabots: kategorijas karte tagad ved uz ZANO `bicycle-zone` kategoriju, nevis uz vienu Stilo produktu.
+
+## Lokālo route inventory
+
+Recursive repo tree audit apstiprina, ka eksistē galvenie lokālie galamērķi:
+- `/index.html`
+- `/produkti/index.html`
+- `/produkti/ara-mebeles/index.html`
+- `/produkti/ara-mebeles/soli/index.html`
+- `/produkti/ara-mebeles/puku-kastes/index.html`
+- `/produkti/betona-mebeles/index.html`
+- `/produkti/parstradata-plastmasa/index.html`
+- `/produkti/rotalu-laukumi/index.html`
+- `/produkti/velo-infrastruktura/index.html`
+- `/produkti/velo-stativi/index.html`
+- `/produkti/velo-nojumes/index.html`
+- `/produkti/divu-limenu-novietnes/index.html`
+- `/produkti/velo-glabatuves/index.html`
+- `/produkti/skrejritenu-stativi/index.html`
+- `/katalogi/index.html`
+- `/par-mums/index.html`
+- `/pieprasijums/index.html`
+- `/privatums/index.html`
+
+Atrasts un salabots pirmais IA/route mismatch:
+- `Produkti → Rotaļu laukumi` iepriekš veda tieši uz ārējo FreeKids root, lai gan repo jau eksistēja lokāla TERITORIJA rotaļu laukumu kategorijas lapa.
+- Tagad produkta hub karte ved uz lokālo `rotalu-laukumi` lapu.
+
+Rotaļu laukumu lokālajā lapā arī pievienots vienotais `Pieprasījums` count elements un `inquiry.js`, lai header funkcionalitāte neatšķirtos no pārējām galvenajām produktu lapām.
+
+## Katalogi
+
+- katalogu lapas lokālie `src` vāki eksistē repo `assets/images/katalogi/`;
+- ZANO on-line katalogs ved uz aktuālo ZANO Street Furniture catalogue root;
+- PDF `href` pašlaik ved uz vecās TERITORIJA hostētajiem PDF URL. `data-pdf-target` norāda nākotnes `/faili/...` ceļus, bet repo pašlaik nav `faili/` mapes; tas nav aktīvs broken-link defekts, jo pašreizējais `href` ir ārējais PDF URL un `catalog.js` šos `data-pdf-target` laukus neizmanto. Pirms gala publish jāizlemj, vai PDF paliek ārēji vai tiek migrēti lokāli.
 
 ## Inquiry flow
 
@@ -142,8 +177,8 @@ Pēc linku, satura un funkcionalitātes lock visu katalogu pārgrupējam pēc li
 
 ## Nākamais audits
 
-1. Pārbaudīt lokālos `href/src` ceļus pret reāli eksistējošiem repo failiem.
-2. Pārbaudīt header, footer, breadcrumbs un CTA visās galvenajās lapās.
+1. Turpināt lokālo `href/src` ceļu auditu pa atlikušajām detalizētajām produktu lapām.
+2. Pārbaudīt header, footer, breadcrumbs un CTA konsekvenci visās galvenajās lapās.
 3. Browser QA Govaplast Play vecajam `?page_id=919`.
 4. Inquiry: `Noņemt` → count, FormSubmit, successful reset.
 5. FUNCTIONALITY + CONTENT LOCK.
