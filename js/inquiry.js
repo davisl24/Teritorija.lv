@@ -1,59 +1,27 @@
 (() => {
   'use strict';
 
-  const STORAGE_KEY = 'teritorijaInquiry';
   const DRAFT_STORAGE_KEY = 'teritorijaInquiryDraft';
+  const LEGACY_STORAGE_KEY = 'teritorijaInquiry';
   const DRAFT_MAX_AGE = 24 * 60 * 60 * 1000;
-  const DRAFT_FIELDS = ['contact', 'email', 'phone', 'location', 'description'];
+  const DRAFT_FIELDS = ['contact', 'email', 'phone', 'location', 'quantity', 'description'];
   const FORM_RECIPIENT = 'einars@teritorija.lv';
-  const memoryState = { items: [] };
-  let storageAvailable = true;
   let draftSaveTimer = null;
 
-  function normalizeItem(value) {
-    if (!value || typeof value !== 'object') return null;
-    const required = ['id', 'name', 'manufacturer'];
-    if (!required.every((field) => typeof value[field] === 'string' && value[field].trim())) return null;
-    return {
-      id: value.id.trim(),
-      name: value.name.trim(),
-      manufacturer: value.manufacturer.trim(),
-      image: typeof value.image === 'string' ? value.image.trim() : ''
-    };
+  function rootPrefix() {
+    const segments = window.location.pathname.replace(/\\/g, '/').split('/').filter(Boolean);
+    if (segments.length === 0) return './';
+    const last = segments[segments.length - 1];
+    const directoryDepth = /\.[a-z0-9]+$/i.test(last) ? segments.length - 1 : segments.length;
+    return directoryDepth > 0 ? '../'.repeat(directoryDepth) : './';
   }
 
-  function readItems() {
-    if (!storageAvailable) return memoryState.items.slice();
-    try {
-      const raw = window.localStorage.getItem(STORAGE_KEY);
-      if (!raw) return [];
-      const parsed = JSON.parse(raw);
-      if (!Array.isArray(parsed)) return [];
-      const clean = parsed.map(normalizeItem).filter(Boolean);
-      const unique = [];
-      const seen = new Set();
-      clean.forEach((item) => {
-        if (!seen.has(item.id)) {
-          seen.add(item.id);
-          unique.push(item);
-        }
-      });
-      return unique;
-    } catch (error) {
-      storageAvailable = false;
-      return memoryState.items.slice();
-    }
-  }
-
-  function writeItems(items) {
-    const clean = items.map(normalizeItem).filter(Boolean);
-    memoryState.items = clean.slice();
-    if (!storageAvailable) return;
-    try {
-      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(clean));
-    } catch (error) {
-      storageAvailable = false;
-    }
+  function requestUrl(params = {}) {
+    const url = new URL(`${rootPrefix()}pieprasijums/index.html`, window.location.href);
+    Object.entries(params).forEach(([key, value]) => {
+      if (value) url.searchParams.set(key, value);
+    });
+    return url.href;
   }
 
   function saveInquiryDraft(form) {
@@ -89,9 +57,7 @@
       }
       DRAFT_FIELDS.forEach((name) => {
         const field = form.elements.namedItem(name);
-        if (field && !String(field.value || '').trim() && typeof draft[name] === 'string') {
-          field.value = draft[name];
-        }
+        if (field && !String(field.value || '').trim() && typeof draft[name] === 'string') field.value = draft[name];
       });
     } catch (error) {
       try { window.localStorage.removeItem(DRAFT_STORAGE_KEY); } catch (removeError) { return; }
@@ -106,162 +72,96 @@
     try { window.localStorage.removeItem(DRAFT_STORAGE_KEY); } catch (error) { return; }
   }
 
-  function updateHeaderCount(items = readItems()) {
-    document.querySelectorAll('[data-request-count]').forEach((counter) => {
-      if (items.length > 0) {
-        counter.textContent = String(items.length);
-        counter.hidden = false;
-      } else {
-        counter.textContent = '0';
-        counter.hidden = true;
+  function clearLegacyCart() {
+    try { window.localStorage.removeItem(LEGACY_STORAGE_KEY); } catch (error) { return; }
+  }
+
+  function inferCategory() {
+    const current = document.querySelector('.breadcrumbs li:last-child, .breadcrumbs [aria-current="page"]');
+    const text = current?.textContent?.trim();
+    if (text && text.toLowerCase() !== 'pieprasījums') return text;
+    return document.querySelector('h1')?.textContent?.trim() || '';
+  }
+
+  function inferManufacturer(trigger) {
+    return trigger.dataset.productManufacturer ||
+      trigger.closest('.bench-card, .category-product-card, .featured-product')?.querySelector('.eyebrow')?.textContent?.trim() || '';
+  }
+
+  function inferProductName(trigger) {
+    return trigger.dataset.productName ||
+      trigger.closest('.bench-card, .category-product-card, .featured-product')?.querySelector('h3')?.textContent?.trim() || '';
+  }
+
+  function setupInquiryTriggers() {
+    document.querySelectorAll('[data-inquiry-add]').forEach((trigger) => {
+      trigger.textContent = 'Jautāt par šo modeli';
+      trigger.removeAttribute('aria-pressed');
+    });
+
+    document.addEventListener('click', (event) => {
+      const productTrigger = event.target.closest('[data-inquiry-add]');
+      if (productTrigger) {
+        const product = inferProductName(productTrigger);
+        if (!product) return;
+        event.preventDefault();
+        window.location.href = requestUrl({
+          produkts: product,
+          razotajs: inferManufacturer(productTrigger)
+        });
+        return;
       }
+
+      const categoryLink = event.target.closest('.category-cta a[href*="pieprasijums"], .category-catalog-heading a[href*="pieprasijums"]');
+      if (!categoryLink) return;
+      event.preventDefault();
+      window.location.href = requestUrl({ kategorija: inferCategory() });
     });
   }
 
-  function bumpHeaderCount() {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    document.querySelectorAll('[data-request-count]:not([hidden])').forEach((counter) => {
-      counter.classList.remove('is-bumped');
-      void counter.offsetWidth;
-      counter.classList.add('is-bumped');
-      counter.addEventListener('animationend', () => counter.classList.remove('is-bumped'), { once: true });
-    });
+  function readRequestContext() {
+    const params = new URLSearchParams(window.location.search);
+    const product = String(params.get('produkts') || '').trim();
+    const manufacturer = String(params.get('razotajs') || '').trim();
+    const category = String(params.get('kategorija') || '').trim();
+    if (product) return { type: 'Produkts', value: product, manufacturer };
+    if (category) return { type: 'Kategorija', value: category, manufacturer: '' };
+    return { type: '', value: '', manufacturer: '' };
   }
 
-  function setPageStatus(message) {
-    document.querySelectorAll('[data-inquiry-status]').forEach((status) => { status.textContent = message; });
-  }
+  function renderRequestContext(form) {
+    const context = readRequestContext();
+    const box = document.querySelector('[data-request-context]');
+    const typeField = form?.elements.namedItem('interest_type');
+    const valueField = form?.elements.namedItem('interest_value');
+    const manufacturerField = form?.elements.namedItem('interest_manufacturer');
 
-  function setAddButtonState(button, isAdded) {
-    button.classList.toggle('is-added', isAdded);
-    button.setAttribute('aria-pressed', isAdded ? 'true' : 'false');
-    button.textContent = isAdded ? 'Pievienots pieprasījumam' : 'Pievienot pieprasījumam';
-  }
+    if (typeField) typeField.value = context.type;
+    if (valueField) valueField.value = context.value;
+    if (manufacturerField) manufacturerField.value = context.manufacturer;
 
-  function syncAddButtons(items = readItems()) {
-    const selectedIds = new Set(items.map((item) => item.id));
-    document.querySelectorAll('[data-inquiry-add]').forEach((button) => {
-      setAddButtonState(button, selectedIds.has(button.dataset.productId));
-    });
-  }
-
-  function productFromButton(button) {
-    const card = button.closest('.bench-card, .category-product-card, .featured-product');
-    const cardImage = card?.querySelector('img')?.src || '';
-    return normalizeItem({
-      id: button.dataset.productId,
-      name: button.dataset.productName,
-      manufacturer: button.dataset.productManufacturer,
-      image: button.dataset.productImage || cardImage
-    });
-  }
-
-  function addProduct(button) {
-    const product = productFromButton(button);
-    if (!product) return;
-    const items = readItems();
-    if (items.some((item) => item.id === product.id)) {
-      setAddButtonState(button, true);
-      setPageStatus(`${product.name} jau ir pieprasījumā.`);
-      return;
-    }
-    items.push(product);
-    writeItems(items);
-    updateHeaderCount(items);
-    bumpHeaderCount();
-    syncAddButtons(items);
-    syncInquiryPage(items);
-    setPageStatus(`${product.name} pievienots pieprasījumam.`);
-  }
-
-  function resolveRequestImage(item) {
-    if (!item.image) return '';
-    try {
-      return new URL(item.image, window.location.origin + '/').href;
-    } catch (error) {
-      return '';
-    }
-  }
-
-  function renderInquiryItem(item) {
-    const article = document.createElement('article');
-    article.className = 'request-product-item';
-
-    const imageSrc = resolveRequestImage(item);
-    if (imageSrc) {
-      const image = document.createElement('img');
-      image.src = imageSrc;
-      image.alt = '';
-      image.width = 128;
-      image.height = 96;
-      image.loading = 'lazy';
-      image.decoding = 'async';
-      image.referrerPolicy = 'no-referrer';
-      image.addEventListener('error', () => image.remove(), { once: true });
-      article.append(image);
-    }
-
-    const copy = document.createElement('div');
-    copy.className = 'request-product-copy';
-    const manufacturer = document.createElement('p');
-    manufacturer.className = 'eyebrow';
-    manufacturer.textContent = item.manufacturer;
-    const name = document.createElement('h3');
-    name.textContent = item.name;
-    copy.append(manufacturer, name);
-
-    const remove = document.createElement('button');
-    remove.className = 'request-remove';
-    remove.type = 'button';
-    remove.dataset.inquiryRemove = item.id;
-    remove.setAttribute('aria-label', `Noņemt ${item.name} no pieprasījuma`);
-    remove.textContent = 'Noņemt';
-
-    article.append(copy, remove);
-    return article;
-  }
-
-  function syncHiddenProducts(items) {
-    const field = document.querySelector('[data-inquiry-products]');
-    if (!field) return;
-    field.value = JSON.stringify(items.map((item) => ({ id: item.id, name: item.name, manufacturer: item.manufacturer })));
-  }
-
-  function syncInquiryPage(items = readItems()) {
-    const list = document.querySelector('[data-inquiry-list]');
-    const empty = document.querySelector('[data-inquiry-empty]');
-    if (!list || !empty) {
-      syncHiddenProducts(items);
-      return;
-    }
-    list.replaceChildren(...items.map(renderInquiryItem));
-    empty.hidden = items.length > 0;
-    list.hidden = items.length === 0;
-    syncHiddenProducts(items);
-  }
-
-  function removeProduct(id) {
-    const current = readItems();
-    const removed = current.find((item) => item.id === id);
-    const items = current.filter((item) => item.id !== id);
-    writeItems(items);
-    updateHeaderCount(items);
-    syncAddButtons(items);
-    syncInquiryPage(items);
-    if (removed) setPageStatus(`${removed.name} noņemts no pieprasījuma.`);
+    if (!box || !context.value) return;
+    const eyebrow = box.querySelector('[data-request-context-type]');
+    const title = box.querySelector('[data-request-context-value]');
+    const note = box.querySelector('[data-request-context-note]');
+    if (eyebrow) eyebrow.textContent = context.type;
+    if (title) title.textContent = context.value;
+    if (note) note.textContent = context.manufacturer ? `${context.manufacturer} · Šo informāciju pievienosim pieprasījumam automātiski.` : 'Šo kategoriju pievienosim pieprasījumam automātiski.';
+    box.hidden = false;
   }
 
   function prepareFormPayload(form) {
-    const items = readItems();
-    syncHiddenProducts(items);
     const data = new FormData(form);
     return {
       contact: String(data.get('contact') || '').trim(),
       email: String(data.get('email') || '').trim(),
       phone: String(data.get('phone') || '').trim(),
       location: String(data.get('location') || '').trim(),
+      quantity: String(data.get('quantity') || '').trim(),
       description: String(data.get('description') || '').trim(),
-      products: items.map((item) => ({ id: item.id, name: item.name, manufacturer: item.manufacturer }))
+      interestType: String(data.get('interest_type') || '').trim(),
+      interestValue: String(data.get('interest_value') || '').trim(),
+      interestManufacturer: String(data.get('interest_manufacturer') || '').trim()
     };
   }
 
@@ -291,6 +191,7 @@
       'E-pasts': payload.email,
       'Tālrunis': payload.phone,
       'Projekta vieta': payload.location,
+      'Aptuvenais apjoms': payload.quantity,
       'Projekta apraksts': payload.description,
       _subject: 'Jauns Teritorija projekta pieprasījums',
       _template: 'table',
@@ -298,10 +199,11 @@
       _honey: ''
     };
 
-    if (payload.products.length > 0) {
-      formSubmitPayload['Izvēlētie produkti'] = payload.products
-        .map((item) => `${item.manufacturer} — ${item.name} (${item.id})`)
-        .join('\n');
+    if (payload.interestValue) {
+      formSubmitPayload['Intereses tips'] = payload.interestType;
+      formSubmitPayload['Interesē'] = payload.interestManufacturer
+        ? `${payload.interestManufacturer} — ${payload.interestValue}`
+        : payload.interestValue;
     }
 
     if (submitButton) submitButton.disabled = true;
@@ -320,13 +222,9 @@
         throw new Error(result && result.message ? String(result.message) : 'FormSubmit request failed');
       }
 
-      writeItems([]);
       clearInquiryDraft();
-      updateHeaderCount([]);
-      syncAddButtons([]);
-      syncInquiryPage([]);
       form.reset();
-      syncHiddenProducts([]);
+      renderRequestContext(form);
       if (status) status.textContent = 'Pieprasījums veiksmīgi nosūtīts. Paldies!';
     } catch (error) {
       const message = String(error && error.message ? error.message : '');
@@ -340,24 +238,12 @@
     }
   }
 
-  function handleClick(event) {
-    const addButton = event.target.closest('[data-inquiry-add]');
-    if (addButton) {
-      addProduct(addButton);
-      return;
-    }
-    const removeButton = event.target.closest('[data-inquiry-remove]');
-    if (removeButton) removeProduct(removeButton.dataset.inquiryRemove);
-  }
-
   function init() {
-    const items = readItems();
-    updateHeaderCount(items);
-    syncAddButtons(items);
-    syncInquiryPage(items);
-    document.addEventListener('click', handleClick);
+    clearLegacyCart();
+    setupInquiryTriggers();
     document.querySelectorAll('[data-inquiry-form]').forEach((form) => {
       restoreInquiryDraft(form);
+      renderRequestContext(form);
       form.addEventListener('input', () => scheduleInquiryDraftSave(form));
       form.addEventListener('change', () => scheduleInquiryDraftSave(form));
       form.addEventListener('submit', handleFormSubmit);
