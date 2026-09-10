@@ -1,23 +1,32 @@
-# TERITORIJA — IA REVIEW
+# TERITORIJA — IA LOCK
 
-Statuss: REVIEW DRAFT. Šis nav IA LOCK un nav implementācijas uzdevums.
+Statuss: **IA LOCKED**. Šis ir gala informācijas arhitektūras pamats pirms HTML/layout/UI/UX pārbūves.
 
-Mērķis: samazināt darba `IA_MAP.md` 11 pirmā līmeņa grupas līdz skaidrai, lietotāja vajadzībās balstītai struktūrai. Ražotāji un materiāli paliek sekundārs izvēles slānis, nevis galvenā navigācijas ass.
+Mērķis: sakārtot produktu katalogu pēc lietotāja vajadzības. Ražotājs un materiāls ir sekundārs izvēles slānis, nevis galvenā navigācijas ass.
 
-## Galvenais secinājums
+## Pamatprincips
 
-11 vienlīdzīgas top-level produktu grupas ir par daudz. Tās sajauc galvenos klienta uzdevumus ar šaurākām produktu ģimenēm un sekundāriem virzieniem.
+Lietotājs vispirms izvēlas vajadzību. TERITORIJA pēc tam palīdz izvēlēties partneri, materiālu un konkrēto risinājumu.
 
-Ieteiktais gala 1. līmenis: 6 grupas.
+- Kategorijas karte → kategorijas lapa.
+- Apakškategorija → attiecīgā produktu/risinājumu grupa.
+- Konkrēta produkta karte → konkrēts produkts vai “Jautāt par šo modeli”.
+- Ražotājs = filtrs / izvēles variants.
+- Materiāls = filtrs / īpašība, izņemot gadījumus, kad pats materiāls vai konstrukcija ir lietotāja mērķis.
+- Vienam produktam ir viena canonical mājvieta IA; citur tas drīkst parādīties tikai kā cross-link / saistīts risinājums.
+
+---
+
+# Gala 1. līmenis — 6 grupas
 
 1. Velo infrastruktūra
 2. Āra mēbeles
-3. Teritorijas aprīkojums
-4. Rotaļu un atpūtas risinājumi
+3. Teritorijas labiekārtojums
+4. Rotaļu un atpūtas zonas
 5. Smart City un tehnoloģijas
-6. Materiāli un konstrukcijas
+6. Materiālu risinājumi
 
-`Papildu pilsētvides elementi` nav atsevišķs top-level. Šie produkti jāievieto tuvākajā funkcionālajā grupā vai sekundārā `Citi risinājumi` blokā.
+`Papildu pilsētvides elementi` nav atsevišķs top-level. Tie tiek ievietoti tuvākajā funkcionālajā grupā vai sekundārā “Citi risinājumi” blokā.
 
 ---
 
@@ -25,7 +34,7 @@ Ieteiktais gala 1. līmenis: 6 grupas.
 
 Lietotāja nodoms: novietot, aizsargāt, glabāt vai apkalpot velosipēdus/skrejriteņus.
 
-Apakšgrupas:
+### Apakškategorijas
 - Velo statīvi
 - Velo nojumes
 - Divu līmeņu novietnes
@@ -33,12 +42,25 @@ Apakšgrupas:
 - Remonta stacijas un pumpji
 - Skrejriteņu statīvi
 
-Partneri:
+### Partneri
 - SAWO
 - ZANO
 - Govaplast
 
-Piezīme: `Velo zonas / servisa punkti` nav vajadzīga kā atsevišķa paralēla apakšgrupa, ja tās saturs faktiski ir remonta stacijas, pumpji un saistīts aprīkojums. Labāk izvairīties no diviem nosaukumiem vienam lietotāja nodomam.
+### Canonical noteikumi
+- SAWO BR/U-tipa/trapecveida/moduļu statīvi → Velo infrastruktūra → Velo statīvi
+- ZANO Bicycle Racks → Velo infrastruktūra → Velo statīvi
+- Govaplast bicycle stands → Velo infrastruktūra → Velo statīvi
+- ZANO Bicycle Zone remonta risinājumi → Velo infrastruktūra → Remonta stacijas un pumpji
+- SAWO nojumes/glabātavas/divu līmeņu/skrejriteņu risinājumi paliek savās apakškategorijās
+
+### Esošie ceļi, ko reuse
+- `produkti/velo-infrastruktura/`
+- `produkti/velo-stativi/`
+- `produkti/velo-nojumes/`
+- `produkti/divu-limenu-novietnes/`
+- `produkti/velo-glabatuves/`
+- `produkti/skrejritenu-stativi/`
 
 ---
 
@@ -46,30 +68,39 @@ Piezīme: `Velo zonas / servisa punkti` nav vajadzīga kā atsevišķa paralēla
 
 Lietotāja nodoms: aprīkot vietu sēdēšanai, ēšanai un ikdienas lietošanai.
 
-Apakšgrupas:
+### Apakškategorijas
 - Soli un sēdvietas
-  - ar atzveltni
-  - atsevišķi sēdekļi / krēsli
-  - moduļu sēdvietas
-  - dizaina / multifunkcionālas sēdvietas
 - Galdi
 - Piknika galdi un komplekti
 
-Partneri:
+### Soli un sēdvietas — sekundārie filtri
+- ar atzveltni
+- sēdekļi / krēsli / tabureti
+- moduļu sēdvietas
+- dizaina / multifunkcionālas sēdvietas
+- viedie / solārie soli kā tips, bet Smart City lapā tikai cross-link
+
+### Partneri
 - ZANO
 - URBASTYLE
 - Govaplast
 - OUT-SIDER
 
-Svarīga robeža: `viedie / solārie soli` produktu tipa ziņā ir soli, bet tehnoloģiskā nodoma ziņā tie pieder arī Smart City. Canonical mājvieta: `Āra mēbeles → Soli un sēdvietas`; Smart City lapā tos drīkst parādīt kā cross-link / piemēru, nevis dublēt kā atsevišķu katalogu.
+### Canonical noteikumi
+- URBASTYLE betona sols → Āra mēbeles → Soli un sēdvietas; “betons” ir atribūts
+- Govaplast pārstrādātas plastmasas sols → Āra mēbeles → Soli un sēdvietas; “pārstrādāta plastmasa” ir atribūts
+- ZANO viedais sols → Āra mēbeles → Soli un sēdvietas; Smart City lapā cross-link
+
+### Esošais ceļš, ko reuse
+- `produkti/ara-mebeles/soli/` → jāpārveido no “ZANO solu” lapas par TERITORIJA vairāku partneru solu kategoriju
 
 ---
 
-## 3. Teritorijas aprīkojums
+## 3. Teritorijas labiekārtojums
 
-Lietotāja nodoms: uzturēt, apzaļumot, norobežot, organizēt un marķēt teritoriju.
+Lietotāja nodoms: uzturēt, apzaļumot, norobežot, organizēt, marķēt un apgaismot teritoriju.
 
-Apakšgrupas:
+### Apakškategorijas
 - Atkritumu apsaimniekošana
   - atkritumu urnas
   - šķirošanas urnas
@@ -89,34 +120,41 @@ Apakšgrupas:
 - Apgaismojums
   - ielu / teritorijas lampas
 
-Partneri:
+### Partneri
 - ZANO
 - URBASTYLE
 - Govaplast
 
-Kāpēc apvienot: `Atkritumu apsaimniekošana`, `Apzaļumošana`, `Norobežojumi` un `Informācija` katra atsevišķi ir pārāk šaura top-level navigācijai. Kopā tās veido vienu saprotamu uzdevumu: teritorijas aprīkošana.
+### Lēmums par apgaismojumu
+Apgaismojums pagaidām **nav top-level kategorija**. Tas paliek zem `Teritorijas labiekārtojums`. Ja vēlāk inventory kļūst pietiekami plašs, to var izcelt atsevišķi bez visas IA pārbūves.
 
-`Apgaismojums` pagaidām paliek zem šīs grupas. Ja vēlāk inventory kļūst pietiekami plašs, to var izcelt atsevišķi bez visas IA pārbūves.
+### Esošais ceļš, ko reuse
+- `produkti/ara-mebeles/puku-kastes/` → jāpārveido par vairāku partneru puķu kastu/apzaļumošanas kategoriju vai jāiekļauj jaunā labiekārtojuma struktūrā
 
 ---
 
-## 4. Rotaļu un atpūtas risinājumi
+## 4. Rotaļu un atpūtas zonas
 
 Lietotāja nodoms: izveidot bērnu, jauniešu vai publisku atpūtas zonu.
 
-Apakšgrupas:
+### Apakškategorijas
 - Rotaļu laukumi / kompleksi
 - Kāpelēšanas un aktivitāšu elementi
 - Šūpoles / slidkalniņi / batuti
 - Publiskie grili
 - Citi aktīvās atpūtas elementi
 
-Partneri:
+### Partneri
 - FreeKids
 - Govaplast Play
 - URBASTYLE (grili / atpūtas papildrisinājumi)
 
-Piezīme: `Publiskie grili` nav pietiekami liela atsevišķa top-level kategorija. Tie iederas šeit kā atpūtas zonas papildrisinājums.
+### Canonical noteikumi
+- FreeKids un Govaplast Play jāapvieno zem viena TERITORIJA rotaļu virziena
+- URBASTYLE grili ir sekundārs atpūtas zonas risinājums, nevis atsevišķa top-level kategorija
+
+### Esošais ceļš, ko reuse
+- `produkti/rotalu-laukumi/` → jāpārvērš no FreeKids-only landing par vairāku partneru `Rotaļu un atpūtas zonas` landing
 
 ---
 
@@ -124,25 +162,30 @@ Piezīme: `Publiskie grili` nav pietiekami liela atsevišķa top-level kategorij
 
 Lietotāja nodoms: pievienot publiskajai videi enerģiju, uzlādi, savienojamību vai digitālas funkcijas.
 
-Apakšgrupas:
+### Apakškategorijas
 - Solārās uzlādes stacijas
 - Viedie soli
 - Wi‑Fi / telemetrija
 - LED / audio / saistītie viedie risinājumi
 
-Partneri:
+### Partneri
 - ZANO
 - URBASTYLE atsevišķos papildrisinājumos
 
-Svarīgi: nepieciešama lokāla TERITORIJA Smart City landing lapa. Produkta hub nevajadzētu mest lietotāju uzreiz uz ZANO.
+### Canonical noteikumi
+- ZANO solārā uzlādes stacija → Smart City un tehnoloģijas
+- ZANO viedais sols → canonical zem Āra mēbeles → Soli un sēdvietas; Smart City lapā cross-link
+
+### Nepieciešams jauns lokāls landing
+Produktu hub nedrīkst mest lietotāju uzreiz uz ZANO Smart City. Vajadzīga lokāla TERITORIJA Smart City kategorijas lapa.
 
 ---
 
-## 6. Materiāli un konstrukcijas
+## 6. Materiālu risinājumi
 
 Lietotāja nodoms: atrast konkrētu tehnisku materiālu, virsmu vai konstrukcijas sistēmu, nevis gatavu soli/urnu.
 
-Apakšgrupas:
+### Apakškategorijas
 - Pārstrādātas plastmasas dēļi un profili
 - Terases
 - Žogu / norobežojumu materiāli
@@ -151,79 +194,136 @@ Apakšgrupas:
 - Arhitektoniskais betons / konstrukcijas
 - HPL / dizaina materiāli
 
-Partneri:
+### Partneri
 - Govaplast
 - URBASTYLE
 - OUT-SIDER
 
-Svarīga robeža: `Betona mēbeles` un `Pārstrādāta plastmasa` vairs nav galvenās produktu kategorijas. Gatavs sols no betona vai pārstrādātas plastmasas atrodas zem `Āra mēbeles → Soli un sēdvietas`. Šajā sadaļā paliek tikai gadījumi, kad pats materiāls vai konstrukcija ir lietotāja mērķis.
+### Canonical noteikumi
+- Govaplast terases dēļi → Materiālu risinājumi
+- Govaplast tehniskie profili → Materiālu risinājumi
+- URBASTYLE atbalsta sienas / arhitektoniskais betons → Materiālu risinājumi
+- Gatavs sols/urna/galds no betona vai pārstrādātas plastmasas nepieder šeit; tas iet savā funkcionālajā produktu kategorijā
+
+### Esošie ceļi
+- `produkti/parstradata-plastmasa/` → nākotnē materiālu/partnera landing vai redirect; ne galvenais ceļš uz Govaplast gatavajiem produktiem
+- `produkti/betona-mebeles/` → nākotnē materiālu/partnera landing vai redirect; ne galvenais ceļš uz URBASTYLE gatavajiem produktiem
 
 ---
 
-# Kur paliek iepriekšējās 11 grupas
+# Partneru pārklājums
 
-| Darba IA grupa | Gala vieta |
-|---|---|
-| Velo infrastruktūra | Velo infrastruktūra |
-| Soli un sēdvietas | Āra mēbeles |
-| Galdi un piknika risinājumi | Āra mēbeles |
-| Atkritumu apsaimniekošana | Teritorijas aprīkojums |
-| Apzaļumošana un koku aizsardzība | Teritorijas aprīkojums |
-| Norobežojumi un teritorijas organizēšana | Teritorijas aprīkojums |
-| Informācija, norādes un apgaismojums | Teritorijas aprīkojums |
-| Rotaļu un aktīvās atpūtas risinājumi | Rotaļu un atpūtas risinājumi |
-| Smart City un uzlāde | Smart City un tehnoloģijas |
-| Materiāli un tehniskie risinājumi | Materiāli un konstrukcijas |
-| Papildu pilsētvides elementi | tuvākā funkcionālā grupa / Citi risinājumi |
-
----
-
-# Dublēšanās noteikums
-
-Vienam produktam ir viena canonical mājvieta IA. To drīkst parādīt arī citā kategorijā kā saistīto risinājumu, bet nevajag veidot divus neatkarīgus produkta katalogus.
-
-Piemēri:
-- ZANO viedais sols → canonical `Āra mēbeles → Soli un sēdvietas`; Smart City lapā cross-link.
-- Govaplast velo statīvs → canonical `Velo infrastruktūra → Velo statīvi`; materiāls `pārstrādāta plastmasa` ir filtrs/atribūts.
-- URBASTYLE betona sols → canonical `Āra mēbeles → Soli un sēdvietas`; `betons` ir filtrs/atribūts.
-- ZANO solārā uzlādes stacija → canonical `Smart City un tehnoloģijas`.
-- Govaplast terases dēļi → canonical `Materiāli un konstrukcijas`.
+| Lietotāja vajadzība | ZANO | SAWO | URBASTYLE | Govaplast | FreeKids | OUT-SIDER |
+|---|---|---|---|---|---|---|
+| Velo statīvi | Jā | Jā | — | Jā | — | — |
+| Velo nojumes | — | Jā | — | — | — | — |
+| Divu līmeņu velo | — | Jā | — | — | — | — |
+| Velo glabātavas | — | Jā | — | — | — | — |
+| Remonta stacijas / pumpji | Jā | servisa virziens | — | — | — | — |
+| Skrejriteņu statīvi | — | Jā | — | — | — | — |
+| Soli / sēdvietas | Jā | — | Jā | Jā | — | Jā |
+| Galdi / piknika | Jā | — | Jā | Jā | — | iespējams |
+| Urnas / šķirošana | Jā | — | Jā | Jā | — | — |
+| Puķu kastes | Jā | — | Jā | Jā | — | — |
+| Koku aizsardzība | Jā | — | Jā | — | — | — |
+| Stabi / norobežojumi | Jā | — | Jā | Jā | — | — |
+| Žogi | Jā | — | — | Jā | — | — |
+| Informācijas stendi / signage | Jā | — | Jā | — | — | — |
+| Apgaismojums | Jā | — | daļēji | — | — | — |
+| Rotaļu laukumi | — | — | — | Jā | Jā | — |
+| Smart City / uzlāde | Jā | — | daļēji | — | — | — |
+| Materiāli / tehniskās sistēmas | — | — | Jā | Jā | — | Jā |
 
 ---
 
-# Ieteicamais sitemap draft
+# Gala sitemap
 
 Produkti
 ├── Velo infrastruktūra
 │   ├── Velo statīvi
+│   │   ├── SAWO
+│   │   ├── ZANO
+│   │   └── Govaplast
 │   ├── Velo nojumes
+│   │   └── SAWO
 │   ├── Divu līmeņu novietnes
+│   │   └── SAWO
 │   ├── Velo glabātavas
+│   │   └── SAWO
 │   ├── Remonta stacijas un pumpji
+│   │   └── ZANO
 │   └── Skrejriteņu statīvi
+│       └── SAWO
 ├── Āra mēbeles
 │   ├── Soli un sēdvietas
+│   │   ├── ZANO
+│   │   ├── URBASTYLE
+│   │   ├── Govaplast
+│   │   └── OUT-SIDER
 │   ├── Galdi
+│   │   ├── ZANO
+│   │   ├── URBASTYLE
+│   │   └── Govaplast
 │   └── Piknika galdi un komplekti
-├── Teritorijas aprīkojums
+│       ├── ZANO
+│       └── Govaplast
+├── Teritorijas labiekārtojums
 │   ├── Atkritumu apsaimniekošana
+│   │   ├── Atkritumu urnas
+│   │   ├── Šķirošanas urnas
+│   │   ├── Suņu atkritumu urnas
+│   │   └── Pelnu trauki
 │   ├── Apzaļumošana un koku aizsardzība
+│   │   ├── Puķu kastes
+│   │   └── Koku sargi / režģi
 │   ├── Norobežojumi
+│   │   ├── Bollardi / dekoratīvie stabi
+│   │   ├── Žogi
+│   │   ├── Ķēdes
+│   │   └── Satiksmes zīmju stabi
 │   ├── Informācija un norādes
+│   │   ├── Informācijas stendi
+│   │   └── Signage / norādes
 │   └── Apgaismojums
-├── Rotaļu un atpūtas risinājumi
+│       └── Ielu / teritorijas lampas
+├── Rotaļu un atpūtas zonas
+│   ├── Rotaļu laukumi / kompleksi
+│   ├── Kāpelēšanas un aktivitāšu elementi
+│   ├── Šūpoles / slidkalniņi / batuti
+│   ├── Publiskie grili
+│   └── Citi aktīvās atpūtas elementi
 ├── Smart City un tehnoloģijas
-└── Materiāli un konstrukcijas
-
-Partneris un materiāls parādās tikai pēc kategorijas/apakškategorijas izvēles kā izvēles vai filtrēšanas slānis.
+│   ├── Solārās uzlādes stacijas
+│   ├── Viedie soli [cross-link uz Āra mēbeles → Soli]
+│   ├── Wi‑Fi / telemetrija
+│   └── LED / audio / saistītie risinājumi
+└── Materiālu risinājumi
+    ├── Pārstrādātas plastmasas dēļi un profili
+    ├── Terases
+    ├── Žogu / norobežojumu materiāli
+    ├── Atbalsta sienas
+    ├── Tehniskie profili un sistēmas
+    ├── Arhitektoniskais betons / konstrukcijas
+    └── HPL / dizaina materiāli
 
 ---
 
-# Pirms IA LOCK vēl jāizlemj
+# IA LOCK lēmumi
 
-1. Vai `Teritorijas aprīkojums` ir klientam pietiekami saprotams nosaukums, vai labāk `Teritorijas labiekārtojums`.
-2. Vai `Apgaismojums` pašreizējā inventory ir pietiekams savai apakšlapai, vai sākumā tikai karte/linka virziens.
-3. Vai `Rotaļu un atpūtas risinājumi` jāsaīsina uz `Rotaļu un atpūtas zonas`.
-4. Vai materiālu sadaļas publiskais nosaukums būs `Materiāli un konstrukcijas` vai vienkāršāk `Materiālu risinājumi`.
+- `Teritorijas aprīkojums` → **Teritorijas labiekārtojums**
+- `Rotaļu un atpūtas risinājumi` → **Rotaļu un atpūtas zonas**
+- `Materiāli un konstrukcijas` → **Materiālu risinājumi**
+- `Apgaismojums` paliek zem **Teritorijas labiekārtojums**
+- 6 top-level grupas ir fiksētas
+- partneris un materiāls nav top-level navigācijas ass
+- katram produktam viena canonical mājvieta
 
-Līdz šo četru nosaukumu/robežu lēmumam HTML struktūru nepārbūvējam.
+## IA LOCK
+
+**Šī struktūra ir apstiprinātā implementācijas bāze.**
+
+Nākamais posms:
+1. pārtaisīt `produkti/index.html` pēc šīm 6 grupām;
+2. izveidot/reorganizēt kategoriju landing lapas;
+3. saglabāt esošo pareizo inventory, attēlus un ārējos partneru galamērķus;
+4. tikai pēc strukturālās implementācijas sākt layout un UI/UX darbu.
