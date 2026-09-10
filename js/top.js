@@ -1,111 +1,6 @@
 (() => {
   'use strict';
 
-  const INQUIRY_STORAGE_KEY = 'teritorijaInquiry';
-
-  function slugify(value) {
-    return String(value || '')
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '')
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, '-')
-      .replace(/^-+|-+$/g, '');
-  }
-
-  function readInquiryItems() {
-    try {
-      const raw = window.localStorage.getItem(INQUIRY_STORAGE_KEY);
-      const parsed = raw ? JSON.parse(raw) : [];
-      return Array.isArray(parsed) ? parsed.filter(Boolean) : [];
-    } catch (error) {
-      return [];
-    }
-  }
-
-  function updateRequestCount(items = readInquiryItems()) {
-    document.querySelectorAll('[data-request-count]').forEach((counter) => {
-      if (items.length > 0) {
-        counter.textContent = String(items.length);
-        counter.hidden = false;
-      } else {
-        counter.textContent = '0';
-        counter.hidden = true;
-      }
-    });
-  }
-
-  function absoluteImageUrl(card) {
-    const src = card?.querySelector('img')?.getAttribute('src') || '';
-    if (!src) return '';
-    try { return new URL(src, window.location.href).href; } catch (error) { return src; }
-  }
-
-  function inferManufacturer(card) {
-    const explicit = card?.querySelector('.eyebrow')?.textContent?.trim();
-    if (explicit) return explicit;
-    const path = window.location.pathname.toLowerCase();
-    if (path.includes('velo-') || path.includes('divu-limenu') || path.includes('skrejritenu')) return 'SAWO';
-    if (path.includes('betona-mebeles')) return 'URBASTYLE';
-    if (path.includes('parstradata-plastmasa')) return 'GOVAPLAST';
-    if (path.includes('rotalu-laukumi')) return 'FREEKIDS';
-    return 'TERITORIJA';
-  }
-
-  function productFromCard(card) {
-    if (!card) return null;
-    const name = card.querySelector('h3')?.textContent?.trim();
-    if (!name) return null;
-    const manufacturer = inferManufacturer(card);
-    const id = card.dataset.productId || slugify(`${manufacturer}-${name}`);
-    if (!id) return null;
-    return { id, name, manufacturer, image: absoluteImageUrl(card) };
-  }
-
-  function saveCardToInquiry(card) {
-    const product = productFromCard(card);
-    if (!product) return null;
-    const items = readInquiryItems();
-    const existingIndex = items.findIndex((item) => item && item.id === product.id);
-    if (existingIndex === -1) items.push(product);
-    else items[existingIndex] = { ...items[existingIndex], ...product };
-    try { window.localStorage.setItem(INQUIRY_STORAGE_KEY, JSON.stringify(items)); }
-    catch (error) { return null; }
-    updateRequestCount(items);
-    return product;
-  }
-
-  function isExplicitProductAdd(link, card) {
-    if (link.matches('[data-inquiry-add]')) return true;
-    const actionText = [
-      link.textContent,
-      card?.querySelector('.bench-request')?.textContent,
-      card?.querySelector('.card-link')?.textContent
-    ].filter(Boolean).join(' ').toLowerCase();
-    return actionText.includes('pievienot pieprasījumam') ||
-      actionText.includes('pieteikt risinājumu') ||
-      actionText.includes('pieteikt modeli');
-  }
-
-  function markAdded(link, card) {
-    card?.classList.add('is-added-to-inquiry');
-    const action = link.querySelector('.bench-request, .card-link') || card?.querySelector('.bench-request, .card-link') || link;
-    if (action) {
-      action.textContent = 'Pievienots pieprasījumam ✓';
-      action.setAttribute('aria-live', 'polite');
-    }
-  }
-
-  document.addEventListener('click', (event) => {
-    const link = event.target.closest('a[href*="pieprasijums"]');
-    if (!link) return;
-    const card = link.closest('.bench-card, .category-product-card, .featured-product');
-    if (!card || !isExplicitProductAdd(link, card)) return;
-    event.preventDefault();
-    event.stopPropagation();
-    const product = saveCardToInquiry(card);
-    if (product) markAdded(link, card);
-  }, true);
-
   function rootPrefix() {
     const segments = window.location.pathname.replace(/\\/g, '/').split('/').filter(Boolean);
     if (segments.length === 0) return './';
@@ -113,6 +8,61 @@
     const directoryDepth = /\.[a-z0-9]+$/i.test(last) ? segments.length - 1 : segments.length;
     return directoryDepth > 0 ? '../'.repeat(directoryDepth) : './';
   }
+
+  function inferManufacturer(card) {
+    const explicit = card?.querySelector('.eyebrow')?.textContent?.trim();
+    if (explicit && explicit.length < 40) return explicit;
+    const path = window.location.pathname.toLowerCase();
+    if (path.includes('velo-') || path.includes('divu-limenu') || path.includes('skrejritenu')) return 'SAWO';
+    if (path.includes('betona-mebeles')) return 'URBASTYLE';
+    if (path.includes('parstradata-plastmasa')) return 'GOVAPLAST';
+    if (path.includes('rotalu-laukumi')) return 'FREEKIDS';
+    if (path.includes('zano-') || path.includes('ara-mebeles')) return 'ZANO';
+    return '';
+  }
+
+  function isProductInquiry(link, card) {
+    const actionText = [
+      link.textContent,
+      card?.querySelector('.bench-request')?.textContent,
+      card?.querySelector('.card-link')?.textContent
+    ].filter(Boolean).join(' ').toLowerCase();
+    return actionText.includes('pievienot pieprasījumam') ||
+      actionText.includes('pieteikt risinājumu') ||
+      actionText.includes('pieteikt modeli') ||
+      actionText.includes('jautāt par šo modeli');
+  }
+
+  function productInquiryUrl(card) {
+    const name = card?.querySelector('h3')?.textContent?.trim();
+    if (!name) return '';
+    const url = new URL(`${rootPrefix()}pieprasijums/index.html`, window.location.href);
+    url.searchParams.set('produkts', name);
+    const manufacturer = inferManufacturer(card);
+    if (manufacturer) url.searchParams.set('razotajs', manufacturer);
+    return url.href;
+  }
+
+  function normalizeProductInquiryLinks() {
+    document.querySelectorAll('a[href*="pieprasijums"]').forEach((link) => {
+      const card = link.closest('.bench-card, .category-product-card, .featured-product');
+      if (!card || !isProductInquiry(link, card)) return;
+      const action = link.querySelector('.bench-request, .card-link') || card.querySelector('.bench-request, .card-link') || link;
+      if (action) action.textContent = 'Jautāt par šo modeli →';
+    });
+  }
+
+  document.addEventListener('click', (event) => {
+    const link = event.target.closest('a[href*="pieprasijums"]');
+    if (!link) return;
+    const card = link.closest('.bench-card, .category-product-card, .featured-product');
+    if (!card || !isProductInquiry(link, card)) return;
+    const target = productInquiryUrl(card);
+    if (!target) return;
+    event.preventDefault();
+    event.stopPropagation();
+    window.location.href = target;
+  }, true);
 
   function enforceInternalLogoLinks() {
     const home = `${rootPrefix()}index.html`;
@@ -256,17 +206,13 @@
     }
   }
 
-  updateRequestCount();
-  window.addEventListener('storage', (event) => {
-    if (event.key === INQUIRY_STORAGE_KEY) updateRequestCount();
-  });
-
   enforceInternalLogoLinks();
   remapOldTeritorijaLinks();
   remapHomepageCategoryQueries();
   remapManufacturerCards();
   enrichSawoBikeRacks();
   normalizeCatalogImages();
+  normalizeProductInquiryLinks();
 
   if (document.body.classList.contains('home-page')) {
     const style = document.createElement('style');
