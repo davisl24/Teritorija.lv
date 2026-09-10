@@ -1,12 +1,208 @@
 # TERITORIJA — Link Audit
 
-Mērķis: pirms UI/UX lock pārbaudīt, ka produktu un partneru kartes ved uz pareizo nākamo soli un nav acīmredzamu dead-linku.
+Mērķis: fiksēt aktuālo produktu struktūru, partneru galamērķus un atlikušos browser QA punktus pirms `STRUCTURE + VISUAL CONTENT LOCK`.
 
-## ZANO
+## Pamatprincips
+
+Produktu navigācija tiek būvēta pēc lietotāja vajadzības, nevis pēc ražotāja vai materiāla.
+
+Gala patterns:
+
+`Kategorija → partneris / produkta tips → pilns lokālais klāsts tikai tad, ja tam ir reāla vērtība → citādi partnera uzturēts katalogs → projekta CTA`
+
+Papildu noteikumi:
+- kategorijas karte ved uz kategorijas lapu, nevis uz vienu konkrētu produktu;
+- ja lokālajā landingā ir tikai viens galamērķis un nav reālas izvēles, starplīmeni neveidojam;
+- saistītu produktu drīkst parādīt citā kontekstā, bet tam ir viena canonical mājvieta;
+- no gala kataloga nevedam atpakaļ uz veco TERITORIJA katalogu tikai tāpēc, lai parādītu pārējo klāstu;
+- neuzturam pilnu partnera kataloga kopiju, ja partneris pats to uztur labāk.
+
+## IA LOCK — 6 galvenās grupas
+
+1. Velo infrastruktūra
+2. Āra mēbeles
+3. Teritorijas labiekārtojums
+4. Rotaļu un atpūtas zonas
+5. Smart City un tehnoloģijas
+6. Materiālu risinājumi
+
+`produkti/index.html` rāda tikai šīs sešas grupas un visas sešas ved uz lokāliem TERITORIJA kategoriju landingiem.
+
+## Velo infrastruktūra
+
+Statuss: CODE/STRUCTURE PASS.
+
+Galvenie lokālie virzieni:
+- `produkti/velo-stativi/`
+- `produkti/velo-nojumes/`
+- `produkti/divu-limenu-novietnes/`
+- `produkti/velo-glabatuves/`
+- `produkti/velo-remonta-stacijas/`
+- `produkti/skrejritenu-stativi/`
+
+### Velo statīvi
+
+Partneru līmenis:
+- SAWO → lokāls `produkti/velo-stativi/sawo-modeli/`
+- ZANO → aktuālais Bicycle Racks katalogs
+- Govaplast → aktuālā Bicycle Stands kategorija
+
+SAWO lokālajā kataloga lapā:
+- BR101–BR123 visi saglabāti ar vizuāliem;
+- zem BR sērijas lokāli parādīti arī U-tipa, trapecveida, privāto teritoriju un moduļu virzieni;
+- vecais links no šīs gala lapas atpakaļ uz veco TERITORIJA SAWO katalogu ir noņemts.
+
+Pārējās velo dziļās lapas ir vienkāršotas līdz reprezentatīviem piemēriem, reālām izvēlēm un projekta CTA, nevis pilna kataloga kopijai.
+
+## Āra mēbeles
+
+Statuss: CODE/STRUCTURE PASS.
+
+Canonical apakšgrupas:
+- Soli un sēdvietas
+- Āra galdi
+- Piknika galdi un komplekti
+
+### Soli un sēdvietas
+
+Partneru līmenis:
+- ZANO
+- URBASTYLE
+- Govaplast
+- OUT-SIDER
+
+Lokāli tiek izcelti tikai tie konkrētie modeļi, kuriem ir labs vizuāls un lokāla produkta lapa. Pilnie katalogi paliek pie partneriem.
+
+## Teritorijas labiekārtojums
+
+Statuss: CODE/STRUCTURE PASS.
+
+Canonical apakšgrupas:
+- Atkritumu apsaimniekošana
+- Apzaļumošana un koku aizsardzība
+- Norobežojumi
+- Informācija un norādes
+- Apgaismojums
+
+### Atkritumu apsaimniekošana
+
+Ir reāli vizuāli un tieši katalogu galamērķi:
+- ZANO litter bins
+- ZANO recycling bins
+- ZANO dog waste bins
+- ZANO cigarette bins
+- URBASTYLE litter bins
+- Govaplast street garbage cans
+
+Projekta CTA: ir.
+
+### Apzaļumošana
+
+- Puķu kastes → lokāls canonical ceļš `Teritorijas labiekārtojums → Apzaļumošana → Puķu kastes`
+- ZANO koku sargi → partnera katalogs
+- URBASTYLE koku aizsardzība → partnera katalogs
+
+Vecais `Āra mēbeles → Puķu kastes` canonical ceļš vairs netiek izmantots jaunajā IA.
+
+### Puķu kastes
+
+Partneru līmenis augšā:
+- ZANO
+- URBASTYLE
+- Govaplast
+
+ZANO zemāk ir reprezentatīvi lokāli modeļi:
+- Universe 06.155.S
+- Quadro 06.176.XL
+- Scandik 06.046.S
+- Origami 06.460.2
+- Flash 06.025.M
+
+Pilnais ZANO planter katalogs paliek kā ārējais galamērķis.
+
+### Norobežojumi
+
+Vizuāli + katalogi:
+- ZANO bollards
+- ZANO fences
+- ZANO chains
+- ZANO traffic sign posts
+- URBASTYLE bollards
+- Govaplast bollards
+
+Projekta CTA: ir.
+
+### Informācija un norādes
+
+Vizuāli + katalogi:
+- ZANO information boards
+- URBASTYLE signage
+
+Projekta CTA: ir.
+
+### Apgaismojums
+
+Nav lieka lokāla starplīmeņa, ja galamērķis ir viens. Kategorija ved tieši uz atbilstošo partnera risinājumu.
+
+## Rotaļu un atpūtas zonas
+
+Statuss: CODE/STRUCTURE PASS.
+
+Galvenie virzieni:
+- Rotaļu laukumi un aktivitāšu elementi
+- Atpūtas zonu papildrisinājumi
+
+### Rotaļu laukumi
+
+Partneru līmenis:
+- FreeKids → aktuālais Playgrounds katalogs
+- Govaplast Play → drošais hostētais Play brochure PDF
+
+Projekta CTA: ir.
+
+### Atpūtas zonu papildrisinājumi
+
+- URBASTYLE publiskie grili
+- Piknika galdi kā saistīts cross-link uz canonical `Āra mēbeles → Piknika galdi`
+
+Projekta CTA: ir.
+
+## Smart City un tehnoloģijas
+
+Statuss: CODE/STRUCTURE PASS.
+
+Galvenajā lapā tikai divi reāli virzieni:
+- Solārā uzlāde un enerģija → ZANO Solar Charging Stations
+- Savienojamība un digitālās funkcijas → ZANO Smart City
+
+Viedie soli netiek dublēti kā otra canonical kategorija. Tie ir cross-link uz `Āra mēbeles → Soli un sēdvietas`.
+
+Agrākais savstarpējais Smart City apakšlapu loops ir noņemts.
+
+## Materiālu risinājumi
+
+Statuss: CODE/STRUCTURE PASS.
+
+Galvenie virzieni:
+- Pārstrādātas plastmasas materiāli → lokāls starplīmenis, jo ir vairāki pielietojumi
+- Betona konstrukcijas un atbalsta sienas → tieši URBASTYLE
+- HPL un dizaina materiāli → tieši OUT-SIDER
+
+### Pārstrādāta plastmasa
+
+Lokālajā materiālu lapā paliek tikai:
+- Govaplast Garden — dēļi, profili, terases
+- Govaplast Technic — tehniskās un atbalsta sistēmas
+
+Gatavie soli, urnas un velo statīvi paliek savās funkcionālajās kategorijās.
+
+## Partneru galamērķi
+
+### ZANO
 
 Statuss: VERIFIED.
 
-Pārbaudīti visi 21 Street Furniture kategoriju URL + Smart City:
+Pārbaudītas Street Furniture kategorijas un Smart City, tostarp:
 - benches
 - litter-bins
 - recycling-bins
@@ -30,181 +226,88 @@ Pārbaudīti visi 21 Street Furniture kategoriju URL + Smart City:
 - hand-sanitizer-stations
 - smart-city
 
-Secinājums: ZANO 22/22 kategoriju galamērķi ir aktuāli un kategoriju līmenī pareizi.
+### URBASTYLE
 
-Svarīga konsekvence: kategorijas kartei jāved uz kategorijas lapu, nevis uz vienu konkrētu produktu, ja vien karte pati nav konkrēts produkts.
+Statuss: VERIFIED.
 
-## URBASTYLE
+Aktīvi izmantotie galamērķi:
+- benches-all
+- planters
+- walls
+- tables
+- litter-bins
+- seats
+- bollards
+- all-collections
+- barbecue
+- tree-protection
+- signage
+- `/en/products`
 
-Statuss: VERIFIED pēc atkārtota publiskā kataloga audita.
+### Govaplast
 
-Repo izmantotie kategoriju galamērķi:
-- benches-all — VERIFIED
-- planters — VERIFIED
-- walls — VERIFIED
-- tables — VERIFIED
-- litter-bins — VERIFIED
-- seats — VERIFIED
-- bollards — VERIFIED
-- all-collections — VERIFIED
-- barbecue — VERIFIED
-- tree-protection — VERIFIED kā aktuāla Street Furniture kategorija
-- signage — VERIFIED kā aktuāla Street Furniture kategorija
-- /en/products — VERIFIED kā aktuālais URBASTYLE produktu root
+Aktīvi izmantotie galamērķi:
+- park benches
+- picnic tables
+- planters
+- garbage cans
+- bicycle stands
+- bollards
+- Garden
+- Technic retaining walls
 
-Papildu pārbaude: aktuālais URBASTYLE produktu root uzskaita gan `Tree protection`, gan `Signage`, un konkrētā `Tree grate Storm` produkta lapa atrodas zem `tree-protection`.
+Govaplast Play V1 izmanto drošo brochure PDF, nevis veco `?page_id=919` URL.
 
-## GOVAPLAST
+### FreeKids
 
-Pārbaudīti un strādā:
-- /street/street-furniture/park-benches/
-- /street/street-furniture/picknick-tables/
-- /street/street-furniture/street-planters-planter-recycled-plastic-street-furniture/
-- /street/street-furniture/street-garbage-cans/
-- /street/street-furniture/traffic-equipment/traffic/bycicle-stands/
-- /street/street-furniture/traffic-equipment/traffic/square-bollard/
-- /garden/
-- /technic/retaining-walls/
+- Playgrounds kategorija — VERIFIED.
 
-Govaplast Play:
-- vecais `https://www.govaplast.com/?page_id=919` vēl nav droši aizverams kā VERIFIED, jo tiešā fetch pārbaude dod cache miss;
-- aktuālajā Govaplast Street saturā ir rotaļu laukumiem paredzēti produkti, piemēram, `The Wave`, taču publiskajā indeksā neatradām skaidru jaunu vienotu `Playground furniture` kategorijas URL;
-- tāpēc V1 pagaidām neatstājam šo punktu kā "salabotu ar minējumu". Browser QA vēl nepieciešams, un IA posmā jāizlemj, vai Govaplast Play ir atsevišķa kategorija vai Govaplast produktu grupa zem `Rotaļu un aktīvās atpūtas risinājumi`.
+### OUT-SIDER
 
-## FreeKids
+- aktuālais domēns `outsiderfurniture.com`
+- urban furniture katalogs tiek izmantots HPL/dizaina un partnera virzieniem.
 
-- `https://freekids.pl/en/kategoria-produktu/playgrounds/` — VERIFIED; aktuālajā lapā ir pilnais Playgrounds katalogs.
-- produktu hub `Rotaļu laukumi` vairs neizlaiž TERITORIJA lokālo kategorijas lapu; tas ved uz `produkti/rotalu-laukumi/index.html`, un no turienes lietotājs var atvērt FreeKids pilno kategoriju.
+## Inquiry modelis
 
-## OUT-SIDER
+Vecais ecommerce tipa produktu grozs vairs nav galvenais UX modelis.
 
-Statuss: VERIFIED uz aktuālo domēnu.
+Aktuālais princips:
+- kategorija → `Pieteikt projektu` / `Saņemt konsultāciju`
+- konkrēts produkts → `Jautāt par šo modeli`
+- produkta vai kategorijas konteksts tiek padots formai
+- lietotājam nav pašam jāsaliek vairāku partneru grozs.
 
-- aktuālais produktu katalogs: `https://outsiderfurniture.com/urban-furniture/`
-- aktuālais downloads/resources: `https://outsiderfurniture.com/tools/download/`
-- repo code search uz `out-sider.dk` — 0 rezultātu;
-- jaunajās saitēs lietojam `outsiderfurniture.com` bez lieka redirecta.
+## Legacy lapas
 
-## SAWO / velo infrastruktūra
+Repo joprojām eksistē vecākas partner/material-first lapas, piemēram:
+- `produkti/betona-mebeles/`
+- `produkti/parstradata-plastmasa/`
 
-Lokālie galamērķi repo:
-- velo-stativi — local
-- velo-nojumes — local
-- divu-limenu-novietnes — local
-- velo-glabatuves — local
-- skrejritenu-stativi — local
+Tās nav jaunās sešu grupu IA canonical navigācijas daļa un ir `noindex`. Tās pagaidām netiek dzēstas, lai nesalauztu iespējamos vecos URL. Pirms publiska SEO/publish posma jāizlemj, vai tās kļūst par redirect/compatibility lapām.
 
-`Remonta stacijas` ir salabots: kategorijas karte tagad ved uz ZANO `bicycle-zone` kategoriju, nevis uz vienu Stilo produktu.
+## Pēdējais browser pass pirms lock
 
-## Lokālo route inventory
+Jāpārbauda tikai reālais pārlūka rezultāts, nevis jāatver jauns IA plānošanas aplis.
 
-Recursive repo tree audit apstiprina, ka eksistē galvenie lokālie galamērķi:
-- `/index.html`
-- `/produkti/index.html`
-- `/produkti/ara-mebeles/index.html`
-- `/produkti/ara-mebeles/soli/index.html`
-- `/produkti/ara-mebeles/puku-kastes/index.html`
-- `/produkti/betona-mebeles/index.html`
-- `/produkti/parstradata-plastmasa/index.html`
-- `/produkti/rotalu-laukumi/index.html`
-- `/produkti/velo-infrastruktura/index.html`
-- `/produkti/velo-stativi/index.html`
-- `/produkti/velo-nojumes/index.html`
-- `/produkti/divu-limenu-novietnes/index.html`
-- `/produkti/velo-glabatuves/index.html`
-- `/produkti/skrejritenu-stativi/index.html`
-- `/katalogi/index.html`
-- `/par-mums/index.html`
-- `/pieprasijums/index.html`
-- `/privatums/index.html`
+Galvenās ķēdes:
+1. `Produkti → Velo infrastruktūra → Velo statīvi → SAWO`
+2. `Produkti → Āra mēbeles → Soli un sēdvietas`
+3. `Produkti → Teritorijas labiekārtojums → Atkritumu apsaimniekošana`
+4. `Produkti → Teritorijas labiekārtojums → Apzaļumošana → Puķu kastes`
+5. `Produkti → Teritorijas labiekārtojums → Norobežojumi`
+6. `Produkti → Teritorijas labiekārtojums → Informācija un norādes`
+7. `Produkti → Rotaļu un atpūtas zonas → Rotaļu laukumi`
+8. `Produkti → Smart City`
+9. `Produkti → Materiālu risinājumi → Pārstrādāta plastmasa`
 
-Atrasts un salabots IA/route mismatch:
-- `Produkti → Rotaļu laukumi` iepriekš veda tieši uz ārējo FreeKids root, lai gan repo jau eksistēja lokāla TERITORIJA rotaļu laukumu kategorijas lapa.
-- Tagad produkta hub karte ved uz lokālo `rotalu-laukumi` lapu.
+PASS kritēriji:
+- nav loopu;
+- nav tukšu vai acīmredzami nepareizu vizuāļu;
+- nākamais klikšķis turpina lietotāja nodomu;
+- nav nejaušas atgriešanās vecajā partner-first IA;
+- breadcrumbs saglabā kontekstu;
+- partnera katalogs tiek atvērts tikai tajā līmenī, kur tas jau ir jēgpilns gala solis.
 
-Rotaļu laukumu lokālajā lapā arī pievienots vienotais `Pieprasījums` count elements un `inquiry.js`, lai header funkcionalitāte neatšķirtos no pārējām galvenajām produktu lapām.
+Ja šie punkti ir PASS → `STRUCTURE + VISUAL CONTENT LOCK`.
 
-## Header / footer / breadcrumbs / CTA audit
-
-Pārbaudītajos galvenajos velo ceļos breadcrumbs ir loģiski: `Sākums → Produkti → Velo infrastruktūra → konkrētā apakškategorija`.
-
-Atrasts konkrēts konsekvences defekts:
-- `/produkti/velo-stativi/index.html` headerī `Pieprasījums` saitei nav `data-request-count` elementa, lai gan pārējās velo lapās tas ir;
-- pati BR produktu pievienošana strādā caur legacy fallback `top.js`, ko apstiprina browser screenshot ar BR104/BR108/BR112 pieprasījumā;
-- šo header izņēmumu jāizlīdzina pirms FUNCTIONALITY + CONTENT LOCK.
-
-Pārbaudīts `/produkti/velo-nojumes/index.html`:
-- header count ir;
-- breadcrumbs ir pareizi;
-- CTA ved uz pieprasījumu;
-- `inquiry.js` un `top.js` ir pieslēgti.
-
-## Katalogi
-
-- katalogu lapas lokālie `src` vāki eksistē repo `assets/images/katalogi/`;
-- ZANO on-line katalogs ved uz aktuālo ZANO Street Furniture catalogue root;
-- PDF `href` pašlaik ved uz vecās TERITORIJA hostētajiem PDF URL. `data-pdf-target` norāda nākotnes `/faili/...` ceļus, bet repo pašlaik nav `faili/` mapes; tas nav aktīvs broken-link defekts, jo pašreizējais `href` ir ārējais PDF URL un `catalog.js` šos `data-pdf-target` laukus neizmanto. Pirms gala publish jāizlemj, vai PDF paliek ārēji vai tiek migrēti lokāli.
-
-## Inquiry flow
-
-Browser screenshot audit:
-- produkti parādās pieprasījumā — PASS
-- produktu attēli parādās — PASS
-- header count parādās lapās, kur `data-request-count` eksistē — PASS
-- `Noņemt` pogas ir — PASS
-
-Koda audits `js/inquiry.js`:
-- `removeProduct(id)` izņem produktu no storage, atjauno header count, add-button state un pieprasījuma sarakstu — CODE PASS;
-- veiksmīga FormSubmit gadījumā `writeItems([])` iztīra produktus — CODE PASS;
-- `updateHeaderCount([])` paslēpj count — CODE PASS;
-- `form.reset()` atiestata formu — CODE PASS;
-- draft tiek dzēsts ar `clearInquiryDraft()` — CODE PASS;
-- FormSubmit recipient ir `einars@teritorija.lv` — CODE PASS.
-
-Vēl jāapstiprina browserī:
-- `Noņemt` reāli maina count, piemēram, 5 → 4;
-- FormSubmit saņēmēja aktivizācija/e-pasta piegāde;
-- pēc reāla successful submit saraksts un count vizuāli iztīrās.
-
-## IA / satura grupēšana — nākamais posms pēc audit lock
-
-UI/UX un vizuālo layout vēl nemainām.
-
-Pēc linku, satura un funkcionalitātes lock visu katalogu pārgrupējam pēc lietotāja vajadzības, nevis ražotāja. Darba karkass:
-
-- Velo infrastruktūra
-  - velo statīvi
-  - velo nojumes
-  - divu līmeņu novietnes
-  - velo glabātavas
-  - remonta stacijas
-  - skrejriteņu statīvi
-- Āra mēbeles
-  - soli un sēdvietas
-  - galdi un piknika galdi
-  - urnas un šķirošana
-  - puķu kastes
-- Teritorijas un apzaļumošanas elementi
-  - koku sargi
-  - stabi un norobežojumi
-  - žogi un ķēdes
-  - informācijas elementi
-- Rotaļu un aktīvās atpūtas risinājumi
-- Smart City / tehnoloģijas
-- Materiālu risinājumi
-  - betons
-  - pārstrādāta plastmasa
-  - HPL / dizaina materiāli
-
-Šis pagaidām ir darba karkass, nevis gala navigācija. Gala IA tiek fiksēta tikai pēc pilna inventory/content audita.
-
-## Nākamais audits
-
-1. Salabot `velo-stativi` header count konsekvenci.
-2. Turpināt detalizēto produktu lapu `href/src` un header/footer/breadcrumbs/CTA auditu.
-3. Browser QA Govaplast Play vecajam `?page_id=919`.
-4. Browser QA inquiry `Noņemt → count`.
-5. FormSubmit reālais successful submit tests.
-6. FUNCTIONALITY + CONTENT LOCK.
-7. Tad IA grupēšana.
-8. Tikai pēc IA lock — layout un UI/UX.
+Pēc lock: layout → UI/UX sistēma → browser review → polish.
