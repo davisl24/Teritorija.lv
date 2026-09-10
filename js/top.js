@@ -188,7 +188,7 @@
     });
   }
 
-  function replaceMediaWithPlaceholder(media, label = 'Attēls tiks pievienots') {
+  function replaceMediaWithPlaceholder(media, label = 'Attēls nav pieejams') {
     if (!media || media.classList.contains('is-image-placeholder')) return;
     media.classList.add('is-image-placeholder');
     media.replaceChildren();
@@ -200,18 +200,10 @@
 
   function normalizeCatalogImages() {
     document.querySelectorAll('.category-product-grid, .catalog-hub-grid').forEach((grid) => {
-      const seen = new Set();
       grid.querySelectorAll('.category-product-media, .catalog-hub-card').forEach((media) => {
         const img = media.querySelector('img');
         if (!img) return;
-        let src = img.getAttribute('src') || '';
-        try { src = new URL(src, window.location.href).href; } catch (error) {}
-        if (src && seen.has(src)) {
-          replaceMediaWithPlaceholder(media, 'Attēls tiks pievienots');
-          return;
-        }
-        if (src) seen.add(src);
-        img.addEventListener('error', () => replaceMediaWithPlaceholder(media, 'Attēls nav pieejams'), { once: true });
+        img.addEventListener('error', () => replaceMediaWithPlaceholder(media), { once: true });
       });
     });
   }
