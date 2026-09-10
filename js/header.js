@@ -29,7 +29,41 @@
     });
   }
 
+  function rootPrefix() {
+    const segments = window.location.pathname.replace(/\\/g, '/').split('/').filter(Boolean);
+    if (segments.length === 0) return './';
+    const last = segments[segments.length - 1];
+    const directoryDepth = /\.[a-z0-9]+$/i.test(last) ? segments.length - 1 : segments.length;
+    return directoryDepth > 0 ? '../'.repeat(directoryDepth) : './';
+  }
+
+  function remapLegacyCategoryLinks() {
+    const prefix = document.body.classList.contains('home-page') ? './' : rootPrefix();
+    const routes = {
+      'ara-mebeles': `${prefix}produkti/ara-mebeles/index.html`,
+      'velo-infrastruktura': `${prefix}produkti/velo-infrastruktura/index.html`,
+      'rotalu-laukumi': `${prefix}produkti/rotalu-laukumi/index.html`,
+      'parstradata-plastmasa': `${prefix}produkti/parstradata-plastmasa/index.html`
+    };
+
+    document.querySelectorAll('a[href*="produkti/index.html?category="]').forEach((link) => {
+      try {
+        const url = new URL(link.href, window.location.href);
+        const category = url.searchParams.get('category');
+        const target = routes[category];
+        if (!target) return;
+        link.href = target;
+        link.removeAttribute('target');
+        link.removeAttribute('rel');
+      } catch (error) {
+        return;
+      }
+    });
+  }
+
   ensureRequestCount();
+  remapLegacyCategoryLinks();
+
   window.addEventListener('storage', (event) => {
     if (event.key === STORAGE_KEY) ensureRequestCount();
   });
