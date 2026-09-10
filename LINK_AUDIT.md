@@ -118,11 +118,26 @@ Recursive repo tree audit apstiprina, ka eksistē galvenie lokālie galamērķi:
 - `/pieprasijums/index.html`
 - `/privatums/index.html`
 
-Atrasts un salabots pirmais IA/route mismatch:
+Atrasts un salabots IA/route mismatch:
 - `Produkti → Rotaļu laukumi` iepriekš veda tieši uz ārējo FreeKids root, lai gan repo jau eksistēja lokāla TERITORIJA rotaļu laukumu kategorijas lapa.
 - Tagad produkta hub karte ved uz lokālo `rotalu-laukumi` lapu.
 
 Rotaļu laukumu lokālajā lapā arī pievienots vienotais `Pieprasījums` count elements un `inquiry.js`, lai header funkcionalitāte neatšķirtos no pārējām galvenajām produktu lapām.
+
+## Header / footer / breadcrumbs / CTA audit
+
+Pārbaudītajos galvenajos velo ceļos breadcrumbs ir loģiski: `Sākums → Produkti → Velo infrastruktūra → konkrētā apakškategorija`.
+
+Atrasts konkrēts konsekvences defekts:
+- `/produkti/velo-stativi/index.html` headerī `Pieprasījums` saitei nav `data-request-count` elementa, lai gan pārējās velo lapās tas ir;
+- pati BR produktu pievienošana strādā caur legacy fallback `top.js`, ko apstiprina browser screenshot ar BR104/BR108/BR112 pieprasījumā;
+- šo header izņēmumu jāizlīdzina pirms FUNCTIONALITY + CONTENT LOCK.
+
+Pārbaudīts `/produkti/velo-nojumes/index.html`:
+- header count ir;
+- breadcrumbs ir pareizi;
+- CTA ved uz pieprasījumu;
+- `inquiry.js` un `top.js` ir pieslēgti.
 
 ## Katalogi
 
@@ -135,19 +150,27 @@ Rotaļu laukumu lokālajā lapā arī pievienots vienotais `Pieprasījums` count
 Browser screenshot audit:
 - produkti parādās pieprasījumā — PASS
 - produktu attēli parādās — PASS
-- header count parādās — PASS
+- header count parādās lapās, kur `data-request-count` eksistē — PASS
 - `Noņemt` pogas ir — PASS
 
-Vēl jāpārbauda browserī:
-- `Noņemt` samazina count
-- FormSubmit pēc aktivizācijas
-- veiksmīga submit laikā saraksts un count tiek iztīrīti
+Koda audits `js/inquiry.js`:
+- `removeProduct(id)` izņem produktu no storage, atjauno header count, add-button state un pieprasījuma sarakstu — CODE PASS;
+- veiksmīga FormSubmit gadījumā `writeItems([])` iztīra produktus — CODE PASS;
+- `updateHeaderCount([])` paslēpj count — CODE PASS;
+- `form.reset()` atiestata formu — CODE PASS;
+- draft tiek dzēsts ar `clearInquiryDraft()` — CODE PASS;
+- FormSubmit recipient ir `einars@teritorija.lv` — CODE PASS.
+
+Vēl jāapstiprina browserī:
+- `Noņemt` reāli maina count, piemēram, 5 → 4;
+- FormSubmit saņēmēja aktivizācija/e-pasta piegāde;
+- pēc reāla successful submit saraksts un count vizuāli iztīrās.
 
 ## IA / satura grupēšana — nākamais posms pēc audit lock
 
 UI/UX un vizuālo layout vēl nemainām.
 
-Pēc linku, satura un funkcionalitātes lock visu katalogu pārgrupējam pēc lietotāja vajadzības, nevis ražotāja. Piemērs:
+Pēc linku, satura un funkcionalitātes lock visu katalogu pārgrupējam pēc lietotāja vajadzības, nevis ražotāja. Darba karkass:
 
 - Velo infrastruktūra
   - velo statīvi
@@ -177,10 +200,11 @@ Pēc linku, satura un funkcionalitātes lock visu katalogu pārgrupējam pēc li
 
 ## Nākamais audits
 
-1. Turpināt lokālo `href/src` ceļu auditu pa atlikušajām detalizētajām produktu lapām.
-2. Pārbaudīt header, footer, breadcrumbs un CTA konsekvenci visās galvenajās lapās.
+1. Salabot `velo-stativi` header count konsekvenci.
+2. Turpināt detalizēto produktu lapu `href/src` un header/footer/breadcrumbs/CTA auditu.
 3. Browser QA Govaplast Play vecajam `?page_id=919`.
-4. Inquiry: `Noņemt` → count, FormSubmit, successful reset.
-5. FUNCTIONALITY + CONTENT LOCK.
-6. Tad IA grupēšana.
-7. Tikai pēc IA lock — layout un UI/UX.
+4. Browser QA inquiry `Noņemt → count`.
+5. FormSubmit reālais successful submit tests.
+6. FUNCTIONALITY + CONTENT LOCK.
+7. Tad IA grupēšana.
+8. Tikai pēc IA lock — layout un UI/UX.
