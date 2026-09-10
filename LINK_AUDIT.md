@@ -36,6 +36,8 @@ Svarīga konsekvence: kategorijas kartei jāved uz kategorijas lapu, nevis uz vi
 
 ## URBASTYLE
 
+Statuss: VERIFIED pēc atkārtota publiskā kataloga audita.
+
 Repo izmantotie kategoriju galamērķi:
 - benches-all — VERIFIED
 - planters — VERIFIED
@@ -46,11 +48,11 @@ Repo izmantotie kategoriju galamērķi:
 - bollards — VERIFIED
 - all-collections — VERIFIED
 - barbecue — VERIFIED
-- tree-protection — BROWSER QA
-- signage — BROWSER QA
-- /en/products — BROWSER QA
+- tree-protection — VERIFIED kā aktuāla Street Furniture kategorija
+- signage — VERIFIED kā aktuāla Street Furniture kategorija
+- /en/products — VERIFIED kā aktuālais URBASTYLE produktu root
 
-Piezīme: pēdējiem trim web audita rīks atdeva cache miss, nevis pierādītu 404. Tāpēc tos nedrīkst saukt par dead linkiem bez browser QA.
+Papildu pārbaude: aktuālais URBASTYLE produktu root uzskaita gan `Tree protection`, gan `Signage`, un konkrētā `Tree grate Storm` produkta lapa atrodas zem `tree-protection`.
 
 ## GOVAPLAST
 
@@ -65,8 +67,9 @@ Pārbaudīti un strādā:
 - /technic/retaining-walls/
 
 Govaplast Play:
-- `https://www.govaplast.com/?page_id=919` ir saite, ko joprojām izmanto pats aktuālais Govaplast menu `Playground furniture`.
-- Web audita rīks to neatvēra cache miss dēļ; browser QA vēl vajadzīgs.
+- vecais `https://www.govaplast.com/?page_id=919` vēl nav droši aizverams kā VERIFIED, jo tiešā fetch pārbaude dod cache miss;
+- aktuālajā Govaplast Street saturā ir rotaļu laukumiem paredzēti produkti, piemēram, `The Wave`, taču publiskajā indeksā neatradām skaidru jaunu vienotu `Playground furniture` kategorijas URL;
+- tāpēc V1 pagaidām neatstājam šo punktu kā "salabotu ar minējumu". Browser QA vēl nepieciešams, un IA posmā jāizlemj, vai Govaplast Play ir atsevišķa kategorija vai Govaplast produktu grupa zem `Rotaļu un aktīvās atpūtas risinājumi`.
 
 ## FreeKids
 
@@ -74,8 +77,12 @@ Govaplast Play:
 
 ## OUT-SIDER
 
-- vecais `https://out-sider.dk/en/` korekti redirectē uz `https://outsiderfurniture.com/`.
-- V1 rekomendācija: jaunās saites turpmāk rakstīt uz `outsiderfurniture.com`, lai nebūtu lieks redirects.
+Statuss: VERIFIED uz aktuālo domēnu.
+
+- aktuālais produktu katalogs: `https://outsiderfurniture.com/urban-furniture/`
+- aktuālais downloads/resources: `https://outsiderfurniture.com/tools/download/`
+- repo code search uz `out-sider.dk` — 0 rezultātu;
+- jaunajās saitēs lietojam `outsiderfurniture.com` bez lieka redirecta.
 
 ## SAWO / velo infrastruktūra
 
@@ -86,9 +93,7 @@ Lokālie galamērķi repo:
 - velo-glabatuves — local
 - skrejritenu-stativi — local
 
-Atsevišķa piezīme:
-- `Remonta stacijas` pašlaik ved uz konkrētu ZANO Stilo 18.048 produkta URL.
-- Konsekventāk ar pārējo IA būtu vest uz verificēto `https://www.zano-streetfurniture.com/street-furniture/catalogue/bicycle-zone` kategoriju, jo pati karte ir kategorija, nevis konkrēts modelis.
+`Remonta stacijas` ir salabots: kategorijas karte tagad ved uz ZANO `bicycle-zone` kategoriju, nevis uz vienu Stilo produktu.
 
 ## Inquiry flow
 
@@ -103,10 +108,44 @@ Vēl jāpārbauda browserī:
 - FormSubmit pēc aktivizācijas
 - veiksmīga submit laikā saraksts un count tiek iztīrīti
 
+## IA / satura grupēšana — nākamais posms pēc audit lock
+
+UI/UX un vizuālo layout vēl nemainām.
+
+Pēc linku, satura un funkcionalitātes lock visu katalogu pārgrupējam pēc lietotāja vajadzības, nevis ražotāja. Piemērs:
+
+- Velo infrastruktūra
+  - velo statīvi
+  - velo nojumes
+  - divu līmeņu novietnes
+  - velo glabātavas
+  - remonta stacijas
+  - skrejriteņu statīvi
+- Āra mēbeles
+  - soli un sēdvietas
+  - galdi un piknika galdi
+  - urnas un šķirošana
+  - puķu kastes
+- Teritorijas un apzaļumošanas elementi
+  - koku sargi
+  - stabi un norobežojumi
+  - žogi un ķēdes
+  - informācijas elementi
+- Rotaļu un aktīvās atpūtas risinājumi
+- Smart City / tehnoloģijas
+- Materiālu risinājumi
+  - betons
+  - pārstrādāta plastmasa
+  - HPL / dizaina materiāli
+
+Šis pagaidām ir darba karkass, nevis gala navigācija. Gala IA tiek fiksēta tikai pēc pilna inventory/content audita.
+
 ## Nākamais audits
 
-1. Browser QA URBASTYLE `tree-protection`, `signage`, `/en/products`.
-2. Browser QA Govaplast Play `?page_id=919`.
-3. Mainīt SAWO `Remonta stacijas` category card uz ZANO `bicycle-zone` kategoriju.
-4. Pārbaudīt footer/navigation lokālos ceļus un atlikušos vecos `?category=` linkus.
-5. Pēc tam FUNCTIONALITY + CONTENT LOCK.
+1. Pārbaudīt lokālos `href/src` ceļus pret reāli eksistējošiem repo failiem.
+2. Pārbaudīt header, footer, breadcrumbs un CTA visās galvenajās lapās.
+3. Browser QA Govaplast Play vecajam `?page_id=919`.
+4. Inquiry: `Noņemt` → count, FormSubmit, successful reset.
+5. FUNCTIONALITY + CONTENT LOCK.
+6. Tad IA grupēšana.
+7. Tikai pēc IA lock — layout un UI/UX.
