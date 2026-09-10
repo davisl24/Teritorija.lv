@@ -5,6 +5,7 @@
   const DRAFT_STORAGE_KEY = 'teritorijaInquiryDraft';
   const DRAFT_MAX_AGE = 24 * 60 * 60 * 1000;
   const DRAFT_FIELDS = ['contact', 'email', 'phone', 'location', 'description'];
+  const FORM_RECIPIENT = 'einars@teritorija.lv';
   const memoryState = { items: [] };
   let storageAvailable = true;
   let draftSaveTimer = null;
@@ -145,11 +146,13 @@
   }
 
   function productFromButton(button) {
+    const card = button.closest('.bench-card, .category-product-card, .featured-product');
+    const cardImage = card?.querySelector('img')?.src || '';
     return normalizeItem({
       id: button.dataset.productId,
       name: button.dataset.productName,
       manufacturer: button.dataset.productManufacturer,
-      image: button.dataset.productImage || ''
+      image: button.dataset.productImage || cardImage
     });
   }
 
@@ -282,6 +285,8 @@
 
     const payload = prepareFormPayload(form);
     const formSubmitPayload = {
+      name: payload.contact,
+      email: payload.email,
       'Vārds / uzņēmums': payload.contact,
       'E-pasts': payload.email,
       'Tālrunis': payload.phone,
@@ -303,7 +308,7 @@
     if (status) status.textContent = 'Nosūta pieprasījumu…';
 
     try {
-      const response = await fetch('https://formsubmit.co/ajax/davislocs135@gmail.com', {
+      const response = await fetch(`https://formsubmit.co/ajax/${FORM_RECIPIENT}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify(formSubmitPayload)
@@ -312,7 +317,7 @@
       let result = null;
       try { result = await response.json(); } catch (error) { result = null; }
       if (!response.ok || !result || result.success !== 'true' && result.success !== true) {
-        throw new Error(result && result.message ? result.message : 'FormSubmit request failed');
+        throw new Error(result && result.message ? String(result.message) : 'FormSubmit request failed');
       }
 
       writeItems([]);
@@ -324,7 +329,12 @@
       syncHiddenProducts([]);
       if (status) status.textContent = 'Pieprasījums veiksmīgi nosūtīts. Paldies!';
     } catch (error) {
-      if (status) status.textContent = 'Neizdevās nosūtīt pieprasījumu. Lūdzu, mēģiniet vēlreiz.';
+      const message = String(error && error.message ? error.message : '');
+      if (/activat|confirm/i.test(message)) {
+        if (status) status.textContent = 'Forma vēl jāaktivizē saņēmēja e-pastā. Pārbaudiet einars@teritorija.lv iesūtni un apstipriniet FormSubmit aktivizācijas e-pastu.';
+      } else if (status) {
+        status.textContent = 'Neizdevās nosūtīt pieprasījumu. Lūdzu, mēģiniet vēlreiz.';
+      }
     } finally {
       if (submitButton) submitButton.disabled = false;
     }
