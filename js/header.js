@@ -1,40 +1,12 @@
 (() => {
   'use strict';
 
-  const STORAGE_KEY = 'teritorijaInquiry';
-
-  function readInquiryCount() {
-    try {
-      const raw = window.localStorage.getItem(STORAGE_KEY);
-      const parsed = raw ? JSON.parse(raw) : [];
-      return Array.isArray(parsed) ? parsed.filter(Boolean).length : 0;
-    } catch (error) {
-      return 0;
-    }
-  }
-
   function rootPrefix() {
     const segments = window.location.pathname.replace(/\\/g, '/').split('/').filter(Boolean);
     if (segments.length === 0) return './';
     const last = segments[segments.length - 1];
     const directoryDepth = /\.[a-z0-9]+$/i.test(last) ? segments.length - 1 : segments.length;
     return directoryDepth > 0 ? '../'.repeat(directoryDepth) : './';
-  }
-
-  function ensureRequestCount() {
-    document.querySelectorAll('a.request-link[href*="pieprasijums"]').forEach((link) => {
-      let counter = link.querySelector('[data-request-count]');
-      if (!counter) {
-        counter = document.createElement('span');
-        counter.className = 'request-count';
-        counter.dataset.requestCount = '';
-        link.append(' ', counter);
-      }
-
-      const count = readInquiryCount();
-      counter.textContent = String(count);
-      counter.hidden = count === 0;
-    });
   }
 
   function normalizeHeaderLinks() {
@@ -55,6 +27,8 @@
 
     document.querySelectorAll('a.request-link').forEach((link) => {
       link.href = `${prefix}pieprasijums/index.html`;
+      link.querySelectorAll('[data-request-count], .request-count').forEach((counter) => counter.remove());
+      if (!link.textContent.trim()) link.textContent = 'Pieprasījums';
     });
   }
 
@@ -136,11 +110,6 @@
   normalizeHeaderLinks();
   remapLegacyCategoryLinks();
   normalizeFooter();
-  ensureRequestCount();
-
-  window.addEventListener('storage', (event) => {
-    if (event.key === STORAGE_KEY) ensureRequestCount();
-  });
 
   if (document.body.classList.contains('home-page')) return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
