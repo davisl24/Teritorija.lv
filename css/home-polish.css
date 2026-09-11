@@ -63,32 +63,34 @@
 .home-page .nv-gallery.is-revealed .nv-gallery-item{opacity:1;transform:none}
 .home-page .nv-gallery.is-revealed .nv-gallery-item:nth-child(2){transition-delay:.08s}.home-page .nv-gallery.is-revealed .nv-gallery-item:nth-child(3){transition-delay:.16s}.home-page .nv-gallery.is-revealed .nv-gallery-item:nth-child(4){transition-delay:.24s}
 
-/* Process — animated timeline instead of four dead boxes */
-.home-page .nv-process{padding:96px 0 104px!important;background:var(--nv-olive)!important}
-.home-page .nv-process>.nv-shell>h2{margin-bottom:52px!important}
+/* Process — white editorial timeline */
+.home-page .nv-process{padding:96px 0 104px!important;background:#fff!important;color:var(--nv-ink)!important;border-top:1px solid #eceeea!important}
+.home-page .nv-process>.nv-shell>h2{margin-bottom:52px!important;color:var(--nv-ink)!important}
 .home-page .nv-process-list{position:relative!important;display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;border-top:0!important;gap:0}
-.home-page .nv-process-list::before,.home-page .nv-process-list::after{content:"";position:absolute;left:0;right:0;top:16px;height:1px;background:rgba(255,255,255,.18)}
-.home-page .nv-process-list::after{right:auto;width:0;background:#fff;transition:width 1.4s cubic-bezier(.22,.61,.36,1)}
+.home-page .nv-process-list::before,.home-page .nv-process-list::after{content:"";position:absolute;left:0;right:0;top:16px;height:1px;background:#dfe3dd}
+.home-page .nv-process-list::after{right:auto;width:0;background:var(--nv-olive);transition:width 1.4s cubic-bezier(.22,.61,.36,1)}
 .home-page .nv-process.is-revealed .nv-process-list::after{width:100%}
-.home-page .nv-process-list details{position:relative;border:0!important;border-right:0!important;padding-top:32px;opacity:.35;transform:translateY(10px);transition:opacity .45s ease,transform .45s ease}
-.home-page .nv-process-list details::before{content:"";position:absolute;top:10px;left:20px;width:13px;height:13px;border:2px solid rgba(255,255,255,.42);border-radius:50%;background:var(--nv-olive);transition:background .3s ease,border-color .3s ease,transform .3s ease}
+.home-page .nv-process-list details{position:relative;border:0!important;border-right:0!important;padding-top:32px;opacity:.42;transform:translateY(10px);transition:opacity .45s ease,transform .45s ease}
+.home-page .nv-process-list details::before{content:"";position:absolute;top:10px;left:20px;width:13px;height:13px;border:2px solid #aeb7ad;border-radius:50%;background:#fff;transition:background .3s ease,border-color .3s ease,transform .3s ease}
 .home-page .nv-process-list details.is-active,.home-page .nv-process-list details[open]{opacity:1;transform:none}
-.home-page .nv-process-list details.is-active::before,.home-page .nv-process-list details[open]::before{background:#fff;border-color:#fff;transform:scale(1.05)}
-.home-page .nv-process-list summary{min-height:120px!important;padding:16px 20px!important;cursor:pointer!important}
-.home-page .nv-process-list summary>span{margin-bottom:16px!important}
+.home-page .nv-process-list details.is-active::before,.home-page .nv-process-list details[open]::before{background:var(--nv-olive);border-color:var(--nv-olive);transform:scale(1.05)}
+.home-page .nv-process-list summary{min-height:120px!important;padding:16px 20px!important;cursor:pointer!important;color:var(--nv-ink)!important}
+.home-page .nv-process-list summary>span{margin-bottom:16px!important;color:#82907f!important}
+.home-page .nv-process-list h3{color:var(--nv-ink)!important}
+.home-page .nv-process-list summary p{color:#7a8078!important}
 .home-page .nv-process-list summary b{display:none!important}
-.home-page .nv-process-detail{display:block!important;max-height:0;overflow:hidden;margin:0 20px;color:rgba(255,255,255,.68);font-size:.76rem;line-height:1.55;transition:max-height .45s ease,padding .45s ease,opacity .35s ease;opacity:0}
+.home-page .nv-process-detail{display:block!important;max-height:0;overflow:hidden;margin:0 20px;color:#666d65;font-size:.76rem;line-height:1.55;transition:max-height .45s ease,padding .45s ease,opacity .35s ease;opacity:0}
 .home-page .nv-process-list details[open] .nv-process-detail{max-height:140px;padding:0 0 22px;opacity:1}
 
-/* CTA — neutral field, centered, oval action */
-.home-page .nv-contact{padding:104px 0 110px!important;background:#f4f5f2!important;color:var(--nv-ink)!important;border-top:1px solid #e6e9e3!important}
+/* CTA — white neutral field, centered, oval action */
+.home-page .nv-contact{padding:104px 0 110px!important;background:#fff!important;color:var(--nv-ink)!important;border-top:1px solid #eceeea!important}
 .home-page .nv-contact-inner{display:flex!important;flex-direction:column!important;align-items:center!important;text-align:center!important;gap:28px!important}
 .home-page .nv-contact h2{color:var(--nv-ink)!important;font-size:clamp(2.5rem,4.4vw,4.8rem)!important;letter-spacing:-.05em!important}
 .home-page .nv-contact p{max-width:52ch!important;margin:14px auto 0!important;color:#70766e!important;font-size:.82rem!important}
 .home-page .nv-contact-button{min-width:0!important;padding:14px 24px!important;gap:36px!important;color:#fff!important;background:var(--nv-olive)!important;border:0!important;border-radius:999px!important;box-shadow:0 12px 30px rgba(36,55,44,.12);transition:transform .25s ease,box-shadow .25s ease}
 .home-page .nv-contact-button:hover{transform:translateY(-2px);box-shadow:0 18px 38px rgba(36,55,44,.17)}
 
-/* Footer — final darker block */
+/* Footer — only final darker block */
 .home-page .nv-footer{background:var(--nv-dark)!important;border-top:0!important}
 .home-page .nv-footer-brand>a{display:inline-block;text-decoration:none}
 .home-page .nv-footer-brand>a img{display:block;transition:opacity .2s ease,transform .2s ease}
@@ -102,7 +104,7 @@
   .home-page .nv-gallery-item:nth-child(even){margin-top:20px}
   .home-page .nv-process-list{display:block!important}
   .home-page .nv-process-list::before,.home-page .nv-process-list::after{display:none}
-  .home-page .nv-process-list details{padding-top:0;border-bottom:1px solid rgba(255,255,255,.16)!important}
+  .home-page .nv-process-list details{padding-top:0;border-bottom:1px solid #e6e9e3!important}
   .home-page .nv-process-list details::before{display:none}
 }
 @media(max-width:767px){
