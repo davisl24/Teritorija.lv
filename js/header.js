@@ -107,9 +107,20 @@
       </div>`;
   }
 
+  function loadHomepageMotion() {
+    if (!document.body.classList.contains('home-page')) return;
+    if (document.querySelector('script[data-home-motion]')) return;
+    const script = document.createElement('script');
+    script.src = './js/home-motion.js';
+    script.defer = true;
+    script.dataset.homeMotion = 'true';
+    document.head.appendChild(script);
+  }
+
   normalizeHeaderLinks();
   remapLegacyCategoryLinks();
   normalizeFooter();
+  loadHomepageMotion();
 
   if (document.body.classList.contains('home-page')) return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
