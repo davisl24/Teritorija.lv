@@ -15,17 +15,76 @@
 <body class="home-page">
 <a class="skip-link" href="#saturs">Pāriet uz saturu</a>
 <header class="nv-header">
-  <a class="nv-brand" href="./index.html" aria-label="Teritorija — sākumlapa"><img src="./assets/images/brand/teritorija-logo-light-268w.png" alt="Teritorija" width="268" height="105"></a>
-  <nav class="nv-nav" aria-label="Galvenā navigācija"><a href="./produkti/index.html">Produkti</a><a href="./katalogi/index.html">Katalogi</a><a href="./par-mums/index.html">Par mums</a><a class="nv-nav-cta" href="./pieprasijums/index.html">Pieprasījums</a></nav>
+  <a class="nv-brand" href="./index.html" aria-label="Teritorija — sākumlapa"><img src="./assets/images/brand/teritorija-logo-dark-268w.png" alt="Teritorija" width="268" height="105"></a>
+  <nav class="nv-nav" aria-label="Galvenā navigācija">
+    <a href="./produkti/index.html">Produkti</a>
+    <a href="./katalogi/index.html">Katalogi</a>
+    <a href="./par-mums/index.html">Par mums</a>
+    <a href="./pieprasijums/index.html">Pieprasījums</a>
+  </nav>
+  <a class="nv-header-cta" href="./pieprasijums/index.html">Sazināties <span>→</span></a>
 </header>
 <main id="saturs" tabindex="-1">
   <section class="nv-hero" aria-labelledby="nv-hero-title">
-    <picture class="nv-hero-media" aria-hidden="true"><source media="(max-width:767px)" srcset="./assets/images/hero/hero-mobile.png"><source media="(max-width:1024px)" srcset="./assets/images/hero/hero-tablet.png"><img src="./assets/images/hero/Hero-desktop.png" alt="" loading="eager" fetchpriority="high"></picture>
-    <div class="nv-hero-shade"></div>
+    <picture class="nv-hero-media" aria-hidden="true">
+      <source media="(max-width:767px)" srcset="./assets/images/hero/mobilel-hero.png">
+      <source media="(max-width:1024px)" srcset="./assets/images/hero/table-hero.png">
+      <img src="./assets/images/hero/desktop-hero.png" alt="" loading="eager" fetchpriority="high">
+    </picture>
     <div class="nv-hero-copy">
-      <h1 id="nv-hero-title">Labiekārtošanas elementi</h1>
-      <p>Āra mēbeles, velo infrastruktūra, rotaļu laukumi un citi risinājumi publiskai un privātai ārtelpai.</p>
-      <div class="nv-hero-actions"><a class="nv-button nv-button-primary" href="#risinajumi">Apskatīt risinājumus <span>→</span></a><a class="nv-button nv-button-secondary" href="./pieprasijums/index.html">Pieteikt projektu <span>↗</span></a></div>
+      <p class="nv-hero-kicker">Pārdomātas vides labākai rītdienai</p>
+      <h1 id="nv-hero-title"><span>Labiekārtošanas</span><em>elementi</em></h1>
+      <p class="nv-hero-lead">Āra mēbeles, velo infrastruktūra, rotaļu laukumi un ilgtspējīgi risinājumi mūsdienu videi.</p>
+      <div class="nv-hero-actions">
+        <a class="nv-button nv-button-primary" href="./katalogi/index.html">Skatīt katalogu <span>→</span></a>
+        <a class="nv-button nv-button-secondary" href="./pieprasijums/index.html">Pieteikt projektu <span>→</span></a>
+      </div>
+      <div class="nv-hero-trust" aria-label="Teritorija priekšrocības">
+        <div><span class="nv-trust-icon" aria-hidden="true">◌</span><p>Ilgtspējīgi<br>risinājumi</p></div>
+        <div><span class="nv-trust-icon" aria-hidden="true">◇</span><p>Eiropas<br>kvalitāte</p></div>
+        <div><span class="nv-trust-icon" aria-hidden="true">◎</span><p>Vide cilvēkiem</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="nv-hero-partners" aria-label="Mūsu partneri">
+    <div class="nv-hero-partner-track">
+      <a href="https://www.zano-streetfurniture.com/" target="_blank" rel="noopener noreferrer">ZANO</a>
+      <a href="https://www.urbastyle.com/" target="_blank" rel="noopener noreferrer">URBASTYLE</a>
+      <a href="https://sawo.com.pl/en/" target="_blank" rel="noopener noreferrer">SAWO</a>
+      <a href="https://www.govaplast.com/" target="_blank" rel="noopener noreferrer">GOVA PLAST</a>
+      <a href="https://freekids.pl/en/" target="_blank" rel="noopener noreferrer">FreeKids</a>
+      <a href="https://outsiderfurniture.com/" target="_blank" rel="noopener noreferrer">OUT-SIDER</a>
+      <a href="https://www.zano-streetfurniture.com/" target="_blank" rel="noopener noreferrer" aria-hidden="true">ZANO</a>
+      <a href="https://www.urbastyle.com/" target="_blank" rel="noopener noreferrer" aria-hidden="true">URBASTYLE</a>
+      <a href="https://sawo.com.pl/en/" target="_blank" rel="noopener noreferrer" aria-hidden="true">SAWO</a>
+      <a href="https://www.govaplast.com/" target="_blank" rel="noopener noreferrer" aria-hidden="true">GOVA PLAST</a>
+      <a href="https://freekids.pl/en/" target="_blank" rel="noopener noreferrer" aria-hidden="true">FreeKids</a>
+      <a href="https://outsiderfurniture.com/" target="_blank" rel="noopener noreferrer" aria-hidden="true">OUT-SIDER</a>
+    </div>
+  </section>
+
+  <nav class="nv-category-nav" aria-label="Produktu kategorijas">
+    <div class="nv-shell nv-category-nav-inner">
+      <a href="./produkti/ara-mebeles/index.html"><span class="nv-category-icon" aria-hidden="true">▱</span><span>Āra mēbeles</span></a>
+      <a href="./produkti/velo-infrastruktura/index.html"><span class="nv-category-icon" aria-hidden="true">◉</span><span>Velo infrastruktūra</span></a>
+      <a href="./produkti/rotalu-laukumi/index.html"><span class="nv-category-icon" aria-hidden="true">△</span><span>Rotaļu laukumi</span></a>
+      <a href="./produkti/parstradata-plastmasa/index.html"><span class="nv-category-icon" aria-hidden="true">◇</span><span>Zaļie risinājumi</span></a>
+      <a href="./produkti/index.html"><span class="nv-category-icon" aria-hidden="true">⊞</span><span>Citi risinājumi</span></a>
+    </div>
+  </nav>
+
+  <section class="nv-about nv-shell" aria-labelledby="about-title">
+    <div class="nv-about-copy">
+      <p class="nv-about-label">Par Teritorija.lv</p>
+      <h2 id="about-title">Vērtīgākas ārtelpas cilvēkiem</h2>
+      <p>Mēs ticam, ka labi veidota ārtelpa iedvesmo, vieno cilvēkus un padara pilsētas un kopienas dzīvojamākas. Teritorija.lv nodrošina kvalitatīvus, ilgtspējīgus un pārdomātus labiekārtošanas risinājumus no vadošiem Eiropas ražotājiem.</p>
+      <a class="nv-about-cta" href="./par-mums/index.html">Uzzināt vairāk <span>→</span></a>
+    </div>
+    <div class="nv-about-media">
+      <img src="./assets/images/products/aplveida-soli.jpg" alt="Teritorija āra mēbeles publiskā vidē" loading="lazy">
+      <div class="nv-about-note">Ilgtspējīgi risinājumi<br>dzīvākām pilsētām</div>
+      <div class="nv-about-pager" aria-hidden="true"><span>01</span><span>02</span><span>03</span></div>
     </div>
   </section>
 
