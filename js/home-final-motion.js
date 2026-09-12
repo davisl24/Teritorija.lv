@@ -4,192 +4,187 @@
 
   const desktop = window.matchMedia('(min-width: 1025px)').matches;
 
-  function injectStyles() {
-    if (document.querySelector('style[data-home-final-motion]')) return;
-    const style = document.createElement('style');
-    style.dataset.homeFinalMotion = 'true';
-    style.textContent = `
-      .home-page .nv-hero-partner-track{
-        animation:nvTopPartners 20s linear infinite!important;
-        animation-play-state:running!important;
-        will-change:transform;
-      }
-      .home-page .nv-hero-partners:hover .nv-hero-partner-track{
-        animation-play-state:running!important;
-      }
-      @keyframes nvTopPartners{
-        from{transform:translate3d(0,0,0)}
-        to{transform:translate3d(-50%,0,0)}
-      }
+  function ensureStyles() {
+    if (document.querySelector('link[data-home-stabilize]')) return;
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = './css/home-stabilize.css?v=1';
+    link.dataset.homeStabilize = 'true';
+    document.head.appendChild(link);
+  }
 
-      @media (min-width:1025px){
-        .home-page .nv-solution-card{
-          transition:border-color .3s ease,box-shadow .3s ease,transform .38s cubic-bezier(.22,.61,.36,1);
-        }
-        .home-page .nv-solution-card:hover,
-        .home-page .nv-solution-card:focus-within{
-          transform:translateY(-5px);
-          box-shadow:0 22px 52px rgba(20,28,22,.09);
-        }
-        .home-page .nv-solution-card .nv-solution-media img{
-          transition:transform .65s cubic-bezier(.22,.61,.36,1),filter .45s ease;
-        }
-        .home-page .nv-solution-card:hover .nv-solution-media img,
-        .home-page .nv-solution-card:focus-within .nv-solution-media img{
-          transform:scale(1.035);
-        }
-        .home-page .nv-gallery-item img{
-          transition:transform .7s cubic-bezier(.22,.61,.36,1),filter .45s ease;
-        }
-        .home-page .nv-gallery-item:hover img{transform:scale(1.025)}
-        .home-page .nv-gallery-item>div{transition:transform .35s ease}
-        .home-page .nv-gallery-item:hover>div{transform:translateY(-3px)}
-        .home-page .nv-contact-button span,
-        .home-page .nv-text-link span{transition:transform .25s ease}
-        .home-page .nv-contact-button:hover span,
-        .home-page .nv-text-link:hover span{transform:translateX(4px)}
-      }
-    `;
-    document.head.appendChild(style);
+  function setResponsiveHero() {
+    const picture = document.querySelector('.nv-hero-media');
+    if (!picture) return;
+
+    const sources = picture.querySelectorAll('source');
+    if (sources[0]) sources[0].srcset = './assets/images/hero/Hero-mobile.png';
+    if (sources[1]) sources[1].srcset = './assets/images/hero/Hero-tablet.png';
+
+    const img = picture.querySelector('img');
+    if (!img) return;
+    img.src = './assets/images/hero/Hero-desktop.png';
+    img.loading = 'eager';
+    img.decoding = 'async';
+    img.setAttribute('fetchpriority', 'high');
+
+    if (!document.querySelector('link[data-hero-preload]')) {
+      const preload = document.createElement('link');
+      preload.rel = 'preload';
+      preload.as = 'image';
+      preload.href = './assets/images/hero/Hero-desktop.png';
+      preload.dataset.heroPreload = 'true';
+      document.head.appendChild(preload);
+    }
   }
 
   function animateIn(el, delay = 0, distance = 24, duration = 720) {
-    if (!el || !desktop) return;
+    if (!el || !desktop || typeof el.animate !== 'function') return;
+    el.animate([
+      { opacity: 0, transform: `translate3d(0,${distance}px,0)` },
+      { opacity: 1, transform: 'translate3d(0,0,0)' }
+    ], {
+      duration,
+      delay,
+      easing: 'cubic-bezier(.22,.61,.36,1)',
+      fill: 'both'
+    });
+  }
 
-    if (typeof el.animate === 'function') {
-      el.animate(
-        [
-          { opacity: 0, transform: `translate3d(0,${distance}px,0)` },
-          { opacity: 1, transform: 'translate3d(0,0,0)' }
-        ],
-        {
-          duration,
-          delay,
-          easing: 'cubic-bezier(.22,.61,.36,1)',
-          fill: 'both'
-        }
-      );
+  function setupReveal(selector, childSelector, stagger = 90) {
+    if (!desktop) return;
+    const section = document.querySelector(selector);
+    if (!section) return;
+    const items = childSelector ? Array.from(section.querySelectorAll(childSelector)) : [section];
+    if (!items.length) return;
+
+    const run = () => items.forEach((el, index) => animateIn(el, index * stagger));
+    if (!('IntersectionObserver' in window)) {
+      run();
       return;
     }
 
-    el.style.opacity = '0';
-    el.style.transform = `translate3d(0,${distance}px,0)`;
-    el.style.transition = `opacity ${duration}ms cubic-bezier(.22,.61,.36,1) ${delay}ms, transform ${duration}ms cubic-bezier(.22,.61,.36,1) ${delay}ms`;
-    requestAnimationFrame(() => requestAnimationFrame(() => {
-      el.style.opacity = '1';
-      el.style.transform = 'translate3d(0,0,0)';
-    }));
+    const observer = new IntersectionObserver((entries) => {
+      if (!entries.some((entry) => entry.isIntersecting)) return;
+      run();
+      observer.disconnect();
+    }, { threshold: .08, rootMargin: '0px 0px -8% 0px' });
+
+    observer.observe(section);
+  }
+
+  function startEndlessTrack(track, speedPxPerSecond) {
+    if (!track || !desktop || track.dataset.endlessReady === 'true') return;
+    track.dataset.endlessReady = 'true';
+
+    let offset = 0;
+    let last = performance.now();
+    let paused = false;
+    let loopWidth = 0;
+    let frame = 0;
+
+    const measure = () => {
+      const total = track.scrollWidth;
+      loopWidth = total > 0 ? total / 2 : 0;
+    };
+
+    const tick = (now) => {
+      const dt = Math.min((now - last) / 1000, .05);
+      last = now;
+
+      if (!paused && loopWidth > 0) {
+        offset += speedPxPerSecond * dt;
+        if (offset >= loopWidth) offset -= loopWidth;
+        track.style.transform = `translate3d(${-offset}px,0,0)`;
+      }
+      frame = requestAnimationFrame(tick);
+    };
+
+    const pause = () => { paused = true; };
+    const resume = () => { paused = false; last = performance.now(); };
+
+    const container = track.parentElement;
+    container?.addEventListener('mouseenter', pause);
+    container?.addEventListener('mouseleave', resume);
+    container?.addEventListener('focusin', pause);
+    container?.addEventListener('focusout', resume);
+
+    window.addEventListener('resize', measure, { passive: true });
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) pause();
+      else resume();
+    });
+
+    measure();
+    requestAnimationFrame(() => {
+      measure();
+      last = performance.now();
+      frame = requestAnimationFrame(tick);
+    });
+
+    track.addEventListener('DOMNodeRemoved', () => cancelAnimationFrame(frame), { once: true });
+  }
+
+  function setupContinuousMotion() {
+    startEndlessTrack(document.querySelector('.nv-hero-partner-track'), 42);
+    startEndlessTrack(document.querySelector('.nv-proof-track'), 30);
+  }
+
+  function resetCTA() {
+    const inner = document.querySelector('.nv-contact-inner');
+    if (!inner || inner.dataset.centeredReady === 'true') return;
+    inner.dataset.centeredReady = 'true';
+    inner.innerHTML = `
+      <p class="nv-contact-eyebrow">Nākamais solis</p>
+      <h2>Sāksim ar projektu</h2>
+      <p>Pastāsti par vietu, vajadzību un termiņu — palīdzēsim piemeklēt piemērotu risinājumu un sagatavot piedāvājumu.</p>
+      <p class="nv-contact-support">Sākam ar īsu sarunu un skaidru nākamo soli.</p>
+      <a class="nv-contact-button nv-coherent-cta" href="./pieprasijums/index.html">Pieteikt projektu <span>↗</span></a>`;
+  }
+
+  function normalizeImageDimensions() {
+    document.querySelectorAll('img[loading="lazy"]').forEach((img) => {
+      const apply = () => {
+        if (!img.hasAttribute('width') && img.naturalWidth) img.setAttribute('width', String(img.naturalWidth));
+        if (!img.hasAttribute('height') && img.naturalHeight) img.setAttribute('height', String(img.naturalHeight));
+      };
+      if (img.complete) apply();
+      else img.addEventListener('load', apply, { once: true });
+    });
   }
 
   function animateHero() {
+    if (!desktop) return;
     const hero = document.querySelector('.nv-hero');
-    if (!hero || !desktop) return;
-
-    const targets = [
+    if (!hero) return;
+    [
       hero.querySelector('.nv-hero-kicker'),
       hero.querySelector('h1'),
       hero.querySelector('.nv-hero-lead'),
       hero.querySelector('.nv-hero-actions'),
       hero.querySelector('.nv-hero-trust')
-    ].filter(Boolean);
-
-    const delays = [60, 180, 330, 470, 620];
-    targets.forEach((el, i) => animateIn(el, delays[i], 28, i === 1 ? 900 : 760));
-  }
-
-  function observeWhyStory() {
-    const section = document.querySelector('.nv-about--story');
-    if (!section || !desktop) return;
-
-    const label = section.querySelector('.nv-about-label');
-    const heading = section.querySelector('h2');
-    const lead = section.querySelector('.nv-why-lead');
-    const cta = section.querySelector('.nv-about-cta');
-    const benefits = Array.from(section.querySelectorAll('.nv-why-item'));
-    const sequence = [label, heading, lead, cta, ...benefits].filter(Boolean);
-    const delays = [0, 140, 340, 560, 880, 1160, 1440];
-
-    const run = () => {
-      sequence.forEach((el, index) => {
-        const isBenefit = index >= 4;
-        animateIn(el, delays[index] ?? index * 180, isBenefit ? 30 : 24, isBenefit ? 760 : 820);
-      });
-    };
-
-    if (!('IntersectionObserver' in window)) {
-      run();
-      return;
-    }
-
-    const observer = new IntersectionObserver((entries) => {
-      if (!entries.some((entry) => entry.isIntersecting)) return;
-      run();
-      observer.disconnect();
-    }, { threshold: 0.18, rootMargin: '0px 0px -10% 0px' });
-
-    observer.observe(section);
-  }
-
-  function observeGroup(selector, childSelector, stagger = 100) {
-    const section = document.querySelector(selector);
-    if (!section || !desktop) return;
-
-    const children = Array.from(section.querySelectorAll(childSelector));
-    if (!children.length) return;
-
-    const run = () => children.forEach((el, index) => animateIn(el, index * stagger, 28, 780));
-
-    if (!('IntersectionObserver' in window)) {
-      run();
-      return;
-    }
-
-    const observer = new IntersectionObserver((entries) => {
-      if (!entries.some((entry) => entry.isIntersecting)) return;
-      run();
-      observer.disconnect();
-    }, { threshold: 0.08, rootMargin: '0px 0px -6% 0px' });
-
-    observer.observe(section);
-  }
-
-  function observeSingle(selector, targetSelector = null, delay = 0) {
-    const section = document.querySelector(selector);
-    if (!section || !desktop) return;
-
-    const target = targetSelector ? section.querySelector(targetSelector) : section;
-    if (!target) return;
-
-    const run = () => animateIn(target, delay, 26, 780);
-
-    if (!('IntersectionObserver' in window)) {
-      run();
-      return;
-    }
-
-    const observer = new IntersectionObserver((entries) => {
-      if (!entries.some((entry) => entry.isIntersecting)) return;
-      run();
-      observer.disconnect();
-    }, { threshold: 0.08, rootMargin: '0px 0px -6% 0px' });
-
-    observer.observe(section);
-  }
-
-  function setupScrollMotion() {
-    observeWhyStory();
-    observeGroup('.nv-solutions--hierarchy', '.nv-section-head, .nv-solution-card', 130);
-    observeGroup('.nv-gallery', '.nv-section-head, .nv-gallery-item', 110);
-    observeGroup('.nv-process', 'h2, .nv-process-list details', 110);
-    observeSingle('.nv-contact', '.nv-contact-inner');
-    observeSingle('.nv-footer');
+    ].filter(Boolean).forEach((el, index) => animateIn(el, index * 130 + 80, 26, index === 1 ? 900 : 760));
   }
 
   function init() {
-    injectStyles();
+    ensureStyles();
+    setResponsiveHero();
+    resetCTA();
+    normalizeImageDimensions();
     animateHero();
-    setupScrollMotion();
+
+    setupReveal('.nv-about--story', '.nv-about-label, h2, .nv-why-lead, .nv-about-cta, .nv-why-item', 120);
+    setupReveal('.nv-solutions--hierarchy', '.nv-section-head, .nv-solution-card', 110);
+    setupReveal('.nv-process', 'h2, .nv-process-list details', 100);
+    setupReveal('.nv-contact', '.nv-contact-eyebrow, h2, p, .nv-contact-button', 90);
+    setupReveal('.nv-footer', null, 0);
+
+    /* Coherence script builds the proof DOM before this file is loaded. */
+    setupContinuousMotion();
+    setTimeout(setupContinuousMotion, 150);
+
     document.body.dataset.motionActive = 'true';
+    document.body.dataset.stabilized = 'true';
   }
 
   if (document.readyState === 'loading') {

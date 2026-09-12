@@ -1,0 +1,166 @@
+/* Final homepage stabilization pass — desktop first. Loaded last by home-final-motion.js. */
+
+@media (min-width:1025px){
+  /* Hero: use the dark premium asset as the visual, keep the existing layout. */
+  .home-page .nv-hero{
+    min-height:820px!important;
+    background:#0d1511!important;
+    isolation:isolate;
+  }
+  .home-page .nv-hero::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    z-index:1;
+    pointer-events:none;
+    background:linear-gradient(90deg,rgba(8,14,10,.74) 0%,rgba(8,14,10,.58) 34%,rgba(8,14,10,.18) 61%,rgba(8,14,10,.04) 100%);
+  }
+  .home-page .nv-hero-media{z-index:0!important}
+  .home-page .nv-hero-media img{
+    width:100%!important;
+    height:100%!important;
+    object-fit:cover!important;
+    object-position:center!important;
+    filter:none!important;
+  }
+  .home-page .nv-hero-copy{z-index:2!important}
+  .home-page .nv-hero h1,
+  .home-page .nv-hero h1 span,
+  .home-page .nv-hero h1 em{
+    color:#fff!important;
+  }
+  .home-page .nv-hero-kicker,
+  .home-page .nv-hero-lead,
+  .home-page .nv-hero-trust p,
+  .home-page .nv-trust-icon{
+    color:rgba(255,255,255,.82)!important;
+  }
+  .home-page .nv-hero-kicker::before{background:rgba(255,255,255,.72)!important}
+  .home-page .nv-hero-trust>div{border-left-color:rgba(255,255,255,.22)!important}
+  .home-page .nv-button{border-radius:999px!important}
+  .home-page .nv-button-primary{
+    color:#15291f!important;
+    background:#fff!important;
+    border-color:#fff!important;
+  }
+  .home-page .nv-button-primary:hover{background:#f3f5f2!important}
+  .home-page .nv-button-secondary{
+    color:#fff!important;
+    background:rgba(12,23,17,.18)!important;
+    border-color:rgba(255,255,255,.64)!important;
+    backdrop-filter:blur(8px);
+  }
+  .home-page .nv-button-secondary:hover{background:rgba(255,255,255,.12)!important}
+
+  /* JS owns both endless tracks so they cannot silently stop because of competing CSS animations. */
+  .home-page .nv-hero-partner-track,
+  .home-page .nv-proof-track{
+    animation:none!important;
+    will-change:transform;
+    transform:translate3d(0,0,0);
+  }
+  .home-page .nv-hero-partners{background:#0d1712!important}
+
+  /* Social proof wall: full-width motion, no visible finish line. */
+  .home-page .nv-proof-social{
+    overflow:hidden!important;
+  }
+  .home-page .nv-proof-window{
+    width:100%!important;
+    overflow:hidden!important;
+    contain:paint;
+  }
+  .home-page .nv-proof-track{
+    display:flex!important;
+    align-items:flex-start!important;
+    width:max-content!important;
+    gap:18px!important;
+  }
+
+  /* Process remains white; active state stays clear. */
+  .home-page .nv-process{
+    background:#fff!important;
+    color:#111!important;
+  }
+
+  /* CTA reset: one centred decision, not a split composition. */
+  .home-page .nv-contact{
+    padding:104px 0 110px!important;
+    background:#fff!important;
+    color:#111!important;
+    border-top:1px solid #eceeea!important;
+  }
+  .home-page .nv-contact-inner{
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:center!important;
+    justify-content:center!important;
+    gap:0!important;
+    max-width:860px!important;
+    margin:0 auto!important;
+    text-align:center!important;
+  }
+  .home-page .nv-contact-eyebrow{
+    margin:0 0 14px!important;
+    color:#7a827c!important;
+    font-size:.62rem!important;
+    font-weight:600!important;
+    letter-spacing:.16em!important;
+    text-transform:uppercase!important;
+  }
+  .home-page .nv-contact h2{
+    max-width:12ch!important;
+    margin:0 auto 20px!important;
+    color:#111!important;
+    font-size:clamp(3rem,4.8vw,5.2rem)!important;
+    font-weight:400!important;
+    line-height:.94!important;
+    letter-spacing:-.055em!important;
+  }
+  .home-page .nv-contact p:not(.nv-contact-eyebrow){
+    max-width:58ch!important;
+    margin:0 auto!important;
+    color:#69706a!important;
+    font-size:.88rem!important;
+    line-height:1.6!important;
+  }
+  .home-page .nv-contact-support{
+    margin-top:10px!important;
+    font-size:.74rem!important;
+  }
+  .home-page .nv-contact-button{
+    display:inline-flex!important;
+    align-items:center!important;
+    justify-content:space-between!important;
+    min-width:220px!important;
+    margin-top:28px!important;
+    padding:15px 18px!important;
+    color:#fff!important;
+    background:#18372c!important;
+    border:1px solid #18372c!important;
+    border-radius:999px!important;
+    text-decoration:none!important;
+    box-shadow:0 14px 32px rgba(24,55,44,.12)!important;
+  }
+
+  /* Footer reset: compact, calm and subordinate to the CTA. */
+  .home-page .nv-footer{
+    padding:44px 0 18px!important;
+    background:#0b1510!important;
+    color:#f4f5f2!important;
+    border-top:1px solid rgba(255,255,255,.08)!important;
+  }
+  .home-page .nv-footer-grid{
+    display:grid!important;
+    grid-template-columns:1.35fr .85fr .8fr 1fr!important;
+    gap:48px!important;
+    align-items:start!important;
+  }
+  .home-page .nv-footer-brand img{width:118px!important;margin-bottom:12px!important}
+  .home-page .nv-footer p,
+  .home-page .nv-footer a{font-size:.68rem!important;line-height:1.5!important}
+  .home-page .nv-footer-bottom{
+    margin-top:30px!important;
+    padding-top:14px!important;
+  }
+}
