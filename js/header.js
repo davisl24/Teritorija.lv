@@ -111,12 +111,25 @@
     if (!document.body.classList.contains('home-page')) return;
     if (document.querySelector('script[data-home-motion]')) return;
 
+    const loadFinalMotion = () => {
+      if (document.querySelector('script[data-home-final-motion]')) return;
+      const finalMotion = document.createElement('script');
+      finalMotion.src = './js/home-final-motion.js';
+      finalMotion.defer = true;
+      finalMotion.dataset.homeFinalMotion = 'true';
+      document.head.appendChild(finalMotion);
+    };
+
     const loadNextPass = () => {
-      if (document.querySelector('script[data-home-next-pass]')) return;
+      if (document.querySelector('script[data-home-next-pass]')) {
+        loadFinalMotion();
+        return;
+      }
       const next = document.createElement('script');
       next.src = './js/home-next-pass.js';
       next.defer = true;
       next.dataset.homeNextPass = 'true';
+      next.addEventListener('load', loadFinalMotion, { once: true });
       document.head.appendChild(next);
     };
 
