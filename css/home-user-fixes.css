@@ -1,0 +1,125 @@
+/* Final user-approved homepage fixes. Loaded after home-stabilize.css. */
+
+@media (min-width:1025px){
+  /* Keep the approved sticky solutions direction. */
+  .home-page .nv-solutions--hierarchy .nv-solution-media img{
+    width:100%!important;
+    height:100%!important;
+    max-width:78%!important;
+    max-height:78%!important;
+    object-fit:contain!important;
+    aspect-ratio:4/3;
+  }
+
+  /* Every subcategory is a vertical line, including the navigation tray. */
+  .home-page .nv-tray-links{
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:flex-start!important;
+    gap:8px!important;
+  }
+  .home-page .nv-tray-links a{
+    display:flex!important;
+    align-items:center!important;
+    justify-content:space-between!important;
+    width:100%!important;
+    padding:3px 0!important;
+  }
+
+  /* Social proof: one disciplined card system, not mixed editorial sizes. */
+  .home-page .nv-proof-track{
+    align-items:stretch!important;
+    gap:18px!important;
+  }
+  .home-page .nv-proof-post,
+  .home-page .nv-proof-post--wide,
+  .home-page .nv-proof-post--tall,
+  .home-page .nv-proof-post--standard{
+    flex:0 0 340px!important;
+    width:340px!important;
+    min-width:340px!important;
+    margin-top:0!important;
+    display:flex!important;
+    flex-direction:column!important;
+    border-radius:18px!important;
+  }
+  .home-page .nv-proof-post-media,
+  .home-page .nv-proof-post--standard .nv-proof-post-media,
+  .home-page .nv-proof-post--wide .nv-proof-post-media,
+  .home-page .nv-proof-post--tall .nv-proof-post-media{
+    width:100%!important;
+    aspect-ratio:4/3!important;
+    min-height:0!important;
+  }
+  .home-page .nv-proof-post-media img{
+    width:100%!important;
+    height:100%!important;
+    aspect-ratio:4/3!important;
+    object-fit:cover!important;
+  }
+  .home-page .nv-proof-post-copy{
+    display:flex!important;
+    flex:1 1 auto!important;
+    flex-direction:column!important;
+    min-height:238px!important;
+  }
+  .home-page .nv-proof-post h3{max-width:none!important}
+  .home-page .nv-proof-post-summary{min-height:0!important}
+  .home-page .nv-proof-post small{margin-top:auto!important;padding-top:18px!important}
+
+  /* Lazy images reserve space before the file arrives. */
+  .home-page .nv-about-media img[loading="lazy"],
+  .home-page .nv-solution-media img[loading="lazy"],
+  .home-page .nv-proof-post-media img[loading="lazy"]{
+    display:block;
+    width:100%;
+    aspect-ratio:4/3;
+  }
+
+  /* Footer follows the supplied reference: compact 4-column information footer. */
+  .home-page .nv-footer{
+    position:relative!important;
+    padding:54px 0 18px!important;
+    overflow:hidden!important;
+    background:
+      radial-gradient(circle at 88% 20%,rgba(50,88,68,.22),transparent 30%),
+      radial-gradient(circle at 8% 100%,rgba(33,71,52,.18),transparent 28%),
+      #08130e!important;
+  }
+  .home-page .nv-footer::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    opacity:.22;
+    background:linear-gradient(120deg,transparent 0 62%,rgba(255,255,255,.035) 62% 63%,transparent 63% 100%);
+  }
+  .home-page .nv-footer-grid,
+  .home-page .nv-footer-bottom{position:relative;z-index:1}
+  .home-page .nv-footer-grid{
+    display:grid!important;
+    grid-template-columns:1.35fr .85fr .85fr 1fr!important;
+    gap:clamp(40px,5vw,84px)!important;
+    align-items:start!important;
+  }
+  .home-page .nv-footer-grid>div{display:block!important;visibility:visible!important;opacity:1!important;text-align:left!important}
+  .home-page .nv-footer-brand{justify-self:start!important}
+  .home-page .nv-footer-brand img{width:92px!important;margin:0 0 14px!important}
+  .home-page .nv-footer-brand p{max-width:28ch!important;font-size:.69rem!important;line-height:1.55!important}
+  .home-page .nv-footer-grid>div:not(.nv-footer-brand)>span{
+    margin-bottom:13px!important;
+    font-size:.69rem!important;
+  }
+  .home-page .nv-footer-grid>div:not(.nv-footer-brand)>a,
+  .home-page .nv-footer-grid>div:not(.nv-footer-brand)>p,
+  .home-page .nv-social a{
+    margin-bottom:6px!important;
+    font-size:.66rem!important;
+  }
+  .home-page .nv-social{margin-top:11px!important}
+  .home-page .nv-footer-bottom{
+    margin-top:34px!important;
+    padding-top:12px!important;
+    border-top:1px solid rgba(255,255,255,.2)!important;
+  }
+}
