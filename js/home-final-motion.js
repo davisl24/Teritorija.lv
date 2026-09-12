@@ -5,12 +5,20 @@
   const desktop = window.matchMedia('(min-width: 1025px)').matches;
 
   function ensureStyles() {
-    if (document.querySelector('link[data-home-stabilize]')) return;
-    const link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = './css/home-stabilize.css?v=2';
-    link.dataset.homeStabilize = 'true';
-    document.head.appendChild(link);
+    if (!document.querySelector('link[data-home-stabilize]')) {
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = './css/home-stabilize.css?v=2';
+      link.dataset.homeStabilize = 'true';
+      document.head.appendChild(link);
+    }
+    if (!document.querySelector('link[data-home-user-fixes]')) {
+      const fixes = document.createElement('link');
+      fixes.rel = 'stylesheet';
+      fixes.href = './css/home-user-fixes.css?v=1';
+      fixes.dataset.homeUserFixes = 'true';
+      document.head.appendChild(fixes);
+    }
   }
 
   function setResponsiveHero() {
@@ -240,6 +248,24 @@
     });
   }
 
+  function setupScrollTop() {
+    if (document.querySelector('.nv-scroll-top')) return;
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'nv-scroll-top';
+    button.setAttribute('aria-label', 'Atgriezties lapas augšā');
+    button.innerHTML = '↑';
+    document.body.appendChild(button);
+
+    const sync = () => button.classList.toggle('is-visible', window.scrollY > 700);
+    sync();
+    window.addEventListener('scroll', sync, { passive: true });
+    button.addEventListener('click', () => {
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' });
+    });
+  }
+
   function animateHero() {
     if (!desktop) return;
     const hero = document.querySelector('.nv-hero');
@@ -260,6 +286,7 @@
     resetFooter();
     guardKnownBadProofMapping();
     normalizeImageDimensions();
+    setupScrollTop();
     animateHero();
 
     setupReveal('.nv-about--story', '.nv-about-label, h2, .nv-why-lead, .nv-about-cta, .nv-why-item', 120);
