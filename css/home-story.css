@@ -1,0 +1,199 @@
+/* Desktop-only landing story refinement */
+@media (min-width:1025px){
+  .home-page .nv-about--story{
+    display:block!important;
+    width:min(calc(100% - 64px),1440px)!important;
+    padding-top:118px!important;
+    padding-bottom:122px!important;
+  }
+  .home-page .nv-about--story .nv-why-intro{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) minmax(320px,.9fr);
+    column-gap:88px;
+    align-items:end;
+    padding:0 0 54px;
+    border-bottom:1px solid #e8ebe6;
+  }
+  .home-page .nv-about--story .nv-about-label{
+    grid-column:1 / -1;
+    margin:0 0 24px!important;
+  }
+  .home-page .nv-about--story h2{
+    max-width:10ch!important;
+    margin:0!important;
+    font-size:clamp(3.2rem,4.7vw,5.7rem)!important;
+    line-height:.94!important;
+    letter-spacing:-.055em!important;
+  }
+  .home-page .nv-why-lead{
+    max-width:48ch;
+    margin:0 0 28px!important;
+    color:#666d65;
+    font-size:.96rem!important;
+    line-height:1.72!important;
+  }
+  .home-page .nv-about--story .nv-about-cta{
+    grid-column:2;
+    justify-self:start;
+  }
+  .home-page .nv-why-grid{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    padding-top:54px;
+  }
+  .home-page .nv-why-item{
+    min-height:270px;
+    padding:0 38px 12px 0;
+    border-right:1px solid #e8ebe6;
+  }
+  .home-page .nv-why-item + .nv-why-item{padding-left:38px}
+  .home-page .nv-why-item:last-child{border-right:0;padding-right:0}
+  .home-page .nv-why-item>span{
+    display:block;
+    margin-bottom:44px;
+    color:#7a897a;
+    font-size:.62rem;
+    font-weight:600;
+    letter-spacing:.12em;
+  }
+  .home-page .nv-why-item h3{
+    margin:0 0 18px;
+    font-size:1.35rem;
+    font-weight:500;
+    letter-spacing:-.03em;
+  }
+  .home-page .nv-why-item p{
+    max-width:34ch;
+    margin:0 0 22px;
+    color:#6d746d;
+    font-size:.78rem;
+    line-height:1.65;
+  }
+  .home-page .nv-why-item strong{
+    display:block;
+    max-width:31ch;
+    color:#2e372f;
+    font-size:.76rem;
+    font-weight:500;
+    line-height:1.55;
+  }
+
+  .home-page .nv-about--story .nv-why-intro>* ,
+  .home-page .nv-about--story .nv-why-item{
+    opacity:0;
+    transform:translateY(22px);
+    transition:opacity .7s ease,transform .75s cubic-bezier(.22,.61,.36,1);
+  }
+  .home-page .nv-about--story.is-revealed .nv-about-label{opacity:1;transform:none;transition-delay:.02s}
+  .home-page .nv-about--story.is-revealed h2{opacity:1;transform:none;transition-delay:.1s}
+  .home-page .nv-about--story.is-revealed .nv-why-lead{opacity:1;transform:none;transition-delay:.2s}
+  .home-page .nv-about--story.is-revealed .nv-about-cta{opacity:1;transform:none;transition-delay:.3s}
+  .home-page .nv-about--story.is-revealed .nv-why-item:nth-child(1){opacity:1;transform:none;transition-delay:.42s}
+  .home-page .nv-about--story.is-revealed .nv-why-item:nth-child(2){opacity:1;transform:none;transition-delay:.52s}
+  .home-page .nv-about--story.is-revealed .nv-why-item:nth-child(3){opacity:1;transform:none;transition-delay:.62s}
+
+  .home-page .nv-solutions--curated{
+    padding-top:102px!important;
+    padding-bottom:118px!important;
+  }
+  .home-page .nv-solutions--curated .nv-section-head{margin-bottom:34px!important}
+  .home-page .nv-solutions--curated .nv-solution-list{
+    display:grid!important;
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
+    gap:18px!important;
+  }
+  .home-page .nv-solutions--curated .nv-solution{
+    display:flex!important;
+    flex-direction:column;
+    min-height:0!important;
+    overflow:hidden!important;
+    background:#fff!important;
+    border:1px solid #e8ebe6!important;
+    border-radius:18px!important;
+    color:var(--nv-ink)!important;
+    text-decoration:none;
+    box-shadow:none!important;
+    transition:transform .42s cubic-bezier(.22,.61,.36,1),box-shadow .42s ease,border-color .42s ease;
+  }
+  .home-page .nv-solutions--curated .nv-solution::after{display:none!important}
+  .home-page .nv-solutions--curated .nv-solution-media{
+    position:relative;
+    display:grid;
+    place-items:center;
+    min-height:260px;
+    overflow:hidden;
+    background:#f6f7f4;
+  }
+  .home-page .nv-solutions--curated .nv-solution-media img{
+    position:relative!important;
+    inset:auto!important;
+    width:100%!important;
+    height:100%!important;
+    min-height:260px;
+    object-fit:cover!important;
+    transform:none!important;
+    filter:none!important;
+    transition:transform .55s cubic-bezier(.22,.61,.36,1)!important;
+  }
+  .home-page .nv-solutions--curated .nv-solution-product .nv-solution-media img{
+    object-fit:contain!important;
+    padding:38px!important;
+    background:#f8f9f6;
+  }
+  .home-page .nv-solutions--curated .nv-solution-copy{
+    position:relative!important;
+    inset:auto!important;
+    display:grid!important;
+    grid-template-columns:auto 1fr auto;
+    gap:14px;
+    align-items:start;
+    min-height:190px;
+    padding:22px 22px 24px!important;
+    background:#fff!important;
+    color:var(--nv-ink)!important;
+  }
+  .home-page .nv-solutions--curated .nv-solution-copy>span{
+    padding-top:3px;
+    color:#8a9188!important;
+    font-size:.58rem!important;
+    font-weight:600;
+  }
+  .home-page .nv-solutions--curated .nv-solution h3{
+    margin:0 0 11px!important;
+    color:var(--nv-ink)!important;
+    font-size:1.28rem!important;
+    font-weight:500!important;
+    line-height:1.05!important;
+    letter-spacing:-.035em!important;
+  }
+  .home-page .nv-solutions--curated .nv-solution p{
+    margin:0 0 16px!important;
+    color:#6e756e!important;
+    font-size:.72rem!important;
+    line-height:1.55!important;
+  }
+  .home-page .nv-solutions--curated .nv-solution small{
+    color:#5e675f!important;
+    font-size:.57rem!important;
+    font-weight:600!important;
+    letter-spacing:.04em;
+  }
+  .home-page .nv-solutions--curated .nv-solution b{
+    color:var(--nv-olive)!important;
+    font-size:.95rem!important;
+    font-weight:400!important;
+    transition:transform .25s ease;
+  }
+  .home-page .nv-solutions--curated .nv-solution:hover{
+    transform:translateY(-6px);
+    border-color:#d9dfd7!important;
+    box-shadow:0 20px 48px rgba(20,28,22,.08)!important;
+  }
+  .home-page .nv-solutions--curated .nv-solution:hover .nv-solution-media img{transform:scale(1.025)!important}
+  .home-page .nv-solutions--curated .nv-solution:hover b{transform:translate(2px,-2px)}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .home-page .nv-about--story .nv-why-intro>*,
+  .home-page .nv-about--story .nv-why-item{opacity:1!important;transform:none!important;transition:none!important}
+}
