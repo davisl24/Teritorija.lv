@@ -1,0 +1,258 @@
+/* Homepage coherence pass — desktop only. One visual system from hero to footer. */
+@media (min-width:1025px){
+  .home-page{
+    --nv-coh-green:#18372c;
+    --nv-coh-ink:#182019;
+    --nv-coh-muted:#697169;
+    --nv-coh-line:#e6ebe6;
+    --nv-coh-soft:#f7f9f7;
+    --nv-coh-radius:20px;
+    background:#fff;
+    color:var(--nv-coh-ink);
+  }
+
+  /* Remove duplicated navigation layers. Mega-menu + solutions now own this job. */
+  .home-page .nv-category-nav,
+  .home-page .nv-products,
+  .home-page .nv-partners{display:none!important}
+
+  /* Global rhythm */
+  .home-page .nv-about--story,
+  .home-page .nv-solutions--hierarchy,
+  .home-page .nv-gallery,
+  .home-page .nv-process,
+  .home-page .nv-contact{background:#fff!important}
+
+  .home-page .nv-about--story,
+  .home-page .nv-solutions--hierarchy,
+  .home-page .nv-gallery{
+    padding-top:112px!important;
+    padding-bottom:112px!important;
+  }
+
+  .home-page .nv-section-head,
+  .home-page .nv-process>.nv-shell{
+    margin-bottom:42px!important;
+  }
+
+  .home-page .nv-section-head h2,
+  .home-page .nv-process h2,
+  .home-page .nv-gallery h2{
+    color:var(--nv-coh-green)!important;
+    font-size:clamp(2.55rem,3.2vw,4rem)!important;
+    font-weight:400!important;
+    line-height:.96!important;
+    letter-spacing:-.055em!important;
+  }
+
+  .home-page .nv-text-link{
+    color:var(--nv-coh-green)!important;
+    font-size:.76rem!important;
+    font-weight:500!important;
+    text-decoration:none!important;
+  }
+
+  /* Header / CTA language */
+  .home-page .nv-header{
+    border-radius:22px!important;
+    background:rgba(255,255,255,.94)!important;
+    border-color:rgba(24,55,44,.11)!important;
+    box-shadow:0 14px 34px rgba(24,40,31,.065)!important;
+  }
+  .home-page .nv-header-cta,
+  .home-page .nv-button,
+  .home-page .nv-about-cta,
+  .home-page .nv-contact-button{
+    border-radius:999px!important;
+  }
+  .home-page .nv-button-primary,
+  .home-page .nv-about-cta,
+  .home-page .nv-contact-button{
+    background:var(--nv-coh-green)!important;
+    border-color:var(--nv-coh-green)!important;
+  }
+  .home-page .nv-button-secondary{
+    color:var(--nv-coh-green)!important;
+    background:rgba(255,255,255,.92)!important;
+    border-color:rgba(24,55,44,.24)!important;
+  }
+
+  /* Hero: same layout, calmer art direction */
+  .home-page .nv-hero h1,
+  .home-page .nv-hero h1 span,
+  .home-page .nv-hero h1 em{
+    color:var(--nv-coh-green)!important;
+  }
+  .home-page .nv-hero-media img{
+    filter:saturate(.80) contrast(.96) brightness(1.015)!important;
+  }
+  .home-page .nv-hero-lead{color:#616961!important}
+  .home-page .nv-hero-partners{background:#0f1b15!important}
+
+  /* Why: keep centered story, unify typography and lines */
+  .home-page .nv-about--story{
+    border-bottom:1px solid var(--nv-coh-line);
+  }
+  .home-page .nv-about--story .nv-why-intro h2{
+    color:var(--nv-coh-green)!important;
+  }
+  .home-page .nv-why-item{
+    border-color:var(--nv-coh-line)!important;
+  }
+  .home-page .nv-why-item h3{color:var(--nv-coh-ink)!important}
+  .home-page .nv-why-item p{color:var(--nv-coh-muted)!important}
+
+  /* Solutions: one consistent card language */
+  .home-page .nv-solutions--hierarchy{
+    border-bottom:1px solid var(--nv-coh-line);
+  }
+  .home-page .nv-solution-card{
+    border:1px solid var(--nv-coh-line)!important;
+    border-radius:var(--nv-coh-radius)!important;
+    box-shadow:none!important;
+  }
+  .home-page .nv-solution-card:hover,
+  .home-page .nv-solution-card:focus-within{
+    border-color:#cad5cc!important;
+    box-shadow:0 18px 48px rgba(24,55,44,.07)!important;
+  }
+  .home-page .nv-solution-media{background:#f8faf8!important}
+  .home-page .nv-solution-copy h3{color:var(--nv-coh-green)!important}
+  .home-page .nv-solution-copy p{color:var(--nv-coh-muted)!important}
+
+  /* Proof / realised solutions — featured story + three concise proofs */
+  .home-page .nv-gallery{
+    border-bottom:1px solid var(--nv-coh-line);
+  }
+  .home-page .nv-gallery-grid{
+    display:grid!important;
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+    gap:26px!important;
+    align-items:start!important;
+  }
+  .home-page .nv-gallery-item,
+  .home-page .nv-gallery-large,
+  .home-page .nv-gallery-wide{
+    min-width:0!important;
+    margin:0!important;
+    color:var(--nv-coh-ink)!important;
+    background:transparent!important;
+    border:0!important;
+    border-radius:0!important;
+    overflow:visible!important;
+    text-decoration:none!important;
+  }
+  .home-page .nv-gallery-item:first-child,
+  .home-page .nv-gallery-large:first-child{
+    grid-column:1/-1!important;
+    display:grid!important;
+    grid-template-columns:minmax(0,1.65fr) minmax(330px,.7fr)!important;
+    min-height:470px!important;
+    overflow:hidden!important;
+    background:#fff!important;
+    border:1px solid var(--nv-coh-line)!important;
+    border-radius:var(--nv-coh-radius)!important;
+  }
+  .home-page .nv-gallery-item:first-child img,
+  .home-page .nv-gallery-large:first-child img{
+    width:100%!important;
+    height:100%!important;
+    min-height:470px!important;
+    aspect-ratio:auto!important;
+    object-fit:cover!important;
+    border-radius:0!important;
+    box-shadow:none!important;
+  }
+  .home-page .nv-gallery-item:first-child>div,
+  .home-page .nv-gallery-large:first-child>div{
+    display:flex!important;
+    flex-direction:column!important;
+    justify-content:center!important;
+    padding:46px 42px!important;
+    border-left:1px solid var(--nv-coh-line)!important;
+  }
+  .home-page .nv-gallery-item:first-child h3,
+  .home-page .nv-gallery-large:first-child h3{
+    margin:10px 0 16px!important;
+    color:var(--nv-coh-green)!important;
+    font-size:clamp(2rem,2.6vw,3.2rem)!important;
+    font-weight:400!important;
+    line-height:1!important;
+    letter-spacing:-.045em!important;
+  }
+  .home-page .nv-gallery-item:first-child p,
+  .home-page .nv-gallery-large:first-child p{
+    max-width:34ch!important;
+    color:var(--nv-coh-muted)!important;
+    font-size:.84rem!important;
+    line-height:1.65!important;
+  }
+  .home-page .nv-gallery-item:not(:first-child) img{
+    width:100%!important;
+    height:auto!important;
+    aspect-ratio:4/3!important;
+    object-fit:cover!important;
+    border-radius:16px!important;
+    box-shadow:none!important;
+  }
+  .home-page .nv-gallery-item:not(:first-child)>div{
+    padding:16px 2px 0!important;
+  }
+  .home-page .nv-gallery-item:not(:first-child) h3{
+    margin:8px 0 7px!important;
+    color:var(--nv-coh-green)!important;
+    font-size:1.35rem!important;
+    font-weight:400!important;
+    letter-spacing:-.025em!important;
+  }
+  .home-page .nv-gallery-item span{
+    color:#889088!important;
+    font-size:.58rem!important;
+    font-weight:600!important;
+    letter-spacing:.11em!important;
+    text-transform:uppercase!important;
+  }
+  .home-page .nv-gallery-item p{
+    color:var(--nv-coh-muted)!important;
+    font-size:.74rem!important;
+    line-height:1.55!important;
+  }
+
+  /* Process: same system, less empty vertical weight */
+  .home-page .nv-process{
+    padding:106px 0 110px!important;
+    border-top:0!important;
+    border-bottom:1px solid var(--nv-coh-line)!important;
+  }
+  .home-page .nv-process-list::before{background:#dfe6e0!important}
+  .home-page .nv-process-list details::before{border-color:#aebbb1!important}
+  .home-page .nv-process-list details.is-active::before,
+  .home-page .nv-process-list details[open]::before{
+    background:var(--nv-coh-green)!important;
+    border-color:var(--nv-coh-green)!important;
+  }
+
+  /* CTA: neutral white field, one strong action */
+  .home-page .nv-contact{
+    padding:110px 0 118px!important;
+    border-top:0!important;
+    border-bottom:0!important;
+  }
+  .home-page .nv-contact h2{
+    color:var(--nv-coh-green)!important;
+    font-size:clamp(2.8rem,4.8vw,5.2rem)!important;
+    font-weight:400!important;
+    line-height:.95!important;
+    letter-spacing:-.055em!important;
+  }
+  .home-page .nv-contact p{
+    color:var(--nv-coh-muted)!important;
+    font-size:.84rem!important;
+  }
+
+  /* Footer is the only large dark block at the end. */
+  .home-page .nv-footer{
+    background:#0e1a14!important;
+    color:#fff!important;
+  }
+}
