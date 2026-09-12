@@ -238,13 +238,20 @@
   }
 
   function normalizeImageDimensions() {
+    const dimensionsFor = (img) => {
+      if (img.closest('.nv-product-image')) return [1120, 1000];
+      if (img.closest('.nv-gallery-item')) return [1600, 1000];
+      if (img.closest('.nv-proof-post-media')) return [1200, 900];
+      if (img.closest('.nv-about-media')) return [1600, 1000];
+      if (img.closest('.nv-solution-media, .nv-solution')) return [1200, 900];
+      return [1200, 900];
+    };
+
     document.querySelectorAll('img[loading="lazy"]').forEach((img) => {
-      const apply = () => {
-        if (!img.hasAttribute('width') && img.naturalWidth) img.setAttribute('width', String(img.naturalWidth));
-        if (!img.hasAttribute('height') && img.naturalHeight) img.setAttribute('height', String(img.naturalHeight));
-      };
-      if (img.complete) apply();
-      else img.addEventListener('load', apply, { once: true });
+      const [width, height] = dimensionsFor(img);
+      if (!img.hasAttribute('width')) img.setAttribute('width', String(width));
+      if (!img.hasAttribute('height')) img.setAttribute('height', String(height));
+      img.style.aspectRatio = `${width} / ${height}`;
     });
   }
 
