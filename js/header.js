@@ -110,65 +110,58 @@
   function loadHomepageMotion() {
     if (!document.body.classList.contains('home-page')) return;
 
-    const ensureCoherence = () => {
-      if (document.querySelector('script[data-home-coherence]')) return;
-      const coherence = document.createElement('script');
-      coherence.src = './js/home-coherence.js?v=1';
-      coherence.dataset.homeCoherence = 'true';
-      document.head.appendChild(coherence);
+    const ensureFinalMotion = () => {
+      const existing = document.querySelector('script[data-home-final-motion]');
+      if (existing) return;
+      const script = document.createElement('script');
+      script.src = './js/home-final-motion.js?v=4';
+      script.dataset.homeFinalMotion = 'true';
+      document.head.appendChild(script);
     };
 
-    const ensureFinalMotion = () => {
-      const existingFinal = document.querySelector('script[data-home-final-motion]');
-      if (existingFinal) {
-        if (existingFinal.dataset.loaded === 'true') ensureCoherence();
-        else existingFinal.addEventListener('load', ensureCoherence, { once: true });
+    const ensureCoherence = () => {
+      const existing = document.querySelector('script[data-home-coherence]');
+      if (existing) {
+        if (existing.dataset.loaded === 'true') ensureFinalMotion();
+        else existing.addEventListener('load', ensureFinalMotion, { once: true });
         return;
       }
-      const finalMotion = document.createElement('script');
-      finalMotion.src = './js/home-final-motion.js?v=3';
-      finalMotion.dataset.homeFinalMotion = 'true';
-      finalMotion.addEventListener('load', () => {
-        finalMotion.dataset.loaded = 'true';
-        ensureCoherence();
+      const script = document.createElement('script');
+      script.src = './js/home-coherence.js?v=2';
+      script.dataset.homeCoherence = 'true';
+      script.addEventListener('load', () => {
+        script.dataset.loaded = 'true';
+        ensureFinalMotion();
       }, { once: true });
-      document.head.appendChild(finalMotion);
+      document.head.appendChild(script);
     };
 
     const ensureNextPass = () => {
-      const existingNext = document.querySelector('script[data-home-next-pass]');
-      if (existingNext) {
-        if (existingNext.dataset.loaded === 'true') {
-          ensureFinalMotion();
-        } else {
-          existingNext.addEventListener('load', ensureFinalMotion, { once: true });
-        }
+      const existing = document.querySelector('script[data-home-next-pass]');
+      if (existing) {
+        if (existing.dataset.loaded === 'true') ensureCoherence();
+        else existing.addEventListener('load', ensureCoherence, { once: true });
         return;
       }
-
-      const next = document.createElement('script');
-      next.src = './js/home-next-pass.js?v=3';
-      next.dataset.homeNextPass = 'true';
-      next.addEventListener('load', () => {
-        next.dataset.loaded = 'true';
-        ensureFinalMotion();
+      const script = document.createElement('script');
+      script.src = './js/home-next-pass.js?v=4';
+      script.dataset.homeNextPass = 'true';
+      script.addEventListener('load', () => {
+        script.dataset.loaded = 'true';
+        ensureCoherence();
       }, { once: true });
-      document.head.appendChild(next);
+      document.head.appendChild(script);
     };
 
     const existingMotion = document.querySelector('script[data-home-motion]');
     if (existingMotion) {
-      if (existingMotion.dataset.loaded === 'true') {
-        ensureNextPass();
-      } else {
-        existingMotion.addEventListener('load', ensureNextPass, { once: true });
-        window.setTimeout(ensureNextPass, 0);
-      }
+      if (existingMotion.dataset.loaded === 'true') ensureNextPass();
+      else existingMotion.addEventListener('load', ensureNextPass, { once: true });
       return;
     }
 
     const script = document.createElement('script');
-    script.src = './js/home-motion.js?v=3';
+    script.src = './js/home-motion.js?v=4';
     script.dataset.homeMotion = 'true';
     script.addEventListener('load', () => {
       script.dataset.loaded = 'true';
