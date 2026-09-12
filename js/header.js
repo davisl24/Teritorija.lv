@@ -109,35 +109,54 @@
 
   function loadHomepageMotion() {
     if (!document.body.classList.contains('home-page')) return;
-    if (document.querySelector('script[data-home-motion]')) return;
 
-    const loadFinalMotion = () => {
+    const ensureFinalMotion = () => {
       if (document.querySelector('script[data-home-final-motion]')) return;
       const finalMotion = document.createElement('script');
-      finalMotion.src = './js/home-final-motion.js';
-      finalMotion.defer = true;
+      finalMotion.src = './js/home-final-motion.js?v=2';
       finalMotion.dataset.homeFinalMotion = 'true';
       document.head.appendChild(finalMotion);
     };
 
-    const loadNextPass = () => {
-      if (document.querySelector('script[data-home-next-pass]')) {
-        loadFinalMotion();
+    const ensureNextPass = () => {
+      const existingNext = document.querySelector('script[data-home-next-pass]');
+      if (existingNext) {
+        if (existingNext.dataset.loaded === 'true') {
+          ensureFinalMotion();
+        } else {
+          existingNext.addEventListener('load', ensureFinalMotion, { once: true });
+        }
         return;
       }
+
       const next = document.createElement('script');
-      next.src = './js/home-next-pass.js';
-      next.defer = true;
+      next.src = './js/home-next-pass.js?v=2';
       next.dataset.homeNextPass = 'true';
-      next.addEventListener('load', loadFinalMotion, { once: true });
+      next.addEventListener('load', () => {
+        next.dataset.loaded = 'true';
+        ensureFinalMotion();
+      }, { once: true });
       document.head.appendChild(next);
     };
 
+    const existingMotion = document.querySelector('script[data-home-motion]');
+    if (existingMotion) {
+      if (existingMotion.dataset.loaded === 'true') {
+        ensureNextPass();
+      } else {
+        existingMotion.addEventListener('load', ensureNextPass, { once: true });
+        window.setTimeout(ensureNextPass, 0);
+      }
+      return;
+    }
+
     const script = document.createElement('script');
-    script.src = './js/home-motion.js';
-    script.defer = true;
+    script.src = './js/home-motion.js?v=2';
     script.dataset.homeMotion = 'true';
-    script.addEventListener('load', loadNextPass, { once: true });
+    script.addEventListener('load', () => {
+      script.dataset.loaded = 'true';
+      ensureNextPass();
+    }, { once: true });
     document.head.appendChild(script);
   }
 
