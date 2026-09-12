@@ -12,8 +12,8 @@
       @media (min-width:1025px){
         .home-page .nv-motion-item{
           opacity:0;
-          transform:translateY(24px);
-          transition:opacity .72s cubic-bezier(.22,.61,.36,1),transform .72s cubic-bezier(.22,.61,.36,1);
+          transform:translateY(30px);
+          transition:opacity .78s cubic-bezier(.22,.61,.36,1),transform .78s cubic-bezier(.22,.61,.36,1);
           transition-delay:var(--nv-motion-delay,0ms);
           will-change:opacity,transform;
         }
@@ -28,13 +28,13 @@
         .home-page .nv-hero .nv-hero-actions,
         .home-page .nv-hero .nv-hero-trust{
           opacity:0;
-          transform:translateY(18px);
+          transform:translateY(22px);
         }
-        .home-page.nv-motion-ready .nv-hero .nv-hero-kicker{animation:nvHeroIn .62s .05s both cubic-bezier(.22,.61,.36,1)}
-        .home-page.nv-motion-ready .nv-hero h1{animation:nvHeroIn .76s .14s both cubic-bezier(.22,.61,.36,1)}
-        .home-page.nv-motion-ready .nv-hero .nv-hero-lead{animation:nvHeroIn .68s .28s both cubic-bezier(.22,.61,.36,1)}
-        .home-page.nv-motion-ready .nv-hero .nv-hero-actions{animation:nvHeroIn .68s .38s both cubic-bezier(.22,.61,.36,1)}
-        .home-page.nv-motion-ready .nv-hero .nv-hero-trust{animation:nvHeroIn .72s .5s both cubic-bezier(.22,.61,.36,1)}
+        .home-page.nv-motion-ready .nv-hero .nv-hero-kicker{animation:nvHeroIn .65s .05s both cubic-bezier(.22,.61,.36,1)}
+        .home-page.nv-motion-ready .nv-hero h1{animation:nvHeroIn .82s .16s both cubic-bezier(.22,.61,.36,1)}
+        .home-page.nv-motion-ready .nv-hero .nv-hero-lead{animation:nvHeroIn .72s .31s both cubic-bezier(.22,.61,.36,1)}
+        .home-page.nv-motion-ready .nv-hero .nv-hero-actions{animation:nvHeroIn .72s .43s both cubic-bezier(.22,.61,.36,1)}
+        .home-page.nv-motion-ready .nv-hero .nv-hero-trust{animation:nvHeroIn .78s .56s both cubic-bezier(.22,.61,.36,1)}
         @keyframes nvHeroIn{to{opacity:1;transform:none}}
 
         .home-page .nv-solution-card{
@@ -83,6 +83,15 @@
     document.head.appendChild(style);
   }
 
+  function repairSolutionImages() {
+    const recycled = document.querySelector('.nv-solution-card[data-solution="recycled"] .nv-solution-media img');
+    if (!recycled) return;
+    const official = 'https://www.govaplast.com/wp-content/uploads/2016/09/canvas_final-1-1-1024x566.jpg';
+    recycled.src = official;
+    recycled.alt = 'GOVA PLAST pārstrādātas plastmasas pilsētvides mēbeles';
+    recycled.referrerPolicy = 'no-referrer';
+  }
+
   function mark(el, delay = 0) {
     if (!el || el.classList.contains('nv-motion-item')) return;
     el.classList.add('nv-motion-item');
@@ -93,28 +102,28 @@
     const about = document.querySelector('.nv-about--story');
     if (about) {
       mark(about.querySelector('.nv-about-label'), 0);
-      mark(about.querySelector('h2'), 70);
-      mark(about.querySelector('.nv-why-lead'), 140);
-      mark(about.querySelector('.nv-about-cta'), 210);
-      about.querySelectorAll('.nv-why-item').forEach((item, index) => mark(item, index * 110));
+      mark(about.querySelector('h2'), 90);
+      mark(about.querySelector('.nv-why-lead'), 180);
+      mark(about.querySelector('.nv-about-cta'), 270);
+      about.querySelectorAll('.nv-why-item').forEach((item, index) => mark(item, index * 130));
     }
 
     const solutions = document.querySelector('.nv-solutions--hierarchy');
     if (solutions) {
       mark(solutions.querySelector('.nv-section-head'), 0);
-      solutions.querySelectorAll('.nv-solution-card').forEach((card, index) => mark(card, index * 100));
+      solutions.querySelectorAll('.nv-solution-card').forEach((card, index) => mark(card, index * 130));
     }
 
     const gallery = document.querySelector('.nv-gallery');
     if (gallery) {
       mark(gallery.querySelector('.nv-section-head'), 0);
-      gallery.querySelectorAll('.nv-gallery-item').forEach((item, index) => mark(item, index * 90));
+      gallery.querySelectorAll('.nv-gallery-item').forEach((item, index) => mark(item, index * 110));
     }
 
     const process = document.querySelector('.nv-process');
     if (process) {
       mark(process.querySelector('h2'), 0);
-      process.querySelectorAll('.nv-process-list details').forEach((item, index) => mark(item, index * 75));
+      process.querySelectorAll('.nv-process-list details').forEach((item, index) => mark(item, index * 95));
     }
 
     const contact = document.querySelector('.nv-contact');
@@ -142,13 +151,14 @@
         entry.target.classList.add('is-visible');
         observer.unobserve(entry.target);
       });
-    }, { threshold: 0.16, rootMargin: '0px 0px -7% 0px' });
+    }, { threshold: 0.12, rootMargin: '0px 0px -5% 0px' });
 
     items.forEach((item) => observer.observe(item));
   }
 
   function init() {
     injectStyles();
+    repairSolutionImages();
     prepareMotionTargets();
     observeMotion();
     requestAnimationFrame(() => document.body.classList.add('nv-motion-ready'));
