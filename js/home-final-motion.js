@@ -8,7 +8,7 @@
     if (document.querySelector('link[data-home-stabilize]')) return;
     const link = document.createElement('link');
     link.rel = 'stylesheet';
-    link.href = './css/home-stabilize.css?v=1';
+    link.href = './css/home-stabilize.css?v=2';
     link.dataset.homeStabilize = 'true';
     document.head.appendChild(link);
   }
@@ -73,6 +73,35 @@
     observer.observe(section);
   }
 
+  function setupSolutionStackReveal() {
+    if (!desktop) return;
+    const section = document.querySelector('.nv-solutions--hierarchy');
+    if (!section) return;
+
+    const head = section.querySelector('.nv-section-head');
+    if (head) animateIn(head, 0, 18, 680);
+
+    const cards = Array.from(section.querySelectorAll('.nv-solution-card'));
+    if (!cards.length) return;
+
+    if (!('IntersectionObserver' in window)) {
+      cards.forEach((card, index) => animateIn(card, index * 80, 30, 760));
+      return;
+    }
+
+    const revealed = new WeakSet();
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting || revealed.has(entry.target)) return;
+        revealed.add(entry.target);
+        animateIn(entry.target, 0, 30, 760);
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: .16, rootMargin: '0px 0px -10% 0px' });
+
+    cards.forEach((card) => observer.observe(card));
+  }
+
   function startEndlessTrack(track, speedPxPerSecond) {
     if (!track || !desktop || track.dataset.endlessReady === 'true') return;
     track.dataset.endlessReady = 'true';
@@ -130,6 +159,19 @@
     startEndlessTrack(document.querySelector('.nv-proof-track'), 30);
   }
 
+  function guardKnownBadProofMapping() {
+    const cards = Array.from(document.querySelectorAll('.nv-proof-post'));
+    cards.forEach((card) => {
+      const title = card.querySelector('h3')?.textContent?.trim();
+      if (title !== 'Velo servisa stacija') return;
+      card.removeAttribute('href');
+      card.removeAttribute('target');
+      card.removeAttribute('rel');
+      card.setAttribute('aria-label', 'Velo servisa stacija — oriģinālais ieraksta links tiks pievienots pēc verifikācijas');
+      card.dataset.linkPending = 'true';
+    });
+  }
+
   function resetCTA() {
     const inner = document.querySelector('.nv-contact-inner');
     if (!inner || inner.dataset.centeredReady === 'true') return;
@@ -170,16 +212,16 @@
     ensureStyles();
     setResponsiveHero();
     resetCTA();
+    guardKnownBadProofMapping();
     normalizeImageDimensions();
     animateHero();
 
     setupReveal('.nv-about--story', '.nv-about-label, h2, .nv-why-lead, .nv-about-cta, .nv-why-item', 120);
-    setupReveal('.nv-solutions--hierarchy', '.nv-section-head, .nv-solution-card', 110);
+    setupSolutionStackReveal();
     setupReveal('.nv-process', 'h2, .nv-process-list details', 100);
     setupReveal('.nv-contact', '.nv-contact-eyebrow, h2, p, .nv-contact-button', 90);
     setupReveal('.nv-footer', null, 0);
 
-    /* Coherence script builds the proof DOM before this file is loaded. */
     setupContinuousMotion();
     setTimeout(setupContinuousMotion, 150);
 
