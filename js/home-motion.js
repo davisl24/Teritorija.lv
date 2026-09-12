@@ -32,6 +32,61 @@
     ];items.slice(0,3).forEach((item,index)=>{const icon=item.querySelector('.nv-trust-icon');const text=item.querySelector('p');if(icon)icon.innerHTML=values[index].icon;if(text)text.textContent=values[index].label;});
   }
 
+  function setupProductMegaMenu(){
+    if(!window.matchMedia('(min-width: 1025px)').matches)return;
+    ensureStoryStyles();
+    const nav=document.querySelector('.nv-nav');
+    if(!nav||nav.querySelector('.nv-product-menu'))return;
+    const productLink=Array.from(nav.querySelectorAll(':scope > a')).find((link)=>link.textContent.trim()==='Produkti');
+    if(!productLink)return;
+
+    const item=document.createElement('div');
+    item.className='nv-product-menu';
+    productLink.replaceWith(item);
+    productLink.classList.add('nv-product-menu-trigger');
+    productLink.setAttribute('aria-haspopup','true');
+    productLink.setAttribute('aria-expanded','false');
+    item.appendChild(productLink);
+
+    const panel=document.createElement('div');
+    panel.className='nv-product-menu-panel';
+    panel.innerHTML=`
+      <div class="nv-product-menu-grid">
+        <div class="nv-menu-group">
+          <a class="nv-menu-heading" href="./produkti/ara-mebeles/index.html">Āra mēbeles <span>↗</span></a>
+          <a href="./produkti/ara-mebeles/index.html">Soli</a>
+          <a href="./produkti/ara-mebeles/index.html">Galdi</a>
+          <a href="./produkti/ara-mebeles/index.html">Urnas</a>
+          <a href="./produkti/ara-mebeles/index.html">Puķu kastes</a>
+        </div>
+        <div class="nv-menu-group">
+          <a class="nv-menu-heading" href="./produkti/velo-infrastruktura/index.html">Velo infrastruktūra <span>↗</span></a>
+          <a href="./produkti/velo-stativi/index.html">Velo statīvi</a>
+          <a href="./produkti/velo-nojumes/index.html">Velo nojumes</a>
+          <a href="./produkti/velo-infrastruktura/index.html">Servisa stacijas</a>
+        </div>
+        <div class="nv-menu-group">
+          <a class="nv-menu-heading" href="./produkti/rotalu-laukumi/index.html">Rotaļu laukumi <span>↗</span></a>
+          <a href="./produkti/rotalu-laukumi/index.html">Rotaļu elementi</a>
+          <a href="./produkti/rotalu-laukumi/index.html">Aktivitāšu risinājumi</a>
+        </div>
+        <div class="nv-menu-group">
+          <a class="nv-menu-heading" href="./produkti/parstradata-plastmasa/index.html">Pārstrādāti materiāli <span>↗</span></a>
+          <a href="./produkti/parstradata-plastmasa/index.html">Soli un galdi</a>
+          <a href="./produkti/parstradata-plastmasa/index.html">Puķu kastes</a>
+          <a href="./produkti/parstradata-plastmasa/index.html">Pilsētvides elementi</a>
+        </div>
+      </div>
+      <div class="nv-product-menu-footer"><a href="./produkti/index.html">Skatīt visus produktus <span>→</span></a></div>`;
+    item.appendChild(panel);
+
+    const syncExpanded=()=>productLink.setAttribute('aria-expanded',item.matches(':hover')||item.matches(':focus-within')?'true':'false');
+    item.addEventListener('mouseenter',syncExpanded);
+    item.addEventListener('mouseleave',syncExpanded);
+    item.addEventListener('focusin',syncExpanded);
+    item.addEventListener('focusout',()=>window.setTimeout(syncExpanded,0));
+  }
+
   function setupLandingStory(){
     if(!window.matchMedia('(min-width: 1025px)').matches)return;ensureStoryStyles();
     const about=document.querySelector('.nv-about');
@@ -43,9 +98,9 @@
         <a class="nv-about-cta" href="./par-mums/index.html">Par Teritorija.lv <span>→</span></a>
       </div>
       <div class="nv-why-grid" aria-label="Kāpēc strādāt ar Teritorija.lv">
-        <article class="nv-why-item"><span>01</span><h3>Vairāki ražotāji</h3><p>Pārstāvam dažādu specializāciju Eiropas ražotājus — no pilsētvides mēbelēm līdz velo infrastruktūrai un rotaļu risinājumiem.</p><strong>Vairāk piemērotu variantu vienam projektam.</strong></article>
-        <article class="nv-why-item"><span>02</span><h3>Atlase projektam</h3><p>Strādājam ar arhitektiem, būvniekiem, attīstītājiem un publiskā sektora pārstāvjiem, piemeklējot risinājumu konkrētai videi un vajadzībai.</p><strong>Izvēle balstās projektā, nevis tikai produkta izskatā.</strong></article>
-        <article class="nv-why-item"><span>03</span><h3>Tehniskā informācija</h3><p>Produktu klāstā pieejami izmēri, materiāli, krāsu iespējas, tehniskās lapas un cita informācija, kas vajadzīga projekta izstrādei.</p><strong>Vieglāk nonākt no idejas līdz specifikācijai.</strong></article>
+        <article class="nv-why-item"><span>01</span><h3>Vairāki ražotāji</h3><p>Pārstāvam dažādu specializāciju Eiropas ražotājus — no pilsētvides mēbelēm līdz velo infrastruktūrai un rotaļu risinājumiem.</p><strong>Vairāk piemērotu variantu vienam projektam.</strong><div class="nv-why-detail">ZANO · URBASTYLE · GOVA PLAST<br>Āra mēbeles · velo · rotaļu risinājumi</div></article>
+        <article class="nv-why-item"><span>02</span><h3>Atlase projektam</h3><p>Strādājam ar arhitektiem, būvniekiem, attīstītājiem un publiskā sektora pārstāvjiem, piemeklējot risinājumu konkrētai videi un vajadzībai.</p><strong>Izvēle balstās projektā, nevis tikai produkta izskatā.</strong><div class="nv-why-detail">Vieta · funkcija · budžets · materiāls</div></article>
+        <article class="nv-why-item"><span>03</span><h3>Tehniskā informācija</h3><p>Produktu klāstā pieejami izmēri, materiāli, krāsu iespējas, tehniskās lapas un cita informācija, kas vajadzīga projekta izstrādei.</p><strong>Vieglāk nonākt no idejas līdz specifikācijai.</strong><div class="nv-why-detail">Izmēri · materiāli · krāsas · tehniskās lapas</div></article>
       </div>`;}
 
     const solutions=document.querySelector('.nv-solutions');const list=solutions?.querySelector('.nv-solution-list');
@@ -68,5 +123,5 @@
     const viewport=document.querySelector('.nv-hero-partners');const track=viewport?.querySelector('.nv-hero-partner-track');if(!viewport||!track)return;normalizeManufacturerLinks(track);const originals=Array.from(track.querySelectorAll('a')).slice(0,6);if(!originals.length)return;track.replaceChildren(...originals.map((node)=>node.cloneNode(true)));normalizeManufacturerLinks(track);const buildCopies=()=>{const base=Array.from(track.children).slice(0,6);while(track.scrollWidth<viewport.clientWidth*3)base.forEach((node)=>track.appendChild(node.cloneNode(true)));normalizeManufacturerLinks(track);};buildCopies();if(reduced)return;let x=0,last=performance.now(),paused=false;const speed=34;viewport.addEventListener('mouseenter',()=>{paused=true;});viewport.addEventListener('mouseleave',()=>{paused=false;last=performance.now();});const firstSetWidth=()=>{const children=Array.from(track.children).slice(0,6);if(!children.length)return 1;const first=children[0].getBoundingClientRect();const lastItem=children[children.length-1].getBoundingClientRect();const styles=getComputedStyle(track);const gap=parseFloat(styles.columnGap||styles.gap||'0')||0;return(lastItem.right-first.left)+gap;};const tick=(now)=>{const dt=Math.min((now-last)/1000,.05);last=now;if(!paused){x-=speed*dt;const wrap=firstSetWidth();if(-x>=wrap)x+=wrap;track.style.transform=`translate3d(${x}px,0,0)`;}requestAnimationFrame(tick);};requestAnimationFrame(tick);window.addEventListener('resize',()=>{track.style.transform='translate3d(0,0,0)';x=0;buildCopies();},{passive:true});
   }
 
-  normalizeManufacturerLinks();makeFooterLogoClickable();polishHeroValues();setupLandingStory();polishProductVisuals();setupInfinitePartners();setupReveal('.nv-about',.18);setupReveal('.nv-gallery',.12);setupProcessTimeline();requestAnimationFrame(()=>normalizeManufacturerLinks());window.setTimeout(()=>normalizeManufacturerLinks(),600);
+  normalizeManufacturerLinks();makeFooterLogoClickable();polishHeroValues();setupProductMegaMenu();setupLandingStory();polishProductVisuals();setupInfinitePartners();setupReveal('.nv-about',.18);setupReveal('.nv-gallery',.12);setupProcessTimeline();requestAnimationFrame(()=>normalizeManufacturerLinks());window.setTimeout(()=>normalizeManufacturerLinks(),600);
 })();
