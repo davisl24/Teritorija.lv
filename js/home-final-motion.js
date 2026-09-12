@@ -184,6 +184,51 @@
       <a class="nv-contact-button nv-coherent-cta" href="./pieprasijums/index.html">Pieteikt projektu <span>↗</span></a>`;
   }
 
+  function resetFooter() {
+    const footer = document.querySelector('.nv-footer');
+    if (!footer || footer.dataset.referenceReady === 'true') return;
+    footer.dataset.referenceReady = 'true';
+    footer.innerHTML = `
+      <div class="nv-shell nv-footer-grid">
+        <div class="nv-footer-brand">
+          <a href="./index.html" aria-label="Teritorija — sākumlapa">
+            <img src="./assets/images/brand/teritorija-logo-light-268w.png" alt="Teritorija">
+          </a>
+          <p>Ārtelpas mēbeles un labiekārtojuma risinājumi ilgtspējīgai videi.</p>
+        </div>
+        <div>
+          <span>Produkti</span>
+          <a href="./produkti/ara-mebeles/index.html">Soli un sēdvietas</a>
+          <a href="./produkti/ara-mebeles/index.html">Atkritumu urnas</a>
+          <a href="./produkti/velo-infrastruktura/index.html">Velo novietnes</a>
+          <a href="./produkti/ara-mebeles/index.html">Puķu kastes</a>
+          <a href="./produkti/index.html">Citi risinājumi</a>
+        </div>
+        <div>
+          <span>Uzņēmums</span>
+          <a href="./par-mums/index.html">Par mums</a>
+          <a href="#realizetie-dzive">Projekti</a>
+          <a href="./katalogi/index.html">Ražotāji</a>
+          <a href="./pieprasijums/index.html">Sadarbība</a>
+          <a href="./pieprasijums/index.html">Kontakti</a>
+        </div>
+        <div>
+          <span>Kontakti</span>
+          <a href="tel:+37129136973">+371 29136973</a>
+          <a href="mailto:einars@teritorija.lv">einars@teritorija.lv</a>
+          <p>Rīga, Latvija</p>
+          <div class="nv-social">
+            <a href="https://www.instagram.com/teritorija.lv/" target="_blank" rel="noopener noreferrer">Instagram</a>
+            <a href="https://www.facebook.com/teritorija.lv" target="_blank" rel="noopener noreferrer">Facebook</a>
+          </div>
+        </div>
+      </div>
+      <div class="nv-shell nv-footer-bottom">
+        <small>© 2026 Teritorija. Visas tiesības aizsargātas.</small>
+        <a href="./privatums/index.html">Privātuma politika</a>
+      </div>`;
+  }
+
   function normalizeImageDimensions() {
     document.querySelectorAll('img[loading="lazy"]').forEach((img) => {
       const apply = () => {
@@ -212,6 +257,7 @@
     ensureStyles();
     setResponsiveHero();
     resetCTA();
+    resetFooter();
     guardKnownBadProofMapping();
     normalizeImageDimensions();
     animateHero();
