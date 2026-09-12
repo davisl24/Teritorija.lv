@@ -42,12 +42,25 @@
     padding-top:54px;
   }
   .home-page .nv-why-item{
+    position:relative;
     min-height:270px;
-    padding:0 38px 12px 0;
+    padding:0 38px 18px 0;
     border-right:1px solid #e8ebe6;
+    transition:opacity .7s ease,transform .75s cubic-bezier(.22,.61,.36,1),background .35s ease;
   }
   .home-page .nv-why-item + .nv-why-item{padding-left:38px}
   .home-page .nv-why-item:last-child{border-right:0;padding-right:0}
+  .home-page .nv-why-item::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:0;
+    width:0;
+    height:2px;
+    background:var(--nv-olive);
+    transition:width .35s cubic-bezier(.22,.61,.36,1);
+  }
+  .home-page .nv-why-item + .nv-why-item::after{left:38px}
   .home-page .nv-why-item>span{
     display:block;
     margin-bottom:44px;
@@ -55,12 +68,14 @@
     font-size:.62rem;
     font-weight:600;
     letter-spacing:.12em;
+    transition:color .3s ease,transform .3s ease;
   }
   .home-page .nv-why-item h3{
     margin:0 0 18px;
     font-size:1.35rem;
     font-weight:500;
     letter-spacing:-.03em;
+    transition:transform .3s ease,color .3s ease;
   }
   .home-page .nv-why-item p{
     max-width:34ch;
@@ -77,21 +92,26 @@
     font-weight:500;
     line-height:1.55;
   }
+  .home-page .nv-why-item:hover::after{width:calc(100% - 38px)}
+  .home-page .nv-why-item:last-child:hover::after{width:100%}
+  .home-page .nv-why-item:hover>span{color:var(--nv-olive);transform:translateY(-2px)}
+  .home-page .nv-why-item:hover h3{transform:translateY(-2px);color:var(--nv-olive)}
 
+  /* Story reveal: intentionally paced so the three proof points arrive one-by-one. */
   .home-page .nv-about--story .nv-why-intro>* ,
   .home-page .nv-about--story .nv-why-item{
     opacity:0;
-    transform:translateY(22px);
-    transition:opacity .7s ease,transform .75s cubic-bezier(.22,.61,.36,1);
+    transform:translateY(24px);
   }
-  .home-page .nv-about--story.is-revealed .nv-about-label{opacity:1;transform:none;transition-delay:.02s}
-  .home-page .nv-about--story.is-revealed h2{opacity:1;transform:none;transition-delay:.1s}
-  .home-page .nv-about--story.is-revealed .nv-why-lead{opacity:1;transform:none;transition-delay:.2s}
-  .home-page .nv-about--story.is-revealed .nv-about-cta{opacity:1;transform:none;transition-delay:.3s}
-  .home-page .nv-about--story.is-revealed .nv-why-item:nth-child(1){opacity:1;transform:none;transition-delay:.42s}
-  .home-page .nv-about--story.is-revealed .nv-why-item:nth-child(2){opacity:1;transform:none;transition-delay:.52s}
-  .home-page .nv-about--story.is-revealed .nv-why-item:nth-child(3){opacity:1;transform:none;transition-delay:.62s}
+  .home-page .nv-about--story.is-revealed .nv-about-label{opacity:1;transform:none;transition-delay:.04s}
+  .home-page .nv-about--story.is-revealed h2{opacity:1;transform:none;transition-delay:.14s}
+  .home-page .nv-about--story.is-revealed .nv-why-lead{opacity:1;transform:none;transition-delay:.30s}
+  .home-page .nv-about--story.is-revealed .nv-about-cta{opacity:1;transform:none;transition-delay:.46s}
+  .home-page .nv-about--story.is-revealed .nv-why-item:nth-child(1){opacity:1;transform:none;transition-delay:.72s}
+  .home-page .nv-about--story.is-revealed .nv-why-item:nth-child(2){opacity:1;transform:none;transition-delay:1.16s}
+  .home-page .nv-about--story.is-revealed .nv-why-item:nth-child(3){opacity:1;transform:none;transition-delay:1.60s}
 
+  /* Solutions: 2x2 editorial layout. Wider cards create breathing room and make the imagery useful. */
   .home-page .nv-solutions--curated{
     padding-top:102px!important;
     padding-bottom:118px!important;
@@ -99,17 +119,17 @@
   .home-page .nv-solutions--curated .nv-section-head{margin-bottom:34px!important}
   .home-page .nv-solutions--curated .nv-solution-list{
     display:grid!important;
-    grid-template-columns:repeat(4,minmax(0,1fr))!important;
-    gap:18px!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:22px!important;
   }
   .home-page .nv-solutions--curated .nv-solution{
-    display:flex!important;
-    flex-direction:column;
-    min-height:0!important;
+    display:grid!important;
+    grid-template-columns:minmax(0,1.18fr) minmax(250px,.82fr)!important;
+    min-height:330px!important;
     overflow:hidden!important;
     background:#fff!important;
     border:1px solid #e8ebe6!important;
-    border-radius:18px!important;
+    border-radius:20px!important;
     color:var(--nv-ink)!important;
     text-decoration:none;
     box-shadow:none!important;
@@ -120,57 +140,57 @@
     position:relative;
     display:grid;
     place-items:center;
-    min-height:260px;
+    min-height:330px;
     overflow:hidden;
-    background:#f6f7f4;
+    background:#f7f8f5;
   }
   .home-page .nv-solutions--curated .nv-solution-media img{
     position:relative!important;
     inset:auto!important;
     width:100%!important;
     height:100%!important;
-    min-height:260px;
+    min-height:330px;
     object-fit:cover!important;
     transform:none!important;
     filter:none!important;
-    transition:transform .55s cubic-bezier(.22,.61,.36,1)!important;
+    transition:transform .6s cubic-bezier(.22,.61,.36,1)!important;
   }
   .home-page .nv-solutions--curated .nv-solution-product .nv-solution-media img{
     object-fit:contain!important;
-    padding:38px!important;
+    padding:44px!important;
     background:#f8f9f6;
   }
   .home-page .nv-solutions--curated .nv-solution-copy{
     position:relative!important;
     inset:auto!important;
-    display:grid!important;
-    grid-template-columns:auto 1fr auto;
-    gap:14px;
-    align-items:start;
-    min-height:190px;
-    padding:22px 22px 24px!important;
+    display:flex!important;
+    flex-direction:column;
+    min-height:330px;
+    padding:28px 26px 26px!important;
     background:#fff!important;
     color:var(--nv-ink)!important;
   }
   .home-page .nv-solutions--curated .nv-solution-copy>span{
-    padding-top:3px;
+    margin-bottom:auto;
     color:#8a9188!important;
     font-size:.58rem!important;
     font-weight:600;
   }
+  .home-page .nv-solutions--curated .nv-solution-copy>div{margin-top:auto}
   .home-page .nv-solutions--curated .nv-solution h3{
-    margin:0 0 11px!important;
+    margin:0 0 12px!important;
     color:var(--nv-ink)!important;
-    font-size:1.28rem!important;
+    font-size:1.45rem!important;
     font-weight:500!important;
     line-height:1.05!important;
-    letter-spacing:-.035em!important;
+    letter-spacing:-.04em!important;
   }
   .home-page .nv-solutions--curated .nv-solution p{
-    margin:0 0 16px!important;
+    max-width:32ch;
+    margin:0 0 17px!important;
     color:#6e756e!important;
-    font-size:.72rem!important;
-    line-height:1.55!important;
+    font-size:.74rem!important;
+    line-height:1.58!important;
   }
   .home-page .nv-solutions--curated .nv-solution small{
     color:#5e675f!important;
@@ -179,6 +199,9 @@
     letter-spacing:.04em;
   }
   .home-page .nv-solutions--curated .nv-solution b{
+    position:absolute;
+    right:26px;
+    top:26px;
     color:var(--nv-olive)!important;
     font-size:.95rem!important;
     font-weight:400!important;
@@ -186,11 +209,17 @@
   }
   .home-page .nv-solutions--curated .nv-solution:hover{
     transform:translateY(-6px);
-    border-color:#d9dfd7!important;
-    box-shadow:0 20px 48px rgba(20,28,22,.08)!important;
+    border-color:#d6ddd5!important;
+    box-shadow:0 24px 56px rgba(20,28,22,.085)!important;
   }
   .home-page .nv-solutions--curated .nv-solution:hover .nv-solution-media img{transform:scale(1.025)!important}
   .home-page .nv-solutions--curated .nv-solution:hover b{transform:translate(2px,-2px)}
+
+  /* Alternate the lower row for a quieter editorial rhythm. */
+  .home-page .nv-solutions--curated .nv-solution:nth-child(3) .nv-solution-media,
+  .home-page .nv-solutions--curated .nv-solution:nth-child(4) .nv-solution-media{order:2}
+  .home-page .nv-solutions--curated .nv-solution:nth-child(3) .nv-solution-copy,
+  .home-page .nv-solutions--curated .nv-solution:nth-child(4) .nv-solution-copy{order:1}
 }
 
 @media (prefers-reduced-motion:reduce){
