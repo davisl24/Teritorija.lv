@@ -156,3 +156,60 @@
 @media(prefers-reduced-motion:reduce){
   .home-page .nv-about-copy>*,.home-page .nv-about-media,.home-page .nv-gallery-item,.home-page .nv-process-list details{opacity:1!important;transform:none!important;transition:none!important}
 }
+
+/* Desktop selected A pass — dark hero / seamless proof motion / centered CTA / compact footer */
+@media(min-width:1025px){
+  /* Hero art direction: keep current composition, shift only the mood toward the dark premium reference. */
+  .home-page .nv-hero{background:#0d1712!important;color:#fff!important}
+  .home-page .nv-hero-media::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(8,14,10,.88) 0%,rgba(8,14,10,.70) 31%,rgba(8,14,10,.24) 58%,rgba(8,14,10,.08) 100%);pointer-events:none}
+  .home-page .nv-hero-media img{filter:brightness(.64) saturate(.72) contrast(1.04)!important;transform:scale(1.01)}
+  .home-page .nv-hero-copy{color:#fff!important}
+  .home-page .nv-hero h1,.home-page .nv-hero h1 span,.home-page .nv-hero h1 em{color:#fff!important}
+  .home-page .nv-hero-kicker{color:rgba(255,255,255,.68)!important}
+  .home-page .nv-hero-kicker::before{background:rgba(255,255,255,.72)!important}
+  .home-page .nv-hero-lead{color:rgba(255,255,255,.74)!important}
+  .home-page .nv-hero-trust>div{border-color:rgba(255,255,255,.2)!important}
+  .home-page .nv-trust-icon svg{stroke:#fff!important}
+  .home-page .nv-hero-trust p{color:rgba(255,255,255,.75)!important}
+  .home-page .nv-button-primary{color:#0d1712!important;background:#fff!important;border-color:#fff!important;box-shadow:0 10px 28px rgba(0,0,0,.14)!important}
+  .home-page .nv-button-primary:hover{background:#f1f1ec!important}
+  .home-page .nv-button-secondary{color:#fff!important;background:rgba(255,255,255,.04)!important;border-color:rgba(255,255,255,.46)!important}
+  .home-page .nv-button-secondary:hover{background:rgba(255,255,255,.1)!important}
+
+  /* Realised/social proof — one calm endless horizontal wall. */
+  .home-page .nv-gallery{width:100%!important;max-width:none!important;padding:104px 0 118px!important;overflow:hidden!important}
+  .home-page .nv-gallery>.nv-section-head{width:min(calc(100% - 64px),1440px);margin-left:auto;margin-right:auto}
+  .home-page .nv-gallery-grid{display:flex!important;grid-template-columns:none!important;gap:18px!important;align-items:flex-start!important;width:max-content!important;min-width:max-content!important;animation:nv-proof-marquee 42s linear infinite!important;will-change:transform}
+  .home-page .nv-gallery:hover .nv-gallery-grid{animation-play-state:paused!important}
+  .home-page .nv-gallery-item,.home-page .nv-gallery-large,.home-page .nv-gallery-wide{flex:0 0 330px!important;width:330px!important;margin-top:0!important;opacity:1!important;transform:none!important;overflow:hidden!important;background:#fff!important;border:1px solid #e7eae5!important;border-radius:18px!important;box-shadow:none!important}
+  .home-page .nv-gallery-item:nth-child(3n+1){flex-basis:300px!important;width:300px!important}
+  .home-page .nv-gallery-item:nth-child(3n+2){flex-basis:350px!important;width:350px!important}
+  .home-page .nv-gallery-item img{width:100%!important;aspect-ratio:4/3!important;border-radius:0!important;box-shadow:none!important;transition:transform .55s cubic-bezier(.22,.61,.36,1)!important}
+  .home-page .nv-gallery-item>div{padding:18px 18px 22px!important}
+  .home-page .nv-gallery-item:hover{transform:translateY(-3px)!important}
+  .home-page .nv-gallery-item:hover img{transform:scale(1.018)!important;box-shadow:none!important}
+  @keyframes nv-proof-marquee{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
+
+  /* CTA back to the compact centred composition. */
+  .home-page .nv-contact{padding:82px 0 86px!important}
+  .home-page .nv-contact-inner{width:min(calc(100% - 64px),760px)!important;gap:14px!important}
+  .home-page .nv-contact-eyebrow{margin:0 0 4px!important;color:#8a9188!important;font-size:.64rem!important;letter-spacing:.18em!important;text-transform:uppercase}
+  .home-page .nv-contact h2{max-width:12ch!important;margin:0 auto!important;font-size:clamp(2.8rem,4.2vw,4.4rem)!important;line-height:.98!important}
+  .home-page .nv-contact p{margin:8px auto 0!important;font-size:.78rem!important;line-height:1.55!important}
+  .home-page .nv-contact-button{margin-top:14px!important;min-width:190px!important;justify-content:space-between!important;padding:13px 18px!important}
+  .home-page .nv-contact-support{margin-top:2px!important;font-size:.68rem!important}
+
+  /* Footer back to a small, quiet centre point. */
+  .home-page .nv-footer{padding:38px 0 16px!important;text-align:center!important}
+  .home-page .nv-footer-grid{display:block!important;width:min(calc(100% - 64px),720px)!important}
+  .home-page .nv-footer-grid>div:not(.nv-footer-brand){display:none!important}
+  .home-page .nv-footer-brand{display:flex!important;flex-direction:column!important;align-items:center!important}
+  .home-page .nv-footer-brand img{width:112px!important;margin:0 auto 10px!important}
+  .home-page .nv-footer-brand p{max-width:36ch!important;margin:0 auto!important;font-size:.66rem!important;color:rgba(255,255,255,.55)!important}
+  .home-page .nv-footer-bottom{justify-content:center!important;gap:18px!important;margin-top:24px!important;padding-top:12px!important}
+  .home-page .nv-footer-bottom small,.home-page .nv-footer-bottom a{font-size:.56rem!important}
+}
+
+@media(min-width:1025px) and (prefers-reduced-motion:reduce){
+  .home-page .nv-gallery-grid{animation:none!important;transform:none!important}
+}
