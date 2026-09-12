@@ -111,22 +111,12 @@
     if (!document.body.classList.contains('home-page')) return;
     if (document.querySelector('script[data-home-motion]')) return;
 
-    const loadProductGrid = () => {
-      if (document.querySelector('script[data-home-products-grid]')) return;
-      const grid = document.createElement('script');
-      grid.src = './js/home-products-grid.js';
-      grid.defer = true;
-      grid.dataset.homeProductsGrid = 'true';
-      document.head.appendChild(grid);
-    };
-
     const loadNextPass = () => {
       if (document.querySelector('script[data-home-next-pass]')) return;
       const next = document.createElement('script');
       next.src = './js/home-next-pass.js';
       next.defer = true;
       next.dataset.homeNextPass = 'true';
-      next.addEventListener('load', loadProductGrid, { once: true });
       document.head.appendChild(next);
     };
 
