@@ -147,7 +147,7 @@
           <h2 id="gallery-title">Realizēti dzīvē</h2>
           <p class="nv-proof-social-lead">Ieskats reālos Teritorija.lv projektos un publicētajos darbos.</p>
         </div>
-        <div class="nv-proof-source-note">Instagram + Facebook</div>
+        <div class="nv-proof-source-note">Sociālie ieraksti</div>
       </div>
       <div class="nv-proof-window" aria-label="Teritorija.lv reālo projektu ieraksti">
         <div class="nv-proof-track">${cards}${duplicates}</div>
