@@ -123,3 +123,29 @@
     border-top:1px solid rgba(255,255,255,.2)!important;
   }
 }
+
+.home-page .nv-scroll-top{
+  position:fixed;
+  right:24px;
+  bottom:24px;
+  z-index:120;
+  display:grid;
+  place-items:center;
+  width:46px;
+  height:46px;
+  padding:0;
+  color:#fff;
+  background:#18372c;
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:50%;
+  box-shadow:0 12px 30px rgba(12,28,20,.18);
+  cursor:pointer;
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(10px);
+  transition:opacity .22s ease,transform .22s ease,visibility .22s ease,background .2s ease;
+}
+.home-page .nv-scroll-top.is-visible{opacity:1;visibility:visible;transform:none}
+.home-page .nv-scroll-top:hover{background:#0f2b20}
+@media(max-width:767px){.home-page .nv-scroll-top{right:16px;bottom:16px;width:42px;height:42px}}
+@media(prefers-reduced-motion:reduce){.home-page .nv-scroll-top{transition:none}}
