@@ -176,6 +176,29 @@
     text-decoration:none;
   }
 
+  /* Hero art-direction cleanup: white + deep green + natural wood only. */
+  .home-page .nv-hero h1,
+  .home-page .nv-hero h1 span,
+  .home-page .nv-hero h1 em{
+    color:#19352a!important;
+  }
+  .home-page .nv-hero-media img{
+    filter:saturate(.78) contrast(.97) brightness(1.01);
+  }
+  .home-page .nv-button,
+  .home-page .nv-header-cta{
+    border-radius:999px!important;
+  }
+  .home-page .nv-button-primary{
+    background:#19352a!important;
+    border-color:#19352a!important;
+  }
+  .home-page .nv-button-secondary{
+    color:#19352a!important;
+    background:rgba(255,255,255,.88)!important;
+    border-color:rgba(25,53,42,.28)!important;
+  }
+
   /* Risinājumi ārtelpai now owns the product hierarchy. */
   .home-page .nv-solutions--hierarchy{
     padding-top:108px!important;
@@ -350,6 +373,180 @@
   }
 
   .home-page .nv-solution-subcats a:hover span{
+    transform:translateX(4px);
+  }
+
+  /* Realizēti risinājumi — proof/story, not a gallery grid. */
+  .home-page .nv-proof{
+    padding-top:118px!important;
+    padding-bottom:124px!important;
+    background:#fff;
+  }
+  .home-page .nv-proof-head{
+    align-items:end!important;
+    margin-bottom:38px!important;
+  }
+  .home-page .nv-proof-eyebrow{
+    margin:0 0 10px;
+    color:#7a837b;
+    font-size:.6rem;
+    font-weight:600;
+    letter-spacing:.15em;
+    text-transform:uppercase;
+  }
+  .home-page .nv-proof-head h2{
+    margin:0;
+    color:#19352a;
+    font-size:clamp(2.6rem,4vw,4.6rem);
+    font-weight:400;
+    line-height:.95;
+    letter-spacing:-.055em;
+  }
+  .home-page .nv-proof-featured{
+    display:grid;
+    grid-template-columns:minmax(0,1.55fr) minmax(340px,.75fr);
+    gap:42px;
+    align-items:stretch;
+    margin-bottom:54px;
+  }
+  .home-page .nv-proof-featured-media{
+    display:block;
+    min-height:560px;
+    overflow:hidden;
+    border-radius:24px;
+    background:#f3f5f2;
+  }
+  .home-page .nv-proof-featured-media img{
+    width:100%;
+    height:100%;
+    min-height:560px;
+    object-fit:cover;
+  }
+  .home-page .nv-proof-featured-copy{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding:36px 12px 36px 4px;
+  }
+  .home-page .nv-proof-meta{
+    margin:0 0 16px;
+    color:#768078;
+    font-size:.62rem;
+    font-weight:600;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+  }
+  .home-page .nv-proof-featured h3{
+    max-width:8ch;
+    margin:0 0 20px;
+    color:#19352a;
+    font-size:clamp(2.7rem,4.2vw,4.8rem);
+    font-weight:400;
+    line-height:.94;
+    letter-spacing:-.055em;
+  }
+  .home-page .nv-proof-lead{
+    max-width:39ch;
+    margin:0 0 24px;
+    color:#657067;
+    font-size:.9rem;
+    line-height:1.65;
+  }
+  .home-page .nv-proof-specs{
+    display:grid;
+    gap:7px;
+    margin:0 0 26px;
+    padding:18px 0;
+    border-top:1px solid #e5e9e4;
+    border-bottom:1px solid #e5e9e4;
+  }
+  .home-page .nv-proof-specs span{
+    color:#38443b;
+    font-size:.74rem;
+  }
+  .home-page .nv-proof-maker{
+    margin:0 0 24px;
+    color:#19352a;
+    font-size:.64rem;
+    font-weight:600;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+  }
+  .home-page .nv-proof-link{
+    display:inline-flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:26px;
+    width:max-content;
+    min-width:176px;
+    padding:13px 18px;
+    color:#fff;
+    background:#19352a;
+    border-radius:999px;
+    font-size:.74rem;
+    text-decoration:none;
+  }
+  .home-page .nv-proof-secondary{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:24px;
+  }
+  .home-page .nv-proof-card{
+    min-width:0;
+  }
+  .home-page .nv-proof-card-media{
+    display:block;
+    aspect-ratio:4/3;
+    overflow:hidden;
+    border-radius:18px;
+    background:#f3f5f2;
+  }
+  .home-page .nv-proof-card-media img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+  }
+  .home-page .nv-proof-card-copy{
+    position:relative;
+    padding:20px 4px 0;
+  }
+  .home-page .nv-proof-card h3{
+    margin:0 0 9px;
+    color:#19352a;
+    font-size:1.45rem;
+    font-weight:400;
+    line-height:1.05;
+    letter-spacing:-.035em;
+  }
+  .home-page .nv-proof-card-copy>p:not(.nv-proof-meta){
+    max-width:40ch;
+    margin:0 0 16px;
+    color:#6e786f;
+    font-size:.76rem;
+    line-height:1.55;
+  }
+  .home-page .nv-proof-card-copy>span{
+    display:block;
+    margin-bottom:16px;
+    color:#19352a;
+    font-size:.6rem;
+    font-weight:600;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+  }
+  .home-page .nv-proof-card-copy>a{
+    display:inline-flex;
+    align-items:center;
+    gap:12px;
+    color:#19352a;
+    font-size:.72rem;
+    text-decoration:none;
+  }
+  .home-page .nv-proof-card-copy>a b{
+    font-weight:400;
+    transition:transform .2s ease;
+  }
+  .home-page .nv-proof-card-copy>a:hover b{
     transform:translateX(4px);
   }
 }
