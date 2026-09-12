@@ -90,7 +90,7 @@
         </div>
         <div class="nv-tray-group">
           <p class="nv-tray-eyebrow">Iepazīsti vairāk</p>
-          <div class="nv-tray-links"><a href="./par-mums/index.html">Par uzņēmumu</a><a href="./katalogi/index.html">Ražotāji</a><a href="#realizetie-projekti">Realizētie projekti</a><a href="#ka-mes-stradajam">Kā mēs strādājam</a></div>
+          <div class="nv-tray-links"><a href="./par-mums/index.html">Par uzņēmumu</a><a href="./katalogi/index.html">Ražotāji</a><a href="#realizetie-projekti">Realizēti risinājumi</a><a href="#ka-mes-stradajam">Kā mēs strādājam</a></div>
         </div>
       </div>
 
@@ -212,7 +212,57 @@
     document.querySelector('.nv-products')?.remove();
   }
 
+  function setupProofProjects(){
+    const section=document.querySelector('.nv-gallery');
+    if(!section)return;
+
+    section.id='realizetie-projekti';
+    section.classList.add('nv-proof');
+    section.innerHTML=`
+      <div class="nv-section-head nv-proof-head">
+        <div><p class="nv-proof-eyebrow">Reāli projekti · reāli risinājumi</p><h2 id="gallery-title">Realizēti risinājumi</h2></div>
+        <a class="nv-text-link" href="https://www.facebook.com/teritorija.lv" target="_blank" rel="noopener noreferrer">Skatīt visus <span>↗</span></a>
+      </div>
+
+      <article class="nv-proof-featured nv-gallery-item">
+        <a class="nv-proof-featured-media" href="https://www.instagram.com/p/CxC8cQqsao5/?img_index=1" target="_blank" rel="noopener noreferrer" aria-label="Madonas Valsts ģimnāzijas ārtelpas projekts">
+          <img src="./assets/images/projects/madona-gimnazija.jpg" alt="Madonas Valsts ģimnāzijas ārtelpas mēbeles" loading="lazy" onerror="this.onerror=null;this.src='./assets/images/products/aplveida-soli.jpg';">
+        </a>
+        <div class="nv-proof-featured-copy">
+          <p class="nv-proof-meta">Madona · Izglītības vide</p>
+          <h3>Ārtelpa skolai</h3>
+          <p class="nv-proof-lead">Madonas Valsts ģimnāzijas iekšpagalmā uzstādītas ZANO Domino sērijas āra mēbeles, izveidojot vienotu sēdvietu un galda zonu.</p>
+          <div class="nv-proof-specs">
+            <span>Domino 90 sols 02.440.1</span>
+            <span>Domino sols 02.040.1</span>
+            <span>Domino galds 13.440.1</span>
+            <span>Soft puķu kaste 06.012.S</span>
+          </div>
+          <p class="nv-proof-maker">ZANO · Āra mēbeles</p>
+          <a class="nv-proof-link" href="https://www.instagram.com/p/CxC8cQqsao5/?img_index=1" target="_blank" rel="noopener noreferrer">Skatīt projektu <span>→</span></a>
+        </div>
+      </article>
+
+      <div class="nv-proof-secondary">
+        <article class="nv-proof-card nv-gallery-item">
+          <a class="nv-proof-card-media" href="https://www.instagram.com/p/CnePyvlotwi/?img_index=1" target="_blank" rel="noopener noreferrer"><img src="./assets/images/projects/adazi-sawo-servisa-stacija.jpg" alt="SAWO velo servisa stacija Ādažu novadā" loading="lazy" onerror="this.onerror=null;this.src='./assets/images/products/velo-servisa-stacija.jpg';"></a>
+          <div class="nv-proof-card-copy"><p class="nv-proof-meta">Ādažu novads · Velo infrastruktūra</p><h3>Velo servisa stacija</h3><p>Uzstādīta SAWO bāzes velosipēdu servisa stacija ar instrumentiem un pumpi ikdienas velo apkopei.</p><span>SAWO</span><a href="https://www.instagram.com/p/CnePyvlotwi/?img_index=1" target="_blank" rel="noopener noreferrer">Skatīt <b>→</b></a></div>
+        </article>
+
+        <article class="nv-proof-card nv-gallery-item">
+          <a class="nv-proof-card-media" href="https://www.instagram.com/p/CwOBW4cMLSf/?img_index=1" target="_blank" rel="noopener noreferrer"><img src="./assets/images/projects/biks-out-sider-piknika-galds.jpg" alt="OUT-SIDER piknika galds BIKS bērnu laukumā" loading="lazy" onerror="this.onerror=null;this.src='./assets/images/products/aplveida-soli.jpg';"></a>
+          <div class="nv-proof-card-copy"><p class="nv-proof-meta">BIKS · Publiskā ārtelpa</p><h3>Piknika zona</h3><p>OUT-SIDER PLATEAU PICNIC ROUND #203 galds 4–6 cilvēkiem ar integrētu vietu velosipēdam un vietu ratiņkrēslam.</p><span>OUT-SIDER</span><a href="https://www.instagram.com/p/CwOBW4cMLSf/?img_index=1" target="_blank" rel="noopener noreferrer">Skatīt <b>→</b></a></div>
+        </article>
+
+        <article class="nv-proof-card nv-gallery-item">
+          <a class="nv-proof-card-media" href="https://www.instagram.com/p/ChmMSyGINfO/?img_index=1" target="_blank" rel="noopener noreferrer"><img src="./assets/images/projects/talsi-vilkmuizas-ezers.jpg" alt="Labiekārtojums pie Vilkmuižas ezera Talsos" loading="lazy" onerror="this.onerror=null;this.src='./assets/images/products/velo-nojume.jpg';"></a>
+          <div class="nv-proof-card-copy"><p class="nv-proof-meta">Talsi · Vilkmuižas ezers</p><h3>Labiekārtojums pie ezera</h3><p>Sadarbībā ar BALTA istaba arhitektiem uzstādīti ZANO Origami sērijas soli un Flat Bicycle Rack 05.025.</p><span>ZANO · Āra mēbeles + velo infrastruktūra</span><a href="https://www.instagram.com/p/ChmMSyGINfO/?img_index=1" target="_blank" rel="noopener noreferrer">Skatīt <b>→</b></a></div>
+        </article>
+      </div>`;
+  }
+
   ensureStyles();
   setupNavigationTray();
   setupSolutionsHierarchy();
+  setupProofProjects();
 })();
