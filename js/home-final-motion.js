@@ -2,13 +2,24 @@
   'use strict';
   if (!document.body.classList.contains('home-page')) return;
 
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
   function injectStyles() {
     if (document.querySelector('style[data-home-final-motion]')) return;
     const style = document.createElement('style');
     style.dataset.homeFinalMotion = 'true';
     style.textContent = `
+      .home-page .nv-hero-partner-track{
+        animation:nvTopPartnersForced 16s linear infinite!important;
+        animation-play-state:running!important;
+        will-change:transform;
+      }
+      .home-page .nv-hero-partners:hover .nv-hero-partner-track{
+        animation-play-state:running!important;
+      }
+      @keyframes nvTopPartnersForced{
+        from{transform:translate3d(0,0,0)}
+        to{transform:translate3d(-50%,0,0)}
+      }
+
       @media (min-width:1025px){
         .home-page .nv-motion-item{
           opacity:0;
@@ -64,20 +75,6 @@
         .home-page .nv-text-link span{transition:transform .25s ease}
         .home-page .nv-contact-button:hover span,
         .home-page .nv-text-link:hover span{transform:translateX(4px)}
-      }
-
-      @media (prefers-reduced-motion:reduce){
-        .home-page .nv-motion-item,
-        .home-page .nv-hero .nv-hero-kicker,
-        .home-page .nv-hero h1,
-        .home-page .nv-hero .nv-hero-lead,
-        .home-page .nv-hero .nv-hero-actions,
-        .home-page .nv-hero .nv-hero-trust{
-          opacity:1!important;
-          transform:none!important;
-          animation:none!important;
-          transition:none!important;
-        }
       }
     `;
     document.head.appendChild(style);
@@ -140,7 +137,7 @@
     const items = Array.from(document.querySelectorAll('.nv-motion-item'));
     if (!items.length) return;
 
-    if (reduced || !('IntersectionObserver' in window)) {
+    if (!('IntersectionObserver' in window)) {
       items.forEach((item) => item.classList.add('is-visible'));
       return;
     }
