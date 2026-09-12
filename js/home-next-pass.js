@@ -144,47 +144,75 @@
     tray.addEventListener('mouseleave',closePanel);
   }
 
-  function setupProductGrid(){
-    const section=document.querySelector('.nv-products');
-    const current=section?.querySelector('.nv-product-rail, .nv-editorial-products, .nv-product-grid-6');
-    if(!section||!current)return;
+  function setupSolutionsHierarchy(){
+    const section=document.querySelector('.nv-solutions');
+    const list=section?.querySelector('.nv-solution-list');
+    if(!section||!list)return;
 
-    section.classList.remove('nv-products--editorial');
-    section.classList.add('nv-products--catalogue');
+    section.classList.add('nv-solutions--hierarchy');
+    list.innerHTML=`
+      <article class="nv-solution-card" data-solution="furniture">
+        <a class="nv-solution-main" href="./produkti/ara-mebeles/index.html">
+          <div class="nv-solution-media"><img src="https://www.zano-streetfurniture.com/images/11675/02-012-1-lawka-miejska-soft-stal-nierdzewna-png.png" alt="Āra mēbeles" loading="lazy" referrerpolicy="no-referrer"></div>
+          <div class="nv-solution-copy"><span>01</span><div><h3>Āra mēbeles</h3><p>Soli, galdi, urnas un puķu kastes publiskai un privātai ārtelpai.</p><small>ZANO · URBASTYLE · GOVA PLAST</small></div><b>↗</b></div>
+        </a>
+        <div class="nv-solution-subcats" aria-label="Āra mēbeļu apakškategorijas">
+          <a href="./produkti/ara-mebeles/index.html">Soli <span>→</span></a>
+          <a href="./produkti/ara-mebeles/index.html">Galdi <span>→</span></a>
+          <a href="./produkti/ara-mebeles/index.html">Urnas <span>→</span></a>
+          <a href="./produkti/ara-mebeles/index.html">Puķu kastes <span>→</span></a>
+        </div>
+      </article>
 
-    const grid=document.createElement('div');
-    grid.className='nv-product-grid-6';
-    grid.setAttribute('aria-label','Labiekārtošanas elementu kategorijas');
-    grid.innerHTML=`
-      <a class="nv-product-tile" href="./produkti/ara-mebeles/index.html">
-        <div class="nv-product-tile-media" style="background:#fff"><img src="https://www.zano-streetfurniture.com/images/11675/02-012-1-lawka-miejska-soft-stal-nierdzewna-png.png" alt="ZANO āra sols" loading="lazy" referrerpolicy="no-referrer"></div>
-        <div class="nv-product-tile-body"><div><span class="nv-product-tile-index">01</span><h3>Soli</h3><p>Publiskām, komerciālām un privātām ārtelpām.</p></div><span class="nv-product-tile-arrow">↗</span></div>
-      </a>
-      <a class="nv-product-tile" href="./produkti/ara-mebeles/index.html">
-        <div class="nv-product-tile-media" style="background:#fff"><img src="https://www.zano-streetfurniture.com/images/9765/table-soft-02-612-stainless-steel.png" alt="ZANO āra galds" loading="lazy" referrerpolicy="no-referrer"></div>
-        <div class="nv-product-tile-body"><div><span class="nv-product-tile-index">02</span><h3>Galdi</h3><p>Atpūtas, piknika un publiskajām zonām.</p></div><span class="nv-product-tile-arrow">↗</span></div>
-      </a>
-      <a class="nv-product-tile" href="./produkti/velo-stativi/index.html">
-        <div class="nv-product-tile-media" style="background:#fff"><img src="https://www.zano-streetfurniture.com/images/11117/bicycle-stand-soft-sn.png" alt="ZANO velo statīvs" loading="lazy" referrerpolicy="no-referrer"></div>
-        <div class="nv-product-tile-body"><div><span class="nv-product-tile-index">03</span><h3>Velo statīvi</h3><p>Drošai un pārdomātai velosipēdu novietošanai.</p></div><span class="nv-product-tile-arrow">↗</span></div>
-      </a>
-      <a class="nv-product-tile" href="./produkti/velo-nojumes/index.html">
-        <div class="nv-product-tile-media" style="background:#fff"><img src="https://sawo.com.pl/wp-content/uploads/2025/11/pam-s-gl-icon-700x700c.jpg" alt="SAWO velo nojume PAM S GL" loading="lazy" referrerpolicy="no-referrer"></div>
-        <div class="nv-product-tile-body"><div><span class="nv-product-tile-index">04</span><h3>Velo nojumes</h3><p>Aizsargātai un organizētai velosipēdu glabāšanai.</p></div><span class="nv-product-tile-arrow">↗</span></div>
-      </a>
-      <a class="nv-product-tile" href="./produkti/velo-infrastruktura/index.html">
-        <div class="nv-product-tile-media" style="background:#fff"><img src="https://sawo.com.pl/wp-content/uploads/2024/01/stacje-naprawy-1-main-202401.jpg" alt="SAWO velo servisa stacija" loading="lazy" referrerpolicy="no-referrer"></div>
-        <div class="nv-product-tile-body"><div><span class="nv-product-tile-index">05</span><h3>Servisa stacijas</h3><p>Publiski pieejami risinājumi velosipēdu apkopei.</p></div><span class="nv-product-tile-arrow">↗</span></div>
-      </a>
-      <a class="nv-product-tile" href="./produkti/rotalu-laukumi/index.html">
-        <div class="nv-product-tile-media" style="background:#fff"><img src="https://freekids.pl/wp-content/uploads/2025/01/0130003_ahoy_11_wiz.1-scaled-800x513.jpg" alt="FreeKids Ahoy 11 rotaļu elements" loading="lazy" referrerpolicy="no-referrer"></div>
-        <div class="nv-product-tile-body"><div><span class="nv-product-tile-index">06</span><h3>Rotaļu elementi</h3><p>Rotaļu un aktivitāšu risinājumi dažādām vecuma grupām.</p></div><span class="nv-product-tile-arrow">↗</span></div>
-      </a>`;
+      <article class="nv-solution-card" data-solution="bike">
+        <a class="nv-solution-main" href="./produkti/velo-infrastruktura/index.html">
+          <div class="nv-solution-media"><img src="https://sawo.com.pl/wp-content/uploads/2025/11/pam-s-gl-icon-700x700c.jpg" alt="Velo infrastruktūra" loading="lazy" referrerpolicy="no-referrer"></div>
+          <div class="nv-solution-copy"><span>02</span><div><h3>Velo infrastruktūra</h3><p>Droši un pārdomāti risinājumi velosipēdu novietošanai, glabāšanai un apkopei.</p><small>SAWO · ZANO</small></div><b>↗</b></div>
+        </a>
+        <div class="nv-solution-subcats" aria-label="Velo infrastruktūras apakškategorijas">
+          <a href="./produkti/velo-stativi/index.html">Velo statīvi <span>→</span></a>
+          <a href="./produkti/velo-nojumes/index.html">Velo nojumes <span>→</span></a>
+          <a href="./produkti/velo-infrastruktura/index.html">Servisa stacijas <span>→</span></a>
+        </div>
+      </article>
 
-    current.replaceWith(grid);
+      <article class="nv-solution-card" data-solution="play">
+        <a class="nv-solution-main" href="./produkti/rotalu-laukumi/index.html">
+          <div class="nv-solution-media"><img src="https://freekids.pl/wp-content/uploads/2025/01/0130003_ahoy_11_wiz.1-scaled-800x513.jpg" alt="Rotaļu laukumi" loading="lazy" referrerpolicy="no-referrer"></div>
+          <div class="nv-solution-copy"><span>03</span><div><h3>Rotaļu laukumi</h3><p>Sertificēti rotaļu un aktivitāšu risinājumi dažādām vecuma grupām.</p><small>FreeKids · OUT-SIDER</small></div><b>↗</b></div>
+        </a>
+        <div class="nv-solution-subcats" aria-label="Rotaļu laukumu apakškategorijas">
+          <a href="./produkti/rotalu-laukumi/index.html">Rotaļu elementi <span>→</span></a>
+          <a href="./produkti/rotalu-laukumi/index.html">Aktivitāšu risinājumi <span>→</span></a>
+        </div>
+      </article>
+
+      <article class="nv-solution-card" data-solution="recycled">
+        <a class="nv-solution-main" href="./produkti/parstradata-plastmasa/index.html">
+          <div class="nv-solution-media"><img src="https://www.govaplast.com/sites/default/files/styles/realisation_slider/public/2021-09/realisation-mona-bench-govaplast.jpg" alt="Pārstrādāti materiāli" loading="lazy" referrerpolicy="no-referrer"></div>
+          <div class="nv-solution-copy"><span>04</span><div><h3>Pārstrādāti materiāli</h3><p>Ilgmūžīgi un viegli kopjami pilsētvides produkti no pārstrādātas plastmasas.</p><small>GOVA PLAST</small></div><b>↗</b></div>
+        </a>
+        <div class="nv-solution-subcats" aria-label="Pārstrādātu materiālu apakškategorijas">
+          <a href="./produkti/parstradata-plastmasa/index.html">Soli un galdi <span>→</span></a>
+          <a href="./produkti/parstradata-plastmasa/index.html">Puķu kastes <span>→</span></a>
+          <a href="./produkti/parstradata-plastmasa/index.html">Pilsētvides elementi <span>→</span></a>
+        </div>
+      </article>`;
+
+    const cards=Array.from(list.querySelectorAll('.nv-solution-card'));
+    const setActive=(card)=>{
+      cards.forEach((item)=>item.classList.toggle('is-active',item===card));
+    };
+    cards.forEach((card)=>{
+      card.addEventListener('mouseenter',()=>setActive(card));
+      card.addEventListener('focusin',()=>setActive(card));
+      card.addEventListener('mouseleave',()=>card.classList.remove('is-active'));
+    });
+
+    document.querySelector('.nv-products')?.remove();
   }
 
   ensureStyles();
   setupNavigationTray();
-  setupProductGrid();
+  setupSolutionsHierarchy();
 })();
