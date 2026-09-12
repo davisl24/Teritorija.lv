@@ -1,22 +1,22 @@
-/* Homepage coherence pass — desktop only. One visual system from hero to footer. */
+/* Homepage coherence pass v2 — desktop only. */
+html{scroll-behavior:smooth}
+
 @media (min-width:1025px){
   .home-page{
     --nv-coh-green:#18372c;
-    --nv-coh-ink:#182019;
-    --nv-coh-muted:#697169;
-    --nv-coh-line:#e6ebe6;
+    --nv-coh-ink:#111411;
+    --nv-coh-muted:#656b66;
+    --nv-coh-line:#e7ebe7;
     --nv-coh-soft:#f7f9f7;
     --nv-coh-radius:20px;
     background:#fff;
     color:var(--nv-coh-ink);
   }
 
-  /* Remove duplicated navigation layers. Mega-menu + solutions now own this job. */
   .home-page .nv-category-nav,
   .home-page .nv-products,
   .home-page .nv-partners{display:none!important}
 
-  /* Global rhythm */
   .home-page .nv-about--story,
   .home-page .nv-solutions--hierarchy,
   .home-page .nv-gallery,
@@ -26,19 +26,31 @@
   .home-page .nv-about--story,
   .home-page .nv-solutions--hierarchy,
   .home-page .nv-gallery{
-    padding-top:112px!important;
-    padding-bottom:112px!important;
+    padding-top:108px!important;
+    padding-bottom:108px!important;
   }
 
   .home-page .nv-section-head,
-  .home-page .nv-process>.nv-shell{
-    margin-bottom:42px!important;
+  .home-page .nv-process>.nv-shell{margin-bottom:42px!important}
+
+  /* Typography: black does the heavy lifting, green is reserved for action/state. */
+  .home-page .nv-hero h1,
+  .home-page .nv-hero h1 span,
+  .home-page .nv-hero h1 em,
+  .home-page .nv-about--story h2,
+  .home-page .nv-section-head h2,
+  .home-page .nv-process h2,
+  .home-page .nv-contact h2,
+  .home-page .nv-solution-copy h3,
+  .home-page .nv-why-item h3,
+  .home-page .nv-proof-social h2,
+  .home-page .nv-proof-post h3{
+    color:var(--nv-coh-ink)!important;
   }
 
   .home-page .nv-section-head h2,
   .home-page .nv-process h2,
-  .home-page .nv-gallery h2{
-    color:var(--nv-coh-green)!important;
+  .home-page .nv-proof-social h2{
     font-size:clamp(2.55rem,3.2vw,4rem)!important;
     font-weight:400!important;
     line-height:.96!important;
@@ -46,7 +58,7 @@
   }
 
   .home-page .nv-text-link{
-    color:var(--nv-coh-green)!important;
+    color:var(--nv-coh-ink)!important;
     font-size:.76rem!important;
     font-weight:500!important;
     text-decoration:none!important;
@@ -55,9 +67,9 @@
   /* Header / CTA language */
   .home-page .nv-header{
     border-radius:22px!important;
-    background:rgba(255,255,255,.94)!important;
-    border-color:rgba(24,55,44,.11)!important;
-    box-shadow:0 14px 34px rgba(24,40,31,.065)!important;
+    background:rgba(255,255,255,.95)!important;
+    border-color:rgba(17,20,17,.10)!important;
+    box-shadow:0 14px 34px rgba(18,25,20,.06)!important;
   }
   .home-page .nv-header-cta,
   .home-page .nv-button,
@@ -72,40 +84,26 @@
     border-color:var(--nv-coh-green)!important;
   }
   .home-page .nv-button-secondary{
-    color:var(--nv-coh-green)!important;
-    background:rgba(255,255,255,.92)!important;
-    border-color:rgba(24,55,44,.24)!important;
+    color:var(--nv-coh-ink)!important;
+    background:rgba(255,255,255,.93)!important;
+    border-color:rgba(17,20,17,.20)!important;
   }
 
-  /* Hero: same layout, calmer art direction */
-  .home-page .nv-hero h1,
-  .home-page .nv-hero h1 span,
-  .home-page .nv-hero h1 em{
-    color:var(--nv-coh-green)!important;
-  }
+  /* Hero keeps layout, but colour discipline is tighter. */
   .home-page .nv-hero-media img{
-    filter:saturate(.80) contrast(.96) brightness(1.015)!important;
+    filter:saturate(.78) contrast(.96) brightness(1.015)!important;
   }
-  .home-page .nv-hero-lead{color:#616961!important}
-  .home-page .nv-hero-partners{background:#0f1b15!important}
+  .home-page .nv-hero-lead{color:#5f655f!important}
+  .home-page .nv-hero-kicker{color:#676d67!important}
+  .home-page .nv-hero-partners{background:#0f1a14!important}
 
-  /* Why: keep centered story, unify typography and lines */
-  .home-page .nv-about--story{
-    border-bottom:1px solid var(--nv-coh-line);
-  }
-  .home-page .nv-about--story .nv-why-intro h2{
-    color:var(--nv-coh-green)!important;
-  }
-  .home-page .nv-why-item{
-    border-color:var(--nv-coh-line)!important;
-  }
-  .home-page .nv-why-item h3{color:var(--nv-coh-ink)!important}
+  /* Why */
+  .home-page .nv-about--story{border-bottom:1px solid var(--nv-coh-line)}
+  .home-page .nv-why-item{border-color:var(--nv-coh-line)!important}
   .home-page .nv-why-item p{color:var(--nv-coh-muted)!important}
 
-  /* Solutions: one consistent card language */
-  .home-page .nv-solutions--hierarchy{
-    border-bottom:1px solid var(--nv-coh-line);
-  }
+  /* Solutions */
+  .home-page .nv-solutions--hierarchy{border-bottom:1px solid var(--nv-coh-line)}
   .home-page .nv-solution-card{
     border:1px solid var(--nv-coh-line)!important;
     border-radius:var(--nv-coh-radius)!important;
@@ -113,146 +111,231 @@
   }
   .home-page .nv-solution-card:hover,
   .home-page .nv-solution-card:focus-within{
-    border-color:#cad5cc!important;
-    box-shadow:0 18px 48px rgba(24,55,44,.07)!important;
+    border-color:#cad3cc!important;
+    box-shadow:0 18px 46px rgba(17,35,26,.065)!important;
   }
-  .home-page .nv-solution-media{background:#f8faf8!important}
-  .home-page .nv-solution-copy h3{color:var(--nv-coh-green)!important}
+  .home-page .nv-solution-media{background:#fff!important}
   .home-page .nv-solution-copy p{color:var(--nv-coh-muted)!important}
+  .home-page .nv-solution-subcats a{
+    color:#353a35!important;
+    border-bottom-color:#edf0ed!important;
+  }
+  .home-page .nv-solution-subcats a:hover{color:var(--nv-coh-green)!important}
 
-  /* Proof / realised solutions — featured story + three concise proofs */
-  .home-page .nv-gallery{
+  /* Real proof: social/project cards moving through one continuous rail. */
+  .home-page .nv-proof-social{
+    width:100%!important;
+    max-width:none!important;
+    padding-left:0!important;
+    padding-right:0!important;
+    overflow:hidden;
     border-bottom:1px solid var(--nv-coh-line);
   }
-  .home-page .nv-gallery-grid{
-    display:grid!important;
-    grid-template-columns:repeat(3,minmax(0,1fr))!important;
-    gap:26px!important;
-    align-items:start!important;
+  .home-page .nv-proof-social-head{
+    display:flex;
+    align-items:end;
+    justify-content:space-between;
+    gap:40px;
+    width:min(calc(100% - 144px),1440px);
+    margin:0 auto 42px;
   }
-  .home-page .nv-gallery-item,
-  .home-page .nv-gallery-large,
-  .home-page .nv-gallery-wide{
-    min-width:0!important;
-    margin:0!important;
-    color:var(--nv-coh-ink)!important;
-    background:transparent!important;
-    border:0!important;
-    border-radius:0!important;
-    overflow:visible!important;
-    text-decoration:none!important;
+  .home-page .nv-proof-social-head>div{max-width:850px}
+  .home-page .nv-proof-social-eyebrow{
+    margin:0 0 12px;
+    color:#858c86;
+    font-size:.6rem;
+    font-weight:600;
+    letter-spacing:.15em;
+    text-transform:uppercase;
   }
-  .home-page .nv-gallery-item:first-child,
-  .home-page .nv-gallery-large:first-child{
-    grid-column:1/-1!important;
-    display:grid!important;
-    grid-template-columns:minmax(0,1.65fr) minmax(330px,.7fr)!important;
-    min-height:470px!important;
+  .home-page .nv-proof-social h2{
+    margin:0 0 18px;
+    max-width:14ch;
+  }
+  .home-page .nv-proof-social-lead{
+    max-width:60ch;
+    margin:0;
+    color:var(--nv-coh-muted);
+    font-size:.9rem;
+    line-height:1.65;
+  }
+  .home-page .nv-proof-window{
+    width:100%;
+    overflow:hidden;
+    padding:0 0 10px;
+  }
+  .home-page .nv-proof-track{
+    display:flex;
+    align-items:stretch;
+    gap:20px;
+    width:max-content;
+    padding:0 20px;
+    animation:nvProofRail 42s linear infinite;
+    will-change:transform;
+  }
+  @keyframes nvProofRail{
+    from{transform:translate3d(0,0,0)}
+    to{transform:translate3d(calc(-50% - 10px),0,0)}
+  }
+  .home-page .nv-proof-post{
+    display:block!important;
+    flex:0 0 360px;
+    min-width:360px!important;
     overflow:hidden!important;
+    color:var(--nv-coh-ink)!important;
     background:#fff!important;
     border:1px solid var(--nv-coh-line)!important;
-    border-radius:var(--nv-coh-radius)!important;
+    border-radius:20px!important;
+    text-decoration:none!important;
+    box-shadow:none!important;
+    transition:border-color .28s ease,box-shadow .35s ease,transform .35s cubic-bezier(.22,.61,.36,1)!important;
   }
-  .home-page .nv-gallery-item:first-child img,
-  .home-page .nv-gallery-large:first-child img{
+  .home-page .nv-proof-post:hover{
+    transform:translateY(-4px)!important;
+    border-color:#cad3cc!important;
+    box-shadow:0 20px 48px rgba(17,35,26,.07)!important;
+  }
+  .home-page .nv-proof-post-media{
+    aspect-ratio:4/3;
+    overflow:hidden;
+    background:#f7f9f7;
+  }
+  .home-page .nv-proof-post-media img{
     width:100%!important;
     height:100%!important;
-    min-height:470px!important;
-    aspect-ratio:auto!important;
     object-fit:cover!important;
-    border-radius:0!important;
-    box-shadow:none!important;
+    transition:transform .65s cubic-bezier(.22,.61,.36,1)!important;
   }
-  .home-page .nv-gallery-item:first-child>div,
-  .home-page .nv-gallery-large:first-child>div{
-    display:flex!important;
-    flex-direction:column!important;
-    justify-content:center!important;
-    padding:46px 42px!important;
-    border-left:1px solid var(--nv-coh-line)!important;
+  .home-page .nv-proof-post:hover .nv-proof-post-media img{transform:scale(1.025)!important}
+  .home-page .nv-proof-post-copy{padding:22px 22px 24px!important}
+  .home-page .nv-proof-post-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:22px;
+    color:#777f78;
+    font-size:.66rem;
   }
-  .home-page .nv-gallery-item:first-child h3,
-  .home-page .nv-gallery-large:first-child h3{
-    margin:10px 0 16px!important;
-    color:var(--nv-coh-green)!important;
-    font-size:clamp(2rem,2.6vw,3.2rem)!important;
-    font-weight:400!important;
-    line-height:1!important;
-    letter-spacing:-.045em!important;
-  }
-  .home-page .nv-gallery-item:first-child p,
-  .home-page .nv-gallery-large:first-child p{
-    max-width:34ch!important;
-    color:var(--nv-coh-muted)!important;
-    font-size:.84rem!important;
-    line-height:1.65!important;
-  }
-  .home-page .nv-gallery-item:not(:first-child) img{
-    width:100%!important;
-    height:auto!important;
-    aspect-ratio:4/3!important;
-    object-fit:cover!important;
-    border-radius:16px!important;
-    box-shadow:none!important;
-  }
-  .home-page .nv-gallery-item:not(:first-child)>div{
-    padding:16px 2px 0!important;
-  }
-  .home-page .nv-gallery-item:not(:first-child) h3{
-    margin:8px 0 7px!important;
-    color:var(--nv-coh-green)!important;
-    font-size:1.35rem!important;
-    font-weight:400!important;
-    letter-spacing:-.025em!important;
-  }
-  .home-page .nv-gallery-item span{
-    color:#889088!important;
+  .home-page .nv-proof-post-copy>p{
+    margin:0 0 8px;
+    color:#828982!important;
     font-size:.58rem!important;
-    font-weight:600!important;
-    letter-spacing:.11em!important;
-    text-transform:uppercase!important;
+    font-weight:600;
+    letter-spacing:.10em;
+    text-transform:uppercase;
   }
-  .home-page .nv-gallery-item p{
-    color:var(--nv-coh-muted)!important;
-    font-size:.74rem!important;
-    line-height:1.55!important;
+  .home-page .nv-proof-post h3{
+    margin:0 0 12px!important;
+    font-size:1.55rem!important;
+    font-weight:400!important;
+    line-height:1.02!important;
+    letter-spacing:-.035em!important;
+  }
+  .home-page .nv-proof-post-summary{
+    min-height:62px;
+    color:var(--nv-coh-muted);
+    font-size:.78rem;
+    line-height:1.55;
+  }
+  .home-page .nv-proof-post small{
+    display:block;
+    margin-top:18px;
+    color:#4f5750;
+    font-size:.58rem;
+    font-weight:600;
+    letter-spacing:.07em;
+    text-transform:uppercase;
   }
 
-  /* Process: same system, less empty vertical weight */
+  /* Process: stupidly easy — one step, one action, one outcome. */
   .home-page .nv-process{
-    padding:106px 0 110px!important;
+    padding:104px 0 108px!important;
     border-top:0!important;
     border-bottom:1px solid var(--nv-coh-line)!important;
   }
-  .home-page .nv-process-list::before{background:#dfe6e0!important}
-  .home-page .nv-process-list details::before{border-color:#aebbb1!important}
+  .home-page .nv-process-list::before{background:#dfe5e0!important}
+  .home-page .nv-process-list details::before{border-color:#aeb8b0!important}
   .home-page .nv-process-list details.is-active::before,
   .home-page .nv-process-list details[open]::before{
     background:var(--nv-coh-green)!important;
     border-color:var(--nv-coh-green)!important;
   }
+  .home-page .nv-process-list h3{color:var(--nv-coh-ink)!important}
+  .home-page .nv-process-list summary p{color:#7b827c!important}
+  .home-page .nv-process-detail{
+    color:var(--nv-coh-muted)!important;
+    line-height:1.55!important;
+  }
+  .home-page .nv-process-detail p{margin:0 0 12px}
+  .home-page .nv-process-detail strong{
+    display:block;
+    color:var(--nv-coh-ink);
+    font-size:.76rem;
+    font-weight:500;
+  }
 
-  /* CTA: neutral white field, one strong action */
+  /* CTA: answer what to do, what you get, what happens next. */
   .home-page .nv-contact{
-    padding:110px 0 118px!important;
-    border-top:0!important;
-    border-bottom:0!important;
+    padding:108px 0 116px!important;
+    border:0!important;
+  }
+  .home-page .nv-contact-inner{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr) auto!important;
+    align-items:end!important;
+    gap:72px!important;
+  }
+  .home-page .nv-contact-eyebrow{
+    margin:0 0 14px!important;
+    color:#828982!important;
+    font-size:.6rem!important;
+    font-weight:600!important;
+    letter-spacing:.14em!important;
+    text-transform:uppercase!important;
   }
   .home-page .nv-contact h2{
-    color:var(--nv-coh-green)!important;
-    font-size:clamp(2.8rem,4.8vw,5.2rem)!important;
+    margin:0 0 18px!important;
+    font-size:clamp(3rem,4.6vw,5rem)!important;
     font-weight:400!important;
-    line-height:.95!important;
+    line-height:.94!important;
     letter-spacing:-.055em!important;
   }
-  .home-page .nv-contact p{
+  .home-page .nv-contact p:not(.nv-contact-eyebrow){
+    max-width:58ch!important;
+    margin:0!important;
     color:var(--nv-coh-muted)!important;
-    font-size:.84rem!important;
+    font-size:.88rem!important;
+    line-height:1.6!important;
+  }
+  .home-page .nv-contact-note{
+    display:block;
+    margin-top:12px;
+    color:#363c37;
+    font-size:.72rem;
+  }
+  .home-page .nv-contact-button{
+    min-width:190px!important;
+    justify-content:space-between!important;
   }
 
-  /* Footer is the only large dark block at the end. */
   .home-page .nv-footer{
-    background:#0e1a14!important;
+    background:#0d1712!important;
     color:#fff!important;
+  }
+
+  /* Smoother entrance rendering on animated desktop sections. */
+  .home-page .nv-about--story,
+  .home-page .nv-solutions--hierarchy,
+  .home-page .nv-proof-social,
+  .home-page .nv-process,
+  .home-page .nv-contact{
+    scroll-margin-top:100px;
+  }
+  .home-page .nv-gallery-item,
+  .home-page .nv-solution-card,
+  .home-page .nv-why-item,
+  .home-page .nv-process-list details{
+    backface-visibility:hidden;
+    transform:translateZ(0);
   }
 }
