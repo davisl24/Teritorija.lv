@@ -1,5 +1,41 @@
 /* Desktop-only landing story refinement */
 @media (min-width:1025px){
+  /* Header product mega-menu */
+  .home-page .nv-header{overflow:visible!important}
+  .home-page .nv-nav{align-self:stretch;display:flex;align-items:center}
+  .home-page .nv-product-menu{position:relative;display:flex;align-items:center;height:100%}
+  .home-page .nv-product-menu-trigger{display:flex;align-items:center;height:100%;text-decoration:none}
+  .home-page .nv-product-menu-trigger::after{content:"";width:6px;height:6px;margin-left:7px;border-right:1px solid currentColor;border-bottom:1px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .22s ease}
+  .home-page .nv-product-menu:hover .nv-product-menu-trigger::after,.home-page .nv-product-menu:focus-within .nv-product-menu-trigger::after{transform:rotate(225deg) translate(-1px,-1px)}
+  .home-page .nv-product-menu-panel{
+    position:absolute;
+    top:calc(100% + 12px);
+    left:50%;
+    width:min(860px,72vw);
+    padding:26px 28px 18px;
+    background:rgba(255,255,255,.98);
+    border:1px solid rgba(36,55,44,.1);
+    border-radius:22px;
+    box-shadow:0 24px 70px rgba(22,30,24,.12);
+    backdrop-filter:blur(18px);
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+    transform:translate(-26%,10px);
+    transition:opacity .18s ease,transform .22s cubic-bezier(.22,.61,.36,1),visibility .18s ease;
+    z-index:100;
+  }
+  .home-page .nv-product-menu:hover .nv-product-menu-panel,.home-page .nv-product-menu:focus-within .nv-product-menu-panel{opacity:1;visibility:visible;pointer-events:auto;transform:translate(-26%,0)}
+  .home-page .nv-product-menu-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:26px}
+  .home-page .nv-menu-group{display:flex;flex-direction:column;gap:9px;min-width:0}
+  .home-page .nv-menu-group>a{display:block;color:#666d65!important;font-size:.72rem!important;line-height:1.35;text-decoration:none!important;transition:color .18s ease,transform .18s ease}
+  .home-page .nv-menu-group>a:hover{color:var(--nv-olive)!important;transform:translateX(2px)}
+  .home-page .nv-menu-group .nv-menu-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:6px;color:var(--nv-ink)!important;font-size:.86rem!important;font-weight:500!important}
+  .home-page .nv-menu-group .nv-menu-heading span{color:var(--nv-olive)}
+  .home-page .nv-product-menu-footer{display:flex;justify-content:flex-end;margin-top:22px;padding-top:16px;border-top:1px solid #eceee9}
+  .home-page .nv-product-menu-footer a{display:inline-flex;align-items:center;gap:20px;color:var(--nv-olive)!important;font-size:.76rem!important;font-weight:500;text-decoration:none}
+
+  /* Why Teritorija — centered statement, then proof points */
   .home-page .nv-about--story{
     display:block!important;
     width:min(calc(100% - 64px),1440px)!important;
@@ -7,44 +43,44 @@
     padding-bottom:122px!important;
   }
   .home-page .nv-about--story .nv-why-intro{
-    display:grid;
-    grid-template-columns:minmax(0,1fr) minmax(320px,.9fr);
-    column-gap:88px;
-    align-items:end;
-    padding:0 0 54px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+    padding:0 0 62px;
     border-bottom:1px solid #e8ebe6;
   }
   .home-page .nv-about--story .nv-about-label{
-    grid-column:1 / -1;
     margin:0 0 24px!important;
+    justify-content:center;
   }
+  .home-page .nv-about--story .nv-about-label::after{display:none!important}
   .home-page .nv-about--story h2{
-    max-width:10ch!important;
-    margin:0!important;
-    font-size:clamp(3.2rem,4.7vw,5.7rem)!important;
-    line-height:.94!important;
-    letter-spacing:-.055em!important;
+    max-width:12ch!important;
+    margin:0 auto 28px!important;
+    font-size:clamp(3.4rem,5.2vw,6.1rem)!important;
+    line-height:.92!important;
+    letter-spacing:-.06em!important;
+    text-align:center;
   }
   .home-page .nv-why-lead{
-    max-width:48ch;
-    margin:0 0 28px!important;
+    max-width:58ch;
+    margin:0 auto 30px!important;
     color:#666d65;
-    font-size:.96rem!important;
+    font-size:.98rem!important;
     line-height:1.72!important;
+    text-align:center;
   }
-  .home-page .nv-about--story .nv-about-cta{
-    grid-column:2;
-    justify-self:start;
-  }
+  .home-page .nv-about--story .nv-about-cta{justify-self:auto}
   .home-page .nv-why-grid{
     display:grid;
     grid-template-columns:repeat(3,minmax(0,1fr));
-    padding-top:54px;
+    padding-top:58px;
   }
   .home-page .nv-why-item{
     position:relative;
-    min-height:270px;
-    padding:0 38px 18px 0;
+    min-height:320px;
+    padding:0 38px 26px 0;
     border-right:1px solid #e8ebe6;
     transition:opacity .7s ease,transform .75s cubic-bezier(.22,.61,.36,1),background .35s ease;
   }
@@ -92,12 +128,24 @@
     font-weight:500;
     line-height:1.55;
   }
+  .home-page .nv-why-detail{
+    max-height:0;
+    margin-top:0;
+    overflow:hidden;
+    color:#667167;
+    font-size:.68rem;
+    line-height:1.65;
+    opacity:0;
+    transform:translateY(8px);
+    transition:max-height .35s ease,margin .35s ease,opacity .28s ease,transform .35s cubic-bezier(.22,.61,.36,1);
+  }
+  .home-page .nv-why-item:hover .nv-why-detail,.home-page .nv-why-item:focus-within .nv-why-detail{max-height:74px;margin-top:18px;opacity:1;transform:none}
   .home-page .nv-why-item:hover::after{width:calc(100% - 38px)}
   .home-page .nv-why-item:last-child:hover::after{width:100%}
   .home-page .nv-why-item:hover>span{color:var(--nv-olive);transform:translateY(-2px)}
   .home-page .nv-why-item:hover h3{transform:translateY(-2px);color:var(--nv-olive)}
 
-  /* Story reveal: intentionally paced so the three proof points arrive one-by-one. */
+  /* Story reveal: proof points arrive one by one. */
   .home-page .nv-about--story .nv-why-intro>* ,
   .home-page .nv-about--story .nv-why-item{
     opacity:0;
@@ -111,7 +159,7 @@
   .home-page .nv-about--story.is-revealed .nv-why-item:nth-child(2){opacity:1;transform:none;transition-delay:1.16s}
   .home-page .nv-about--story.is-revealed .nv-why-item:nth-child(3){opacity:1;transform:none;transition-delay:1.60s}
 
-  /* Solutions: 2x2 editorial layout. Wider cards create breathing room and make the imagery useful. */
+  /* Solutions: 2x2 editorial layout. */
   .home-page .nv-solutions--curated{
     padding-top:102px!important;
     padding-bottom:118px!important;
@@ -214,8 +262,6 @@
   }
   .home-page .nv-solutions--curated .nv-solution:hover .nv-solution-media img{transform:scale(1.025)!important}
   .home-page .nv-solutions--curated .nv-solution:hover b{transform:translate(2px,-2px)}
-
-  /* Alternate the lower row for a quieter editorial rhythm. */
   .home-page .nv-solutions--curated .nv-solution:nth-child(3) .nv-solution-media,
   .home-page .nv-solutions--curated .nv-solution:nth-child(4) .nv-solution-media{order:2}
   .home-page .nv-solutions--curated .nv-solution:nth-child(3) .nv-solution-copy,
