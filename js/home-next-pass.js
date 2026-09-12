@@ -144,49 +144,51 @@
     tray.addEventListener('mouseleave',closePanel);
   }
 
-  function setupEditorialProducts(){
+  function setupProductGrid(){
     const section=document.querySelector('.nv-products');
-    const rail=section?.querySelector('.nv-product-rail');
-    if(!section||!rail)return;
+    const current=section?.querySelector('.nv-product-rail, .nv-editorial-products, .nv-product-grid-6');
+    if(!section||!current)return;
 
-    section.classList.add('nv-products--editorial');
-    rail.className='nv-editorial-products';
-    rail.setAttribute('aria-label','Labiekārtošanas elementu kategorijas');
-    rail.innerHTML=`
-      <a class="nv-editorial-item" data-area="bench" href="./produkti/ara-mebeles/index.html">
-        <div class="nv-editorial-media"><img src="./assets/images/products/zano-flash-02-725-1.png" alt="ZANO āra sols" loading="lazy"></div>
-        <div class="nv-editorial-meta"><div><span class="nv-editorial-index">01</span><h3>Soli</h3></div><span class="nv-editorial-arrow">↗</span></div>
+    section.classList.remove('nv-products--editorial');
+    section.classList.add('nv-products--catalogue');
+
+    const grid=document.createElement('div');
+    grid.className='nv-product-grid-6';
+    grid.setAttribute('aria-label','Labiekārtošanas elementu kategorijas');
+    grid.innerHTML=`
+      <a class="nv-product-tile" href="./produkti/ara-mebeles/index.html">
+        <div class="nv-product-tile-media"><img src="./assets/images/products/zano-flash-02-725-1.png" alt="Āra sols" loading="lazy"></div>
+        <div class="nv-product-tile-body"><div><span class="nv-product-tile-index">01</span><h3>Soli</h3><p>Publiskām, komerciālām un privātām ārtelpām.</p></div><span class="nv-product-tile-arrow">↗</span></div>
       </a>
-      <a class="nv-editorial-item" data-area="table" href="./produkti/ara-mebeles/index.html">
-        <div class="nv-editorial-media"><img src="https://www.zano-streetfurniture.com/images/10908/stolik-quadro-13-076-1-stal-nierdzewna.png" alt="ZANO āra galds" loading="lazy" referrerpolicy="no-referrer"></div>
-        <div class="nv-editorial-meta"><div><span class="nv-editorial-index">02</span><h3>Galdi</h3></div><span class="nv-editorial-arrow">↗</span></div>
+      <a class="nv-product-tile" href="./produkti/ara-mebeles/index.html">
+        <div class="nv-product-tile-media"><img src="https://www.zano-streetfurniture.com/images/10908/stolik-quadro-13-076-1-stal-nierdzewna.png" alt="Āra galds" loading="lazy" referrerpolicy="no-referrer"></div>
+        <div class="nv-product-tile-body"><div><span class="nv-product-tile-index">02</span><h3>Galdi</h3><p>Atpūtas, piknika un publiskajām zonām.</p></div><span class="nv-product-tile-arrow">↗</span></div>
       </a>
-      <a class="nv-editorial-item is-lifestyle" data-area="rack" href="./produkti/velo-stativi/index.html">
-        <div class="nv-editorial-media"><img src="./assets/images/products/velo-stativi.jpg" alt="Velo statīvi" loading="lazy"></div>
-        <div class="nv-editorial-meta"><div><span class="nv-editorial-index">03</span><h3>Velo statīvi</h3></div><span class="nv-editorial-arrow">↗</span></div>
+      <a class="nv-product-tile" href="./produkti/velo-stativi/index.html">
+        <div class="nv-product-tile-media"><img src="./assets/images/products/zano-soft-05-012.png" alt="Velo statīvs" loading="lazy"></div>
+        <div class="nv-product-tile-body"><div><span class="nv-product-tile-index">03</span><h3>Velo statīvi</h3><p>Drošai un pārdomātai velosipēdu novietošanai.</p></div><span class="nv-product-tile-arrow">↗</span></div>
       </a>
-      <a class="nv-editorial-item is-lifestyle" data-area="shelter" href="./produkti/velo-nojumes/index.html">
-        <div class="nv-editorial-media"><img src="https://sawo.com.pl/wp-content/uploads/2025/07/slider-wiaty-rowerowe-202506-b.jpg" alt="SAWO velo nojume" loading="lazy" referrerpolicy="no-referrer"></div>
-        <div class="nv-editorial-meta"><div><span class="nv-editorial-index">04</span><h3>Velo nojumes</h3></div><span class="nv-editorial-arrow">↗</span></div>
+      <a class="nv-product-tile is-context" href="./produkti/velo-nojumes/index.html">
+        <div class="nv-product-tile-media"><img src="https://sawo.com.pl/wp-content/uploads/2025/07/slider-wiaty-rowerowe-202506-b.jpg" alt="Velo nojume" loading="lazy" referrerpolicy="no-referrer"></div>
+        <div class="nv-product-tile-body"><div><span class="nv-product-tile-index">04</span><h3>Velo nojumes</h3><p>Aizsargātai un organizētai velosipēdu glabāšanai.</p></div><span class="nv-product-tile-arrow">↗</span></div>
       </a>
-      <a class="nv-editorial-item" data-area="service" href="./produkti/velo-infrastruktura/index.html">
-        <div class="nv-editorial-media"><img src="https://sawo.com.pl/wp-content/uploads/2024/01/stacje-naprawy-1-main-202401.jpg" alt="SAWO velo servisa stacija" loading="lazy" referrerpolicy="no-referrer"></div>
-        <div class="nv-editorial-meta"><div><span class="nv-editorial-index">05</span><h3>Servisa stacijas</h3></div><span class="nv-editorial-arrow">↗</span></div>
+      <a class="nv-product-tile" href="./produkti/velo-infrastruktura/index.html">
+        <div class="nv-product-tile-media"><img src="./assets/images/products/zano-stilo-18-048.png" alt="Velo servisa stacija" loading="lazy"></div>
+        <div class="nv-product-tile-body"><div><span class="nv-product-tile-index">05</span><h3>Servisa stacijas</h3><p>Publiski pieejami risinājumi velosipēdu apkopei.</p></div><span class="nv-product-tile-arrow">↗</span></div>
       </a>
-      <a class="nv-editorial-item is-lifestyle" data-area="play" href="./produkti/rotalu-laukumi/index.html">
-        <div class="nv-editorial-media"><img src="./assets/images/products/rotalu-laukums.jpg" alt="Rotaļu laukumu elementi" loading="lazy"></div>
-        <div class="nv-editorial-meta"><div><span class="nv-editorial-index">06</span><h3>Rotaļu elementi</h3></div><span class="nv-editorial-arrow">↗</span></div>
+      <a class="nv-product-tile is-context" href="./produkti/rotalu-laukumi/index.html">
+        <div class="nv-product-tile-media"><img src="./assets/images/products/rotalu-laukums.jpg" alt="Rotaļu laukuma elementi" loading="lazy"></div>
+        <div class="nv-product-tile-body"><div><span class="nv-product-tile-index">06</span><h3>Rotaļu elementi</h3><p>Rotaļu un aktivitāšu risinājumi dažādām vecuma grupām.</p></div><span class="nv-product-tile-arrow">↗</span></div>
       </a>`;
 
-    const tableImg=rail.querySelector('[data-area="table"] img');
-    const shelterImg=rail.querySelector('[data-area="shelter"] img');
-    const serviceImg=rail.querySelector('[data-area="service"] img');
+    current.replaceWith(grid);
+    const tableImg=grid.querySelectorAll('img')[1];
+    const shelterImg=grid.querySelectorAll('img')[3];
     tableImg?.addEventListener('error',()=>{tableImg.src='./assets/images/products/zano-scandik-02-046.png';},{once:true});
     shelterImg?.addEventListener('error',()=>{shelterImg.src='./assets/images/products/velo-nojume.jpg';},{once:true});
-    serviceImg?.addEventListener('error',()=>{serviceImg.src='./assets/images/products/velo-servisa-stacija.jpg';},{once:true});
   }
 
   ensureStyles();
   setupNavigationTray();
-  setupEditorialProducts();
+  setupProductGrid();
 })();
