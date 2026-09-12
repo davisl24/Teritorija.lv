@@ -161,8 +161,8 @@
         <div class="nv-editorial-media"><img src="https://www.zano-streetfurniture.com/images/10908/stolik-quadro-13-076-1-stal-nierdzewna.png" alt="ZANO āra galds" loading="lazy" referrerpolicy="no-referrer"></div>
         <div class="nv-editorial-meta"><div><span class="nv-editorial-index">02</span><h3>Galdi</h3></div><span class="nv-editorial-arrow">↗</span></div>
       </a>
-      <a class="nv-editorial-item" data-area="rack" href="./produkti/velo-stativi/index.html">
-        <div class="nv-editorial-media"><img src="./assets/images/products/zano-soft-05-012.png" alt="ZANO velo statīvs" loading="lazy"></div>
+      <a class="nv-editorial-item is-lifestyle" data-area="rack" href="./produkti/velo-stativi/index.html">
+        <div class="nv-editorial-media"><img src="./assets/images/products/velo-stativi.jpg" alt="Velo statīvi" loading="lazy"></div>
         <div class="nv-editorial-meta"><div><span class="nv-editorial-index">03</span><h3>Velo statīvi</h3></div><span class="nv-editorial-arrow">↗</span></div>
       </a>
       <a class="nv-editorial-item is-lifestyle" data-area="shelter" href="./produkti/velo-nojumes/index.html">
