@@ -157,35 +157,31 @@
     grid.setAttribute('aria-label','Labiekārtošanas elementu kategorijas');
     grid.innerHTML=`
       <a class="nv-product-tile" href="./produkti/ara-mebeles/index.html">
-        <div class="nv-product-tile-media"><img src="./assets/images/products/zano-flash-02-725-1.png" alt="Āra sols" loading="lazy"></div>
+        <div class="nv-product-tile-media" style="background:#fff"><img src="https://www.zano-streetfurniture.com/images/11675/02-012-1-lawka-miejska-soft-stal-nierdzewna-png.png" alt="ZANO āra sols" loading="lazy" referrerpolicy="no-referrer"></div>
         <div class="nv-product-tile-body"><div><span class="nv-product-tile-index">01</span><h3>Soli</h3><p>Publiskām, komerciālām un privātām ārtelpām.</p></div><span class="nv-product-tile-arrow">↗</span></div>
       </a>
       <a class="nv-product-tile" href="./produkti/ara-mebeles/index.html">
-        <div class="nv-product-tile-media"><img src="https://www.zano-streetfurniture.com/images/10908/stolik-quadro-13-076-1-stal-nierdzewna.png" alt="Āra galds" loading="lazy" referrerpolicy="no-referrer"></div>
+        <div class="nv-product-tile-media" style="background:#fff"><img src="https://www.zano-streetfurniture.com/images/9765/table-soft-02-612-stainless-steel.png" alt="ZANO āra galds" loading="lazy" referrerpolicy="no-referrer"></div>
         <div class="nv-product-tile-body"><div><span class="nv-product-tile-index">02</span><h3>Galdi</h3><p>Atpūtas, piknika un publiskajām zonām.</p></div><span class="nv-product-tile-arrow">↗</span></div>
       </a>
       <a class="nv-product-tile" href="./produkti/velo-stativi/index.html">
-        <div class="nv-product-tile-media"><img src="./assets/images/products/zano-soft-05-012.png" alt="Velo statīvs" loading="lazy"></div>
+        <div class="nv-product-tile-media" style="background:#fff"><img src="https://www.zano-streetfurniture.com/images/11117/bicycle-stand-soft-sn.png" alt="ZANO velo statīvs" loading="lazy" referrerpolicy="no-referrer"></div>
         <div class="nv-product-tile-body"><div><span class="nv-product-tile-index">03</span><h3>Velo statīvi</h3><p>Drošai un pārdomātai velosipēdu novietošanai.</p></div><span class="nv-product-tile-arrow">↗</span></div>
       </a>
-      <a class="nv-product-tile is-context" href="./produkti/velo-nojumes/index.html">
-        <div class="nv-product-tile-media"><img src="https://sawo.com.pl/wp-content/uploads/2025/07/slider-wiaty-rowerowe-202506-b.jpg" alt="Velo nojume" loading="lazy" referrerpolicy="no-referrer"></div>
+      <a class="nv-product-tile" href="./produkti/velo-nojumes/index.html">
+        <div class="nv-product-tile-media" style="background:#fff"><img src="https://sawo.com.pl/wp-content/uploads/2025/11/pam-s-gl-icon-700x700c.jpg" alt="SAWO velo nojume PAM S GL" loading="lazy" referrerpolicy="no-referrer"></div>
         <div class="nv-product-tile-body"><div><span class="nv-product-tile-index">04</span><h3>Velo nojumes</h3><p>Aizsargātai un organizētai velosipēdu glabāšanai.</p></div><span class="nv-product-tile-arrow">↗</span></div>
       </a>
       <a class="nv-product-tile" href="./produkti/velo-infrastruktura/index.html">
-        <div class="nv-product-tile-media"><img src="./assets/images/products/zano-stilo-18-048.png" alt="Velo servisa stacija" loading="lazy"></div>
+        <div class="nv-product-tile-media" style="background:#fff"><img src="https://sawo.com.pl/wp-content/uploads/2024/01/stacje-naprawy-1-main-202401.jpg" alt="SAWO velo servisa stacija" loading="lazy" referrerpolicy="no-referrer"></div>
         <div class="nv-product-tile-body"><div><span class="nv-product-tile-index">05</span><h3>Servisa stacijas</h3><p>Publiski pieejami risinājumi velosipēdu apkopei.</p></div><span class="nv-product-tile-arrow">↗</span></div>
       </a>
-      <a class="nv-product-tile is-context" href="./produkti/rotalu-laukumi/index.html">
-        <div class="nv-product-tile-media"><img src="./assets/images/products/rotalu-laukums.jpg" alt="Rotaļu laukuma elementi" loading="lazy"></div>
+      <a class="nv-product-tile" href="./produkti/rotalu-laukumi/index.html">
+        <div class="nv-product-tile-media" style="background:#fff"><img src="https://freekids.pl/wp-content/uploads/2025/01/0130003_ahoy_11_wiz.1-scaled-800x513.jpg" alt="FreeKids Ahoy 11 rotaļu elements" loading="lazy" referrerpolicy="no-referrer"></div>
         <div class="nv-product-tile-body"><div><span class="nv-product-tile-index">06</span><h3>Rotaļu elementi</h3><p>Rotaļu un aktivitāšu risinājumi dažādām vecuma grupām.</p></div><span class="nv-product-tile-arrow">↗</span></div>
       </a>`;
 
     current.replaceWith(grid);
-    const tableImg=grid.querySelectorAll('img')[1];
-    const shelterImg=grid.querySelectorAll('img')[3];
-    tableImg?.addEventListener('error',()=>{tableImg.src='./assets/images/products/zano-scandik-02-046.png';},{once:true});
-    shelterImg?.addEventListener('error',()=>{shelterImg.src='./assets/images/products/velo-nojume.jpg';},{once:true});
   }
 
   ensureStyles();
