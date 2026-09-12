@@ -97,6 +97,39 @@
     targets.forEach((el, i) => animateIn(el, delays[i], 28, i === 1 ? 900 : 760));
   }
 
+  function observeWhyStory() {
+    const section = document.querySelector('.nv-about--story');
+    if (!section || !desktop) return;
+
+    const label = section.querySelector('.nv-about-label');
+    const heading = section.querySelector('h2');
+    const lead = section.querySelector('.nv-why-lead');
+    const cta = section.querySelector('.nv-about-cta');
+    const benefits = Array.from(section.querySelectorAll('.nv-why-item'));
+    const sequence = [label, heading, lead, cta, ...benefits].filter(Boolean);
+    const delays = [0, 140, 340, 560, 880, 1160, 1440];
+
+    const run = () => {
+      sequence.forEach((el, index) => {
+        const isBenefit = index >= 4;
+        animateIn(el, delays[index] ?? index * 180, isBenefit ? 30 : 24, isBenefit ? 760 : 820);
+      });
+    };
+
+    if (!('IntersectionObserver' in window)) {
+      run();
+      return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      if (!entries.some((entry) => entry.isIntersecting)) return;
+      run();
+      observer.disconnect();
+    }, { threshold: 0.18, rootMargin: '0px 0px -10% 0px' });
+
+    observer.observe(section);
+  }
+
   function observeGroup(selector, childSelector, stagger = 100) {
     const section = document.querySelector(selector);
     if (!section || !desktop) return;
@@ -144,7 +177,7 @@
   }
 
   function setupScrollMotion() {
-    observeGroup('.nv-about--story', '.nv-about-label, h2, .nv-why-lead, .nv-about-cta, .nv-why-item', 120);
+    observeWhyStory();
     observeGroup('.nv-solutions--hierarchy', '.nv-section-head, .nv-solution-card', 130);
     observeGroup('.nv-gallery', '.nv-section-head, .nv-gallery-item', 110);
     observeGroup('.nv-process', 'h2, .nv-process-list details', 110);
