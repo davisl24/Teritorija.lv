@@ -1,7 +1,7 @@
 /* Final homepage stabilization pass — desktop first. Loaded last by home-final-motion.js. */
 
 @media (min-width:1025px){
-  /* Hero: use the dark premium asset as the visual, keep the existing layout. */
+  /* HERO LOCKED — do not redesign in lower-page passes. */
   .home-page .nv-hero{
     min-height:820px!important;
     background:#0d1511!important;
@@ -26,15 +26,11 @@
   .home-page .nv-hero-copy{z-index:2!important}
   .home-page .nv-hero h1,
   .home-page .nv-hero h1 span,
-  .home-page .nv-hero h1 em{
-    color:#fff!important;
-  }
+  .home-page .nv-hero h1 em{color:#fff!important}
   .home-page .nv-hero-kicker,
   .home-page .nv-hero-lead,
   .home-page .nv-hero-trust p,
-  .home-page .nv-trust-icon{
-    color:rgba(255,255,255,.82)!important;
-  }
+  .home-page .nv-trust-icon{color:rgba(255,255,255,.82)!important}
   .home-page .nv-hero-kicker::before{background:rgba(255,255,255,.72)!important}
   .home-page .nv-hero-trust>div{border-left-color:rgba(255,255,255,.22)!important}
   .home-page .nv-button{border-radius:999px!important}
@@ -52,7 +48,7 @@
   }
   .home-page .nv-button-secondary:hover{background:rgba(255,255,255,.12)!important}
 
-  /* JS owns both endless tracks so they cannot silently stop because of competing CSS animations. */
+  /* JS owns both endless tracks so CSS never fights the JS transform. */
   .home-page .nv-hero-partner-track,
   .home-page .nv-proof-track{
     animation:none!important;
@@ -61,10 +57,7 @@
   }
   .home-page .nv-hero-partners{background:#0d1712!important}
 
-  /* Social proof wall: full-width motion, no visible finish line. */
-  .home-page .nv-proof-social{
-    overflow:hidden!important;
-  }
+  .home-page .nv-proof-social{overflow:hidden!important}
   .home-page .nv-proof-window{
     width:100%!important;
     overflow:hidden!important;
@@ -77,15 +70,129 @@
     gap:18px!important;
   }
 
-  /* Process remains white; active state stays clear. */
   .home-page .nv-process{
     background:#fff!important;
     color:#111!important;
   }
 
-  /* CTA reset: one centred decision, not a split composition. */
+  /* B VARIANT — sticky overview + vertically stacked solution stories. */
+  .home-page .nv-solutions--hierarchy{
+    display:grid!important;
+    grid-template-columns:minmax(260px,.36fr) minmax(0,.64fr)!important;
+    column-gap:clamp(58px,6vw,104px)!important;
+    align-items:start!important;
+    width:min(calc(100% - 112px),1440px)!important;
+    padding-top:118px!important;
+    padding-bottom:124px!important;
+  }
+  .home-page .nv-solutions--hierarchy .nv-section-head{
+    position:sticky!important;
+    top:126px!important;
+    display:block!important;
+    align-self:start!important;
+    margin:0!important;
+    padding:2px 0 0!important;
+  }
+  .home-page .nv-solutions--hierarchy .nv-section-head h2{
+    max-width:8ch!important;
+    margin:0 0 22px!important;
+    color:#111!important;
+    font-size:clamp(2.9rem,4vw,4.8rem)!important;
+    font-weight:400!important;
+    line-height:.94!important;
+    letter-spacing:-.055em!important;
+  }
+  .home-page .nv-solutions--hierarchy .nv-section-head::after{
+    content:"Izvēlies risinājuma virzienu un apskati produktus, kas piemēroti konkrētai videi un vajadzībai.";
+    display:block;
+    max-width:34ch;
+    margin:0 0 26px;
+    color:#6b726c;
+    font-size:.86rem;
+    line-height:1.65;
+  }
+  .home-page .nv-solutions--hierarchy .nv-text-link{
+    display:inline-flex!important;
+    align-items:center!important;
+    gap:18px!important;
+    width:max-content!important;
+    padding:12px 17px!important;
+    color:#fff!important;
+    background:#18372c!important;
+    border-radius:999px!important;
+  }
+  .home-page .nv-solutions--hierarchy .nv-solution-list{
+    display:flex!important;
+    flex-direction:column!important;
+    gap:28px!important;
+    min-width:0!important;
+  }
+  .home-page .nv-solutions--hierarchy .nv-solution-card{
+    width:100%!important;
+    min-height:0!important;
+    overflow:hidden!important;
+    border:1px solid #e4e8e4!important;
+    border-radius:22px!important;
+    background:#fff!important;
+    box-shadow:none!important;
+    opacity:1;
+    transform:none;
+    transition:border-color .28s ease,box-shadow .35s ease,transform .35s cubic-bezier(.22,.61,.36,1)!important;
+  }
+  .home-page .nv-solutions--hierarchy .nv-solution-card:hover,
+  .home-page .nv-solutions--hierarchy .nv-solution-card:focus-within{
+    border-color:#cbd4cd!important;
+    box-shadow:0 18px 44px rgba(17,35,26,.07)!important;
+    transform:translateY(-3px)!important;
+  }
+  .home-page .nv-solutions--hierarchy .nv-solution-main{
+    display:grid!important;
+    grid-template-columns:minmax(300px,.95fr) minmax(300px,1.05fr)!important;
+    min-height:410px!important;
+  }
+  .home-page .nv-solutions--hierarchy .nv-solution-media{
+    min-height:410px!important;
+    background:#fafbf9!important;
+  }
+  .home-page .nv-solutions--hierarchy .nv-solution-media img{
+    max-width:78%!important;
+    max-height:78%!important;
+    object-fit:contain!important;
+  }
+  .home-page .nv-solutions--hierarchy .nv-solution-copy{
+    align-items:center!important;
+    padding:42px 38px!important;
+  }
+  .home-page .nv-solutions--hierarchy .nv-solution-copy h3{
+    font-size:clamp(1.8rem,2.2vw,2.45rem)!important;
+  }
+  .home-page .nv-solutions--hierarchy .nv-solution-copy p{
+    max-width:38ch!important;
+    font-size:.84rem!important;
+  }
+  .home-page .nv-solutions--hierarchy .nv-solution-subcats{
+    padding-left:38px!important;
+    padding-right:38px!important;
+  }
+  .home-page .nv-solutions--hierarchy .nv-solution-card.is-active .nv-solution-subcats,
+  .home-page .nv-solutions--hierarchy .nv-solution-card:focus-within .nv-solution-subcats{
+    padding:10px 38px 24px!important;
+  }
+  .home-page .nv-solutions--hierarchy .nv-solution-subcats a{
+    min-height:46px!important;
+    font-size:.8rem!important;
+    transition:color .2s ease,background .2s ease,padding .2s ease,opacity .2s ease,transform .28s ease!important;
+  }
+  .home-page .nv-solutions--hierarchy .nv-solution-subcats a:hover{
+    color:#18372c!important;
+    background:#f7f9f7!important;
+    padding-left:8px!important;
+    padding-right:8px!important;
+  }
+
+  /* CTA — one obvious next action. Heading stays on one line on desktop. */
   .home-page .nv-contact{
-    padding:104px 0 110px!important;
+    padding:108px 0 116px!important;
     background:#fff!important;
     color:#111!important;
     border-top:1px solid #eceeea!important;
@@ -96,7 +203,7 @@
     align-items:center!important;
     justify-content:center!important;
     gap:0!important;
-    max-width:860px!important;
+    max-width:1080px!important;
     margin:0 auto!important;
     text-align:center!important;
   }
@@ -109,13 +216,14 @@
     text-transform:uppercase!important;
   }
   .home-page .nv-contact h2{
-    max-width:12ch!important;
+    max-width:none!important;
     margin:0 auto 20px!important;
     color:#111!important;
-    font-size:clamp(3rem,4.8vw,5.2rem)!important;
+    font-size:clamp(3.4rem,5vw,5.4rem)!important;
     font-weight:400!important;
     line-height:.94!important;
     letter-spacing:-.055em!important;
+    white-space:nowrap!important;
   }
   .home-page .nv-contact p:not(.nv-contact-eyebrow){
     max-width:58ch!important;
@@ -143,24 +251,69 @@
     box-shadow:0 14px 32px rgba(24,55,44,.12)!important;
   }
 
-  /* Footer reset: compact, calm and subordinate to the CTA. */
+  /* Full footer — reference structure: brand / products / company / contacts. */
   .home-page .nv-footer{
-    padding:44px 0 18px!important;
-    background:#0b1510!important;
+    padding:66px 0 22px!important;
+    background:#08130e!important;
     color:#f4f5f2!important;
     border-top:1px solid rgba(255,255,255,.08)!important;
   }
   .home-page .nv-footer-grid{
     display:grid!important;
-    grid-template-columns:1.35fr .85fr .8fr 1fr!important;
-    gap:48px!important;
+    grid-template-columns:1.25fr .8fr .8fr 1fr!important;
+    gap:clamp(42px,5vw,86px)!important;
     align-items:start!important;
   }
-  .home-page .nv-footer-brand img{width:118px!important;margin-bottom:12px!important}
-  .home-page .nv-footer p,
-  .home-page .nv-footer a{font-size:.68rem!important;line-height:1.5!important}
+  .home-page .nv-footer-brand img{
+    width:132px!important;
+    height:auto!important;
+    margin:0 0 18px!important;
+  }
+  .home-page .nv-footer-brand p{
+    max-width:31ch!important;
+    margin:0!important;
+    color:rgba(255,255,255,.64)!important;
+    font-size:.74rem!important;
+    line-height:1.65!important;
+  }
+  .home-page .nv-footer-grid>div:not(.nv-footer-brand)>span{
+    display:block!important;
+    margin:0 0 18px!important;
+    color:#fff!important;
+    font-size:.76rem!important;
+    font-weight:600!important;
+  }
+  .home-page .nv-footer-grid>div:not(.nv-footer-brand)>a,
+  .home-page .nv-footer-grid>div:not(.nv-footer-brand)>p,
+  .home-page .nv-social a{
+    display:block!important;
+    margin:0 0 9px!important;
+    color:rgba(255,255,255,.68)!important;
+    font-size:.72rem!important;
+    line-height:1.5!important;
+    text-decoration:none!important;
+    transition:color .2s ease!important;
+  }
+  .home-page .nv-footer-grid a:hover{color:#fff!important}
+  .home-page .nv-social{
+    display:flex!important;
+    gap:16px!important;
+    margin-top:16px!important;
+  }
+  .home-page .nv-social a{margin:0!important}
   .home-page .nv-footer-bottom{
-    margin-top:30px!important;
-    padding-top:14px!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:space-between!important;
+    gap:24px!important;
+    margin-top:52px!important;
+    padding-top:18px!important;
+    border-top:1px solid rgba(255,255,255,.18)!important;
+  }
+  .home-page .nv-footer-bottom small,
+  .home-page .nv-footer-bottom a{
+    color:rgba(255,255,255,.56)!important;
+    font-size:.66rem!important;
+    text-decoration:none!important;
   }
 }
