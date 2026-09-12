@@ -110,10 +110,21 @@
   function loadHomepageMotion() {
     if (!document.body.classList.contains('home-page')) return;
     if (document.querySelector('script[data-home-motion]')) return;
+
+    const loadNextPass = () => {
+      if (document.querySelector('script[data-home-next-pass]')) return;
+      const next = document.createElement('script');
+      next.src = './js/home-next-pass.js';
+      next.defer = true;
+      next.dataset.homeNextPass = 'true';
+      document.head.appendChild(next);
+    };
+
     const script = document.createElement('script');
     script.src = './js/home-motion.js';
     script.defer = true;
     script.dataset.homeMotion = 'true';
+    script.addEventListener('load', loadNextPass, { once: true });
     document.head.appendChild(script);
   }
 
