@@ -47,6 +47,45 @@
       .home-page .nv-about{grid-template-columns:1fr;gap:28px;width:calc(100% - 28px);padding-top:64px;padding-bottom:64px}.home-page .nv-about h2{font-size:clamp(2.35rem,10.5vw,3.25rem)}.home-page .nv-about-media{min-height:310px}.home-page .nv-about-note{top:18px;right:18px;font-size:.55rem}.home-page .nv-about-pager{right:18px;bottom:16px}
     }
     @media(prefers-reduced-motion:reduce){.home-page .nv-hero-partner-track{animation:none}}
+
+    /* Desktop lower-page coherence pass: process -> CTA -> footer */
+    @media(min-width:1025px){
+      .home-page .nv-process{padding:96px 0 106px!important;background:#fff!important;color:var(--nv-ink)!important;border-top:1px solid #eceeea!important}
+      .home-page .nv-process>.nv-shell>h2{margin:0 0 52px!important;color:#111!important;font-size:clamp(2.55rem,3.6vw,4.2rem)!important;font-weight:400!important;letter-spacing:-.05em!important}
+      .home-page .nv-process-list{position:relative!important;display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;border:0!important}
+      .home-page .nv-process-list::before{content:"";position:absolute;left:0;right:0;top:14px;height:1px;background:#dfe3dd}
+      .home-page .nv-process-list details{position:relative;border:0!important;padding:32px 24px 0!important;opacity:.42;transition:opacity .38s ease,transform .38s ease}
+      .home-page .nv-process-list details::before{content:"";position:absolute;top:8px;left:24px;width:12px;height:12px;border:2px solid #aeb7ad;border-radius:50%;background:#fff;transition:all .3s ease}
+      .home-page .nv-process-list details.is-active,.home-page .nv-process-list details[open]{opacity:1;transform:none}
+      .home-page .nv-process-list details.is-active::before,.home-page .nv-process-list details[open]::before{background:var(--nv-olive);border-color:var(--nv-olive);box-shadow:0 0 0 5px rgba(36,55,44,.08)}
+      .home-page .nv-process-list summary{min-height:126px!important;padding:0!important;cursor:pointer!important;color:#111!important}
+      .home-page .nv-process-list summary>span{display:block;margin:0 0 18px!important;color:#82907f!important;font-size:.58rem!important}
+      .home-page .nv-process-list h3{margin:0 0 8px!important;color:#111!important;font-size:1.05rem!important;font-weight:500!important}
+      .home-page .nv-process-list summary p{margin:0!important;color:#7a8078!important;font-size:.66rem!important;line-height:1.5!important}
+      .home-page .nv-process-list summary b{display:none!important}
+      .home-page .nv-process-detail{display:block!important;max-height:0;overflow:hidden;margin:0!important;padding:0;color:#626961!important;font-size:.76rem!important;line-height:1.55!important;opacity:0;transform:translateY(6px);transition:max-height .4s ease,padding .4s ease,opacity .3s ease,transform .3s ease}
+      .home-page .nv-process-list details[open] .nv-process-detail{max-height:180px;padding:8px 0 0!important;opacity:1;transform:none}
+      .home-page .nv-process-outcome{display:block;margin-top:12px;color:#111;font-size:.72rem;font-weight:500;line-height:1.45}
+
+      .home-page .nv-contact{padding:112px 0 116px!important;background:#fff!important;color:#111!important;border-top:1px solid #eceeea!important}
+      .home-page .nv-contact-inner{display:flex!important;flex-direction:column!important;align-items:center!important;text-align:center!important;gap:0!important}
+      .home-page .nv-contact-eyebrow{margin:0 0 10px;color:#80867d;font-size:.62rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase}
+      .home-page .nv-contact h2{margin:0!important;color:#111!important;font-size:clamp(3rem,4.8vw,5.2rem)!important;font-weight:400!important;line-height:.98!important;letter-spacing:-.055em!important}
+      .home-page .nv-contact p{max-width:58ch!important;margin:22px auto 0!important;color:#70766e!important;font-size:.86rem!important;line-height:1.6!important}
+      .home-page .nv-contact-button{display:inline-flex!important;align-items:center!important;justify-content:space-between!important;gap:34px!important;min-width:218px!important;margin-top:28px;padding:14px 20px!important;color:#fff!important;background:var(--nv-olive)!important;border:0!important;border-radius:999px!important;box-shadow:0 12px 30px rgba(36,55,44,.12);font-size:.75rem!important;text-decoration:none;transition:transform .25s ease,box-shadow .25s ease}
+      .home-page .nv-contact-button:hover{transform:translateY(-2px);box-shadow:0 18px 38px rgba(36,55,44,.17)}
+      .home-page .nv-contact-support{margin-top:14px!important;color:#8a8f87!important;font-size:.68rem!important}
+
+      .home-page .nv-footer{padding:58px 0 20px!important;background:#0d1712!important;color:#f4f4ef!important;border-top:0!important}
+      .home-page .nv-footer-grid{grid-template-columns:1.35fr .9fr .9fr 1fr!important;gap:58px!important}
+      .home-page .nv-footer-brand a{display:inline-block}
+      .home-page .nv-footer-brand img{width:132px!important;margin-bottom:16px!important}
+      .home-page .nv-footer-grid span{color:#aebaa4!important}
+      .home-page .nv-footer a{color:rgba(255,255,255,.76)!important}
+      .home-page .nv-footer a:hover{color:#fff!important}
+      .home-page .nv-footer p{color:rgba(255,255,255,.52)!important}
+      .home-page .nv-footer-bottom{margin-top:40px!important;padding-top:16px!important}
+    }
   </style>
 </head>
 <body class="home-page">
@@ -164,10 +203,10 @@
   <section class="nv-process" aria-labelledby="process-title">
     <div class="nv-shell"><h2 id="process-title">Kā mēs strādājam</h2></div>
     <div class="nv-process-list nv-shell">
-      <details open><summary><span>01</span><h3>Konsultācija</h3><p>Projekts · vide · termiņš</p><b>+</b></summary><div class="nv-process-detail">Noskaidrojam projekta vajadzību, vietu, apjomu un termiņu, lai saprastu, kāds risinājums būs piemērotākais.</div></details>
-      <details><summary><span>02</span><h3>Produktu atlase</h3><p>Ražotāji · materiāli · komplektācija</p><b>+</b></summary><div class="nv-process-detail">Salīdzinām piemērotus ražotājus un produktus, ņemot vērā funkciju, dizainu, budžetu un projekta prasības.</div></details>
-      <details><summary><span>03</span><h3>Tehniskā informācija</h3><p>Specifikācija · rasējumi · detaļas</p><b>+</b></summary><div class="nv-process-detail">Sagatavojam specifikācijas, rasējumus, materiālu informāciju un citas detaļas, kas nepieciešamas projekta izstrādei.</div></details>
-      <details><summary><span>04</span><h3>Piedāvājums</h3><p>Cena · termiņš · piegāde</p><b>+</b></summary><div class="nv-process-detail">Apvienojam izvēlēto risinājumu skaidrā piedāvājumā ar cenu, termiņiem un piegādes nosacījumiem.</div></details>
+      <details open><summary><span>01</span><h3>Konsultācija</h3><p>Vieta · vajadzība · termiņš</p><b>+</b></summary><div class="nv-process-detail">Pastāsti par projektu un to, kas konkrētajā vietā nepieciešams.<strong class="nv-process-outcome">Rezultāts: saprotam projekta vajadzību un virzienu.</strong></div></details>
+      <details><summary><span>02</span><h3>Produktu atlase</h3><p>Ražotāji · materiāli · komplektācija</p><b>+</b></summary><div class="nv-process-detail">Piemeklējam piemērotus produktus un salīdzinām risinājumus.<strong class="nv-process-outcome">Rezultāts: saņem piemērotākos variantus projektam.</strong></div></details>
+      <details><summary><span>03</span><h3>Tehniskā informācija</h3><p>Izmēri · specifikācijas · rasējumi</p><b>+</b></summary><div class="nv-process-detail">Sagatavojam informāciju, kas nepieciešama projekta izstrādei un izvērtēšanai.<strong class="nv-process-outcome">Rezultāts: viss nepieciešamais lēmuma pieņemšanai vienuviet.</strong></div></details>
+      <details><summary><span>04</span><h3>Piedāvājums</h3><p>Cena · termiņš · piegāde</p><b>+</b></summary><div class="nv-process-detail">Apvienojam izvēlēto risinājumu skaidrā piedāvājumā.<strong class="nv-process-outcome">Rezultāts: zini izmaksas, termiņu un nākamo soli.</strong></div></details>
     </div>
   </section>
 
@@ -179,8 +218,47 @@
     </div></div>
   </section>
 
-  <section class="nv-contact"><div class="nv-shell nv-contact-inner"><div><h2>Sāksim ar projektu</h2><p>Pastāsti par vietu, vajadzību un termiņu. Palīdzēsim nonākt līdz piemērotam risinājumam.</p></div><a class="nv-contact-button" href="./pieprasijums/index.html">Pieteikt projektu <span>↗</span></a></div></section>
+  <section class="nv-contact"><div class="nv-shell nv-contact-inner"><p class="nv-contact-eyebrow">Nākamais solis</p><h2>Sāksim ar projektu</h2><p>Pastāsti par vietu, vajadzību un termiņu — palīdzēsim piemeklēt piemērotu risinājumu un sagatavot piedāvājumu.</p><a class="nv-contact-button" href="./pieprasijums/index.html">Pieteikt projektu <span>↗</span></a><p class="nv-contact-support">Sākam ar īsu sarunu un skaidru nākamo soli.</p></div></section>
 </main>
-<footer class="nv-footer"><div class="nv-shell nv-footer-grid"><div class="nv-footer-brand"><img src="./assets/images/brand/teritorija-logo-light-268w.png" alt="Teritorija"><p>Labiekārtošanas elementi un risinājumi publiskai un privātai ārtelpai.</p></div><div><span>Produkti</span><a href="./produkti/ara-mebeles/index.html">Āra mēbeles</a><a href="./produkti/velo-infrastruktura/index.html">Velo infrastruktūra</a><a href="./produkti/rotalu-laukumi/index.html">Rotaļu laukumi</a><a href="./produkti/parstradata-plastmasa/index.html">Ilgtspējīgi risinājumi</a></div><div><span>Uzņēmums</span><a href="./par-mums/index.html">Par mums</a><a href="./katalogi/index.html">Katalogi</a><a href="https://www.facebook.com/teritorija.lv" target="_blank" rel="noopener noreferrer">Realizācijas</a></div><div><span>Kontakti</span><a href="mailto:einars@teritorija.lv">einars@teritorija.lv</a><a href="tel:+37129136973">+371 29136973</a><p>Rīga, Latvija</p><div class="nv-social"><a href="https://www.instagram.com/teritorija.lv/" target="_blank" rel="noopener noreferrer">Instagram</a><a href="https://www.facebook.com/teritorija.lv" target="_blank" rel="noopener noreferrer">Facebook</a></div></div></div><div class="nv-shell nv-footer-bottom"><small>© 2026 SIA “Mārupes noma” · Teritorija</small><a href="./privatums/index.html">Privātuma politika</a></div></footer>
+<footer class="nv-footer"><div class="nv-shell nv-footer-grid"><div class="nv-footer-brand"><a href="./index.html" aria-label="Teritorija — sākumlapa"><img src="./assets/images/brand/teritorija-logo-light-268w.png" alt="Teritorija"></a><p>Labiekārtošanas elementi un risinājumi publiskai un privātai ārtelpai.</p></div><div><span>Risinājumi</span><a href="./produkti/ara-mebeles/index.html">Āra mēbeles</a><a href="./produkti/velo-infrastruktura/index.html">Velo infrastruktūra</a><a href="./produkti/rotalu-laukumi/index.html">Rotaļu laukumi</a><a href="./produkti/parstradata-plastmasa/index.html">Pārstrādāti materiāli</a></div><div><span>Informācija</span><a href="./par-mums/index.html">Par Teritorija.lv</a><a href="./katalogi/index.html">Katalogi</a><a href="https://www.instagram.com/teritorija.lv/" target="_blank" rel="noopener noreferrer">Realizēti dzīvē</a></div><div><span>Kontakti</span><a href="mailto:einars@teritorija.lv">einars@teritorija.lv</a><a href="tel:+37129136973">+371 29136973</a><p>Rīga, Latvija</p><div class="nv-social"><a href="https://www.instagram.com/teritorija.lv/" target="_blank" rel="noopener noreferrer">Instagram</a><a href="https://www.facebook.com/teritorija.lv" target="_blank" rel="noopener noreferrer">Facebook</a></div></div></div><div class="nv-shell nv-footer-bottom"><small>© 2026 SIA “Mārupes noma” · Teritorija.lv</small><a href="./privatums/index.html">Privātuma politika</a></div></footer>
 <script src="./js/inquiry.js" defer></script><script src="./js/header.js?v=3" defer></script><script src="./js/top.js" defer></script>
+<script>
+(() => {
+  if (!window.matchMedia('(min-width:1025px)').matches) return;
+  const process = document.querySelector('.nv-process-list');
+  if (!process) return;
+  const steps = Array.from(process.querySelectorAll('details'));
+  if (!steps.length) return;
+  let index = Math.max(0, steps.findIndex(step => step.open));
+  let timer = null;
+  let paused = false;
+
+  const activate = (next) => {
+    index = (next + steps.length) % steps.length;
+    steps.forEach((step, i) => {
+      const active = i === index;
+      step.open = active;
+      step.classList.toggle('is-active', active);
+    });
+  };
+  const start = () => {
+    clearInterval(timer);
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    timer = setInterval(() => { if (!paused) activate(index + 1); }, 3500);
+  };
+
+  steps.forEach((step, i) => {
+    step.addEventListener('mouseenter', () => { paused = true; activate(i); });
+    step.addEventListener('mouseleave', () => { paused = false; });
+    step.querySelector('summary')?.addEventListener('click', (event) => {
+      event.preventDefault();
+      activate(i);
+    });
+  });
+  process.addEventListener('mouseenter', () => { paused = true; });
+  process.addEventListener('mouseleave', () => { paused = false; });
+  activate(index);
+  start();
+})();
+</script>
 </body></html>
