@@ -1,7 +1,11 @@
 /* Final user-approved homepage corrections. Loaded last by home-final-motion.js. */
 
+/* Keep the same floating navigation available while moving through the homepage. */
+.home-page .nv-header{position:fixed!important;top:18px!important;left:50%!important;right:auto!important;transform:translateX(-50%)!important;z-index:90!important}
+.home-page .nv-nav-tray{position:fixed!important;top:96px!important}
+
 .home-page .nv-contact{
-  padding:96px 0 102px!important;
+  padding:112px 0 118px!important;
   background:#fff!important;
   color:#111!important;
   border-top:1px solid #eceeea!important;
@@ -15,7 +19,7 @@
   gap:0!important;
 }
 .home-page .nv-contact-eyebrow{
-  margin:0 0 12px!important;
+  margin:0 0 18px!important;
   color:#7d837b!important;
   font-size:.62rem!important;
   font-weight:600!important;
@@ -34,19 +38,19 @@
 }
 .home-page .nv-contact p{
   max-width:58ch!important;
-  margin:22px auto 0!important;
+  margin:28px auto 0!important;
   color:#747a73!important;
   font-size:.86rem!important;
-  line-height:1.6!important;
+  line-height:1.65!important;
 }
-.home-page .nv-contact-support{margin-top:6px!important;font-size:.72rem!important;color:#858b83!important}
+.home-page .nv-contact-support{margin-top:8px!important;font-size:.72rem!important;color:#858b83!important}
 .home-page .nv-contact-button{
   display:inline-flex!important;
   align-items:center!important;
   justify-content:space-between!important;
   gap:34px!important;
   min-width:220px!important;
-  margin-top:26px!important;
+  margin-top:34px!important;
   padding:14px 20px!important;
   color:#fff!important;
   background:#173f31!important;
@@ -182,9 +186,14 @@
   font-size:.8rem;
 }
 
+/* Temporary URL-based partner logos. If the client approves, replace with local optimized assets. */
+.home-page .nv-hero-partner-track a{display:flex!important;align-items:center!important;justify-content:center!important;min-width:150px!important;height:48px!important;opacity:.9!important}
+.home-page .nv-hero-partner-track a img{display:block!important;width:auto!important;max-width:150px!important;height:36px!important;object-fit:contain!important;filter:grayscale(1) brightness(0) invert(1)!important;opacity:.88!important}
+.home-page .nv-hero-partner-track a:hover img{opacity:1!important}
+
 .home-page .nv-footer{
   position:relative!important;
-  padding:58px 0 20px!important;
+  padding:72px 0 24px!important;
   overflow:hidden!important;
   color:#f4f4ef!important;
   background:
@@ -204,13 +213,15 @@
   position:relative;
   z-index:1;
   display:grid!important;
-  grid-template-columns:1.35fr .9fr .9fr 1fr!important;
-  gap:58px!important;
+  grid-template-columns:1.45fr .9fr .9fr 1fr!important;
+  gap:clamp(54px,5vw,88px)!important;
+  align-items:start!important;
 }
-.home-page .nv-footer-brand img{width:128px!important;height:auto!important;margin:0 0 16px!important}
-.home-page .nv-footer-brand p{max-width:28ch!important;color:rgba(255,255,255,.58)!important}
-.home-page .nv-footer-grid>div:not(.nv-footer-brand){display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:8px!important}
-.home-page .nv-footer-grid span{margin-bottom:8px!important;color:#b3c2ad!important;font-size:.58rem!important;font-weight:600!important;letter-spacing:.1em!important;text-transform:uppercase!important}
+.home-page .nv-footer-brand{padding-right:28px!important}
+.home-page .nv-footer-brand img{width:148px!important;height:auto!important;margin:0 0 22px!important}
+.home-page .nv-footer-brand p{max-width:30ch!important;color:rgba(255,255,255,.58)!important;line-height:1.6!important}
+.home-page .nv-footer-grid>div:not(.nv-footer-brand){display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:10px!important}
+.home-page .nv-footer-grid span{margin-bottom:10px!important;color:#b3c2ad!important;font-size:.58rem!important;font-weight:600!important;letter-spacing:.1em!important;text-transform:uppercase!important}
 .home-page .nv-footer a{color:rgba(255,255,255,.77)!important;font-size:.7rem!important;text-decoration:none!important}
 .home-page .nv-footer a:hover{color:#fff!important}
 .home-page .nv-footer p{margin:0!important;color:rgba(255,255,255,.56)!important;font-size:.69rem!important;line-height:1.5!important}
@@ -220,33 +231,38 @@
   display:flex!important;
   justify-content:space-between!important;
   gap:24px!important;
-  margin-top:42px!important;
-  padding-top:16px!important;
+  margin-top:52px!important;
+  padding-top:18px!important;
   border-top:1px solid rgba(255,255,255,.14)!important;
 }
 .home-page .nv-footer-bottom small,.home-page .nv-footer-bottom a{color:rgba(255,255,255,.44)!important;font-size:.6rem!important}
 
 @media(max-width:1024px){
+  .home-page .nv-header{top:14px!important}
+  .home-page .nv-nav-tray{top:88px!important}
   .home-page .nv-contact h2{white-space:normal!important;font-size:clamp(2.8rem,8vw,4.7rem)!important}
   .home-page .nv-proof-head-final{width:calc(100% - 40px)}
   .home-page .nv-proof-card-final{flex-basis:310px;width:310px;min-height:490px}
   .home-page .nv-proof-card-final img{height:238px}
-  .home-page .nv-footer-grid{grid-template-columns:1.2fr 1fr 1fr!important;gap:34px!important}
+  .home-page .nv-footer-grid{grid-template-columns:1.2fr 1fr 1fr!important;gap:40px!important}
   .home-page .nv-footer-grid>div:last-child{grid-column:2/-1}
 }
 @media(max-width:767px){
-  .home-page .nv-contact{padding:72px 0 78px!important}
+  .home-page .nv-header{top:10px!important}
+  .home-page .nv-contact{padding:78px 0 86px!important}
   .home-page .nv-contact h2{font-size:clamp(2.45rem,12vw,3.6rem)!important}
-  .home-page .nv-contact p{max-width:34ch!important;font-size:.8rem!important}
+  .home-page .nv-contact p{max-width:34ch!important;font-size:.8rem!important;margin-top:22px!important}
+  .home-page .nv-contact-button{margin-top:28px!important}
   .home-page .nv-proof,#realizetie-dzive{padding:70px 0 78px!important}
   .home-page .nv-proof-head-final{width:calc(100% - 28px);margin-bottom:28px;align-items:flex-start;flex-direction:column}
   .home-page .nv-proof-head-final h2{font-size:clamp(2.45rem,12vw,3.5rem)}
   .home-page .nv-proof-card-final{flex-basis:82vw;width:82vw;min-height:455px}
   .home-page .nv-proof-card-final img{height:220px}
   .home-page .nv-proof-track-final{gap:12px;padding-inline:14px}
-  .home-page .nv-footer{padding:46px 0 18px!important}
-  .home-page .nv-footer-grid{grid-template-columns:1fr 1fr!important;gap:34px 24px!important}
-  .home-page .nv-footer-brand{grid-column:1/-1}
+  .home-page .nv-hero-partner-track a{min-width:122px!important;height:42px!important}.home-page .nv-hero-partner-track a img{max-width:122px!important;height:30px!important}
+  .home-page .nv-footer{padding:52px 0 18px!important}
+  .home-page .nv-footer-grid{grid-template-columns:1fr 1fr!important;gap:38px 28px!important}
+  .home-page .nv-footer-brand{grid-column:1/-1;padding-right:0!important}
   .home-page .nv-footer-grid>div:last-child{grid-column:auto}
-  .home-page .nv-footer-bottom{align-items:flex-start!important;flex-direction:column!important;margin-top:32px!important}
+  .home-page .nv-footer-bottom{align-items:flex-start!important;flex-direction:column!important;margin-top:36px!important}
 }
