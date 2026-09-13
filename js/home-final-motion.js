@@ -9,7 +9,7 @@
     const styles = [
       ['./css/home-stabilize.css?v=2', 'homeStabilize'],
       ['./css/home-user-fixes.css?v=1', 'homeUserFixes'],
-      ['./css/home-user-final.css?v=1', 'homeUserFinal']
+      ['./css/home-user-final.css?v=2', 'homeUserFinal']
     ];
     styles.forEach(([href, key]) => {
       if (document.querySelector(`link[data-${key}]`)) return;
@@ -178,6 +178,35 @@
       </div>`;
   }
 
+  function replacePartnerNamesWithLogos() {
+    const logoByName = {
+      'ZANO': 'https://logo.clearbit.com/zano-streetfurniture.com',
+      'SAWO': 'https://logo.clearbit.com/sawo.com.pl',
+      'GOVA PLAST': 'https://logo.clearbit.com/govaplast.com',
+      'GOVAPLAST': 'https://logo.clearbit.com/govaplast.com',
+      'URBASTYLE': 'https://logo.clearbit.com/urbastyle.com',
+      'FREEKIDS': 'https://logo.clearbit.com/freekids.pl',
+      'OUT-SIDER': 'https://logo.clearbit.com/outsiderfurniture.com'
+    };
+    document.querySelectorAll('.nv-hero-partner-track a').forEach((link) => {
+      const label = link.textContent.replace(/↗/g, '').trim().toUpperCase();
+      const key = Object.keys(logoByName).find((name) => label === name || label.startsWith(`${name} `));
+      if (!key || link.querySelector('img')) return;
+      const img = document.createElement('img');
+      img.src = logoByName[key];
+      img.alt = key;
+      img.loading = 'eager';
+      img.decoding = 'async';
+      img.width = 150;
+      img.height = 48;
+      img.referrerPolicy = 'no-referrer';
+      img.onerror = () => { link.textContent = key; };
+      link.replaceChildren(img);
+      link.setAttribute('aria-label', key);
+      link.dataset.partnerLogo = 'temporary-url';
+    });
+  }
+
   function proofCard({ image, place, title, copy, brand }) {
     const url = 'https://www.facebook.com/teritorija.lv';
     return `
@@ -293,6 +322,7 @@
     resetCTA();
     resetFooter();
     rebuildProof();
+    replacePartnerNamesWithLogos();
     normalizeImageDimensions();
     setupScrollTop();
     animateHero();
