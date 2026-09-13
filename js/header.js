@@ -75,9 +75,7 @@
       <div class="global-mega" aria-hidden="true">
         <section class="global-mega-panel global-products-grid" data-global-panel-content="products">${buildProductsPanel(p)}</section>
         <section class="global-mega-panel global-catalog-grid" data-global-panel-content="catalogues">
-          <div><strong>Ražotāju katalogi</strong><div class="global-manufacturers">
-            <a href="${p}razotaji/zano/index.html">ZANO <span>→</span></a><a href="${p}razotaji/sawo/index.html">SAWO <span>→</span></a><a href="${p}razotaji/gova-plast/index.html">GOVA PLAST <span>→</span></a><a href="${p}razotaji/urbastyle/index.html">URBASTYLE <span>→</span></a><a href="${p}razotaji/freekids/index.html">FreeKids <span>→</span></a><a href="${p}razotaji/out-sider/index.html">OUT-SIDER <span>→</span></a>
-          </div></div>
+          <div><strong>Ražotāju katalogi</strong><div class="global-manufacturers"><a href="${p}razotaji/zano/index.html">ZANO <span>→</span></a><a href="${p}razotaji/sawo/index.html">SAWO <span>→</span></a><a href="${p}razotaji/gova-plast/index.html">GOVA PLAST <span>→</span></a><a href="${p}razotaji/urbastyle/index.html">URBASTYLE <span>→</span></a><a href="${p}razotaji/freekids/index.html">FreeKids <span>→</span></a><a href="${p}razotaji/out-sider/index.html">OUT-SIDER <span>→</span></a></div></div>
           <div><strong>Visi materiāli vienuviet</strong><p class="global-mega-copy">Atver ražotāju katalogus vai izvēlies produktu kategoriju. Klientam nav jāmeklē partneru lapās pašam.</p><a class="global-mega-cta" href="${p}katalogi/index.html">Visi katalogi →</a></div>
         </section>
         <section class="global-mega-panel global-about-grid" data-global-panel-content="about"><div><strong>Teritorija.lv</strong><p class="global-mega-copy">Ārtelpas mēbeles un labiekārtojuma risinājumi. Palīdzam piemeklēt produktus konkrētai vietai, funkcijai un projekta prasībām.</p><a class="global-mega-cta" href="${p}par-mums/index.html">Par uzņēmumu →</a></div><div class="global-nav-sub"><a href="${p}par-mums/index.html">Par Teritorija.lv</a><a href="${p}katalogi/index.html">Ražotāji un katalogi</a><a href="${p}pieprasijums/index.html">Kontakti un pieprasījums</a></div></section>
@@ -86,7 +84,6 @@
     </div>`;
     if(old)old.replaceWith(nav); else document.body.prepend(nav);
     document.body.classList.add('has-global-site');
-
     const mega=nav.querySelector('.global-mega');
     const triggers=[...nav.querySelectorAll('.global-nav-trigger')];
     let timer=null;
@@ -94,14 +91,12 @@
     const close=()=>{timer=setTimeout(()=>{triggers.forEach(x=>x.classList.remove('is-active'));mega.classList.remove('is-open');mega.setAttribute('aria-hidden','true')},120)};
     triggers.forEach(btn=>{btn.addEventListener('mouseenter',()=>open(btn.dataset.globalPanel,btn));btn.addEventListener('focus',()=>open(btn.dataset.globalPanel,btn));btn.addEventListener('click',()=>open(btn.dataset.globalPanel,btn))});
     nav.querySelector('.global-nav-links')?.addEventListener('mouseleave',close);mega.addEventListener('mouseenter',()=>clearTimeout(timer));mega.addEventListener('mouseleave',close);
-
     const mobile=document.createElement('div');
     mobile.className='global-mobile-menu';
     mobile.innerHTML=`${productGroups(p).map(([name,href,items])=>`<details class="global-mobile-section"><summary>${name}</summary><nav><a href="${href}">Skatīt kategoriju</a>${items.map(item=>`<a href="${subHref(item,p)}">${item}</a>`).join('')}</nav></details>`).join('')}<details class="global-mobile-section"><summary>Katalogi</summary><nav><a href="${p}katalogi/index.html">Visi katalogi</a><a href="${p}razotaji/zano/index.html">ZANO</a><a href="${p}razotaji/sawo/index.html">SAWO</a><a href="${p}razotaji/gova-plast/index.html">GOVA PLAST</a><a href="${p}razotaji/urbastyle/index.html">URBASTYLE</a><a href="${p}razotaji/freekids/index.html">FreeKids</a><a href="${p}razotaji/out-sider/index.html">OUT-SIDER</a></nav></details><a class="global-mobile-contact" href="${p}pieprasijums/index.html">Sazināties <span>→</span></a>`;
     document.body.appendChild(mobile);
     const menuBtn=nav.querySelector('.global-nav-menu-btn');
     menuBtn.addEventListener('click',()=>{const state=!mobile.classList.contains('is-open');mobile.classList.toggle('is-open',state);menuBtn.setAttribute('aria-expanded',String(state));menuBtn.textContent=state?'×':'☰'});
-
     mountCategoryRail();
   }
 
@@ -132,9 +127,9 @@
     footer.innerHTML=`<div class="global-footer-shell global-footer-grid">
       <div class="global-footer-brand"><a href="${p}index.html"><img src="${p}assets/images/brand/teritorija-logo-light-268w.png" alt="Teritorija" width="268" height="105"></a><p>Ārtelpas mēbeles un labiekārtojuma risinājumi ilgtspējīgai, funkcionālai publiskai videi.</p></div>
       <details class="global-footer-group" open><summary>Produkti</summary><div class="global-footer-links"><a href="${p}produkti/ara-mebeles/index.html">Pilsētvides mēbeles</a><a href="${p}produkti/velo-infrastruktura/index.html">Mobilitāte</a><a href="${p}produkti/rotalu-atputas-zonas/index.html">Rotaļu laukumi</a><a href="${p}produkti/smart-city/index.html">Viedā pilsēta</a><a href="${p}produkti/teritorijas-labiekartojums/index.html">Labiekārtošanas produkti</a></div></details>
-      <details class="global-footer-group" open><summary>Uzņēmums</summary><div class="global-footer-links"><a href="${p}par-mums/index.html">Par mums</a><a href="${p}katalogi/index.html">Katalogi</a><a href="${p}pieprasijums/index.html">Pieprasījums</a><a href="${p}privatums/index.html">Privātums</a></div></details>
+      <details class="global-footer-group" open><summary>Uzņēmums</summary><div class="global-footer-links"><a href="${p}par-mums/index.html">Par mums</a><a href="${p}katalogi/index.html">Katalogi</a><a href="${p}pieprasijums/index.html">Pieprasījums</a><a href="https://teritorija.lv/privacy-policy" target="_blank" rel="noopener noreferrer">Privātuma politika</a><a href="https://teritorija.lv/cookie-policy" target="_blank" rel="noopener noreferrer">Sīkdatņu politika</a></div></details>
       <details class="global-footer-group" open><summary>Kontakti</summary><div class="global-footer-links"><a href="tel:+37129136973">+371 29136973</a><a href="mailto:einars@teritorija.lv">einars@teritorija.lv</a><span>Rīga, Latvija</span><a href="https://www.instagram.com/teritorija.lv/" target="_blank" rel="noopener noreferrer">Instagram</a><a href="https://www.facebook.com/teritorija.lv" target="_blank" rel="noopener noreferrer">Facebook</a></div></details>
-    </div><div class="global-footer-shell global-footer-bottom"><small>© 2026 Teritorija. Visas tiesības aizsargātas.</small><a href="${p}privatums/index.html">Privātuma politika</a></div>`;
+    </div><div class="global-footer-shell global-footer-bottom"><small>© 2026 Teritorija. Visas tiesības aizsargātas.</small><span><a href="https://teritorija.lv/privacy-policy" target="_blank" rel="noopener noreferrer">Privātuma politika</a> · <a href="https://teritorija.lv/cookie-policy" target="_blank" rel="noopener noreferrer">Sīkdatņu politika</a></span></div>`;
   }
 
   function cleanHomepage(){
@@ -143,8 +138,7 @@
     const list=document.querySelector('.nv-solutions .nv-solution-list');
     if(!list)return;
     const p='./';
-    const imgs={
-      'Pilsētvides mēbeles':'./assets/images/products/aplveida-soli.jpg','Mobilitāte':'./assets/images/products/velo-nojume.jpg','Rotaļu laukumi':'./assets/images/products/rotalu-laukums.jpg','Viedā pilsēta':'./assets/images/products/solara-stacija-zasa.jpg','Āra fitness':'./assets/images/products/rotalu-laukums.jpg','Labiekārtošanas produkti':'https://static.wixstatic.com/media/e827f3_64af561e07b34f8a965c1667342b7244~mv2.jpg/v1/fill/w_900,h_600,al_c,q_90/kolorowe_stalowe_donice_miejskie_na_drze.jpg'};
+    const imgs={'Pilsētvides mēbeles':'./assets/images/products/aplveida-soli.jpg','Mobilitāte':'./assets/images/products/velo-nojume.jpg','Rotaļu laukumi':'./assets/images/products/rotalu-laukums.jpg','Viedā pilsēta':'./assets/images/products/solara-stacija-zasa.jpg','Āra fitness':'./assets/images/products/rotalu-laukums.jpg','Labiekārtošanas produkti':'https://static.wixstatic.com/media/e827f3_64af561e07b34f8a965c1667342b7244~mv2.jpg/v1/fill/w_900,h_600,al_c,q_90/kolorowe_stalowe_donice_miejskie_na_drze.jpg'};
     list.innerHTML=productGroups(p).map(([name,href,items],i)=>`<article class="nv-solution-card is-active"><a class="nv-solution-main" href="${href}"><div class="nv-solution-media"><img src="${imgs[name]}" alt="${name}" loading="lazy" width="1200" height="900"></div><div class="nv-solution-copy"><span>0${i+1}</span><div><h3>${name}</h3><p>${items.slice(0,4).join(', ')}.</p><small>Skatīt pilno klāstu</small></div><b>↗</b></div></a><div class="nv-solution-subcats">${items.map(item=>`<a href="${subHref(item,p)}">${item}<span>→</span></a>`).join('')}</div></article>`).join('');
   }
 
